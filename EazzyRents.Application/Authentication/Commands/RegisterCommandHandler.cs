@@ -4,7 +4,9 @@ using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
+using System.IO.Pipes;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
@@ -12,11 +14,15 @@ namespace EazzyRents.Application.Authentication.Commands
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
         private readonly IUserRepository userRepository;
+        private readonly IPasswordHasher<User> passwordHasher;
 
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, 
+            IUserRepository userRepository,
+            IPasswordHasher<User> passwordHasher)
         {
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.userRepository = userRepository;
+            this.passwordHasher = passwordHasher;
         }
         public Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -28,6 +34,9 @@ namespace EazzyRents.Application.Authentication.Commands
                 Password = request.Password,
                 UserRole = request.UserRole
             };
+
+            //var password = this.passwordHasher.HashPassword(user, request.Password);
+            //user.Password = password;
 
             var token = this.jwtTokenGenerator.GenerateToken(user);
             this.userRepository.AddUser(user);

@@ -2,8 +2,11 @@
 using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
 using EazzyRents.Application.Common.Interfaces.Authentication;
+using EazzyRents.Core.Enums;
+using EazzyRents.Core.Models;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -23,7 +26,8 @@ namespace EazzyRents.Application.Configurations
             //services.AddScoped<IRequestHandler<LoginQuery, ErrorOr<AuthResult>>, LoginQueryHandler>();
             //services.AddScoped<IRequestHandler<RegisterCommand, ErrorOr<AuthResult>>, RegisterCommandHandler>();
 
-            
+            //services.AddScoped<UserManager<User>>();
+            //services.AddIdentityCore<IPasswordHasher<User>>().AddEntityFrameworkStores<AppDbContext>();    
 
             return services;
         }
