@@ -1,6 +1,5 @@
 ﻿using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Core.Enums;
-using ErrorOr;
 using MediatR;
 
 namespace EazzyRents.Application.Authentication.Commands

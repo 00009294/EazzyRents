@@ -1,5 +1,4 @@
 ﻿using EazzyRents.Application.Authentication.Common;
-using ErrorOr;
 using MediatR;
 
 namespace EazzyRents.Application.Authentication.Queries

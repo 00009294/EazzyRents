@@ -2,7 +2,6 @@
 using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
-using ErrorOr;
 using MediatR;
 
 namespace EazzyRents.Application.Authentication.Queries

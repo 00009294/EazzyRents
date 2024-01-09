@@ -1,7 +1,6 @@
 ﻿using EazzyRents.Application.Authentication.Commands;
 using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
-using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,19 +1,5 @@
-﻿using EazzyRents.Application.Authentication.Commands;
-using EazzyRents.Application.Authentication.Common;
-using EazzyRents.Application.Authentication.Queries;
-using EazzyRents.Application.Common.Interfaces.Authentication;
-using EazzyRents.Core.Enums;
-using EazzyRents.Core.Models;
-using ErrorOr;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.Configurations
 {
