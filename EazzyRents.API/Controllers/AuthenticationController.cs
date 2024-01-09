@@ -3,8 +3,6 @@ using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
 using ErrorOr;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EazzyRents.API.Controllers
@@ -21,14 +19,14 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ErrorOr<AuthResult>> Register([FromQuery]RegisterCommand command)
+        public async Task<ErrorOr<AuthResult>> Register([FromQuery] RegisterCommand command)
         {
             var user = new RegisterCommand(command.FirstName, command.LastName, command.Email, command.Password, command.UserRole);
             return await this.mediator.Send(user);
         }
 
         [HttpGet("login")]
-        public async Task<ErrorOr<AuthResult>> Login([FromQuery]LoginQuery query)
+        public async Task<ErrorOr<AuthResult>> Login([FromQuery] LoginQuery query)
         {
             var user = new LoginQuery(query.Email, query.Password);
             return await this.mediator.Send(user);

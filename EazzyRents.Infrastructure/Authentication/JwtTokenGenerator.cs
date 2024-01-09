@@ -3,13 +3,9 @@ using EazzyRents.Application.Common.Interfaces.Services;
 using EazzyRents.Core.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Infrastructure.Authentication
 {
@@ -48,7 +44,7 @@ namespace EazzyRents.Infrastructure.Authentication
                 );
 
             return new JwtSecurityTokenHandler().WriteToken(securityToken);
-                
+
         }
     }
 }

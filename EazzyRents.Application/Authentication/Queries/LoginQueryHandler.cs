@@ -4,11 +4,6 @@ using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
@@ -26,12 +21,12 @@ namespace EazzyRents.Application.Authentication.Queries
         {
             await Task.CompletedTask;
 
-            if(this.userRepository.GetUserByEmail(request.Email) is not User user) 
+            if (this.userRepository.GetUserByEmail(request.Email) is not User user)
             {
-                throw new Exception("Invalid credentials");            
+                throw new Exception("Invalid credentials");
             }
 
-            if(user.Password != request.Password)
+            if (user.Password != request.Password)
             {
                 throw new Exception("Invalid password");
             }

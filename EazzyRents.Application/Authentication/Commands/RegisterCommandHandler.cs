@@ -4,11 +4,6 @@ using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using ErrorOr;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
@@ -26,7 +21,7 @@ namespace EazzyRents.Application.Authentication.Commands
         {
             await Task.CompletedTask;
 
-            if(this.userRepository.GetUserByEmail(request.Email) is not null) 
+            if (this.userRepository.GetUserByEmail(request.Email) is not null)
             {
                 throw new Exception("Duplicate Email");
             }
