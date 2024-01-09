@@ -11,6 +11,6 @@ namespace EazzyRents.Application.Authentication.Commands
         string Email,
         string Password,
         UserRole UserRole
-        ) : IRequest<ErrorOr<AuthResult>>;
+        ) : IRequest<AuthResultForRegistration>;
 
 }

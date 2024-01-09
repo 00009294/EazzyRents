@@ -4,10 +4,11 @@ using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using ErrorOr;
 using MediatR;
+using System.Diagnostics;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<AuthResult>>
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthResultForRegistration>
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
         private readonly IUserRepository userRepository;
@@ -17,15 +18,8 @@ namespace EazzyRents.Application.Authentication.Commands
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.userRepository = userRepository;
         }
-        public async Task<ErrorOr<AuthResult>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
-
-            if (this.userRepository.GetUserByEmail(request.Email) is not null)
-            {
-                throw new Exception("Duplicate Email");
-            }
-
             var user = new User()
             {
                 FirstName = request.FirstName,
@@ -35,10 +29,17 @@ namespace EazzyRents.Application.Authentication.Commands
                 UserRole = request.UserRole
             };
 
-            this.userRepository.AddUser(user);
-
             var token = this.jwtTokenGenerator.GenerateToken(user);
-            return new AuthResult(user, token);
+            this.userRepository.AddUser(user);
+            
+            if(token != null)
+            {
+                return Task.FromResult(new AuthResultForRegistration(IsRegistered: true, Message: "Registered successfully"));
+                
+            }
+            return Task.FromResult(new AuthResultForRegistration(IsRegistered: false, Message: "Registered successfully"));
+             
         }
+
     }
 }

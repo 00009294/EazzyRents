@@ -6,6 +6,6 @@ namespace EazzyRents.Application.Authentication.Queries
 {
     public record LoginQuery(
         string Email,
-        string Password) : IRequest<ErrorOr<AuthResult>>;
+        string Password) : IRequest<AuthResultForLogin>;
 
 }

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthResult>>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResultForLogin>
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
         private readonly IUserRepository userRepository;
@@ -17,7 +17,7 @@ namespace EazzyRents.Application.Authentication.Queries
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.userRepository = userRepository;
         }
-        public async Task<ErrorOr<AuthResult>> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<AuthResultForLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
@@ -33,7 +33,7 @@ namespace EazzyRents.Application.Authentication.Queries
 
             var token = this.jwtTokenGenerator.GenerateToken(user);
 
-            return new AuthResult(user, token);
+            return new AuthResultForLogin(token);
         }
     }
 }
