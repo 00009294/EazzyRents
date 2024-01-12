@@ -1,12 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -27,7 +21,7 @@ namespace EazzyRents.Infrastructure.Persistence
         public bool Delete(int id)
         {
             var realEstate = this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
-            if(realEstate != null)
+            if (realEstate != null)
             {
                 this.appDbContext.RealEstates.Remove(realEstate);
                 return this.appDbContext.SaveChanges() > 0;
@@ -57,7 +51,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public bool Update(RealEstate realEstate)
         {
-            if(realEstate != null)
+            if (realEstate != null)
             {
                 this.appDbContext.Update(realEstate);
                 return this.appDbContext.SaveChanges() > 0;

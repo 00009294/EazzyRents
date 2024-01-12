@@ -1,11 +1,5 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
-using EazzyRents.Application.RealEstates.Commands;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
@@ -16,8 +10,8 @@ namespace EazzyRents.Application.RealEstates.Commands
         public CreateCommandHandler(IRealEstateRepository realEstateRepository)
         {
             this.realEstateRepository = realEstateRepository;
-        } 
-        
+        }
+
         public Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
             var realEstate = new Core.Models.RealEstate()
@@ -31,7 +25,7 @@ namespace EazzyRents.Application.RealEstates.Commands
                 RealEstateStatus = request.Status
             };
 
-           return Task.FromResult(this.realEstateRepository.Create(realEstate));
+            return Task.FromResult(this.realEstateRepository.Create(realEstate));
         }
     }
 }

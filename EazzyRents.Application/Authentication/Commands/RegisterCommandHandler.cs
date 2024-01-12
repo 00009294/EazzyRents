@@ -3,9 +3,6 @@ using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System.Diagnostics.Metrics;
-using System.Text;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
@@ -13,7 +10,7 @@ namespace EazzyRents.Application.Authentication.Commands
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
         private readonly IUserRepository userRepository;
-        
+
 
         public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator,
             IUserRepository userRepository
@@ -21,7 +18,7 @@ namespace EazzyRents.Application.Authentication.Commands
         {
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.userRepository = userRepository;
-            
+
         }
         public Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
@@ -32,7 +29,7 @@ namespace EazzyRents.Application.Authentication.Commands
                 Email = request.Email,
                 UserRole = request.UserRole
             };
-            
+
             user.Password = EnCryption.EnCrypt(request.Password);
             var token = this.jwtTokenGenerator.GenerateToken(user);
             this.userRepository.AddUser(user);
@@ -46,7 +43,7 @@ namespace EazzyRents.Application.Authentication.Commands
 
         }
 
-        
+
 
     }
 }

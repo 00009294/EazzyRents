@@ -3,8 +3,6 @@ using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using MediatR;
-using System.Text;
-using System;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
