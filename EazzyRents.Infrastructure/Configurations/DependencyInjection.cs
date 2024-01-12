@@ -21,6 +21,7 @@ namespace EazzyRents.Infrastructure.Configurations
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRealEstateRepository, RealEstateRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IDateTimerProvider, DateTimeProvider>();
 
