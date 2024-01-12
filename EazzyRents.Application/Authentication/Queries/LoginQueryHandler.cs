@@ -3,6 +3,8 @@ using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using MediatR;
+using System.Text;
+using System;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
@@ -25,7 +27,9 @@ namespace EazzyRents.Application.Authentication.Queries
                 throw new Exception("Invalid credentials");
             }
 
-            if (user.Password != request.Password)
+            var enCryptedPassword = EnCryption.EnCrypt(request.Password);
+
+            if (user.Password != enCryptedPassword)
             {
                 throw new Exception("Invalid password");
             }
@@ -34,5 +38,6 @@ namespace EazzyRents.Application.Authentication.Queries
 
             return new AuthResultForLogin(token);
         }
+
     }
 }

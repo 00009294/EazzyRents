@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Text;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
@@ -13,3 +14,4 @@ namespace EazzyRents.Application.Authentication.Commands
         }
     }
 }
+

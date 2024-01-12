@@ -12,9 +12,6 @@ namespace EazzyRents.Application.Configurations
             //services.AddScoped<IRequestHandler<LoginQuery, ErrorOr<AuthResult>>, LoginQueryHandler>();
             //services.AddScoped<IRequestHandler<RegisterCommand, ErrorOr<AuthResult>>, RegisterCommandHandler>();
 
-            //services.AddScoped<UserManager<User>>();
-            //services.AddIdentityCore<IPasswordHasher<User>>().AddEntityFrameworkStores<AppDbContext>();    
-
             return services;
         }
     }

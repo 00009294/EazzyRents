@@ -21,6 +21,7 @@ namespace EazzyRents.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
         }
 
+        public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }
