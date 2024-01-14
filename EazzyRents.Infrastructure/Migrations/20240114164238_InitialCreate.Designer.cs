@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazzyRents.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240112181610_CreateRealEstate")]
-    partial class CreateRealEstate
+    [Migration("20240114164238_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,28 @@ namespace EazzyRents.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EazzyRents.Core.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Images");
+                });
 
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
@@ -41,16 +63,12 @@ namespace EazzyRents.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OwnerIdId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Photo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -60,16 +78,18 @@ namespace EazzyRents.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerIdId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("RealEstates");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -99,15 +119,27 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("EazzyRents.Core.Models.Image", b =>
+                {
+                    b.HasOne("EazzyRents.Core.Models.RealEstate", null)
+                        .WithMany("Images")
+                        .HasForeignKey("RealEstateId");
+                });
+
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
-                    b.HasOne("EazzyRents.Core.Models.User", "OwnerId")
+                    b.HasOne("EazzyRents.Core.Models.User", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerIdId")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("OwnerId");
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
+                {
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

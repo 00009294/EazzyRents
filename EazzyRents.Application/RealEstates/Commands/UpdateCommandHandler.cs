@@ -20,7 +20,7 @@ namespace EazzyRents.Application.RealEstates.Commands
                 Description = request.Descriprion,
                 Address = request.Address,
                 Price = request.Price,
-                Photo = request.Photo,
+                Images = request.Images,
                 PhoneNumber = request.PhoneNumber,
                 RealEstateStatus = request.Status
             };

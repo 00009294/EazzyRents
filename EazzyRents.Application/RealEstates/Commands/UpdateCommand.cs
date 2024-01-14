@@ -1,4 +1,5 @@
 ﻿using EazzyRents.Core.Enums;
+using EazzyRents.Core.Models;
 using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Commands
@@ -8,7 +9,7 @@ namespace EazzyRents.Application.RealEstates.Commands
         string Descriprion,
         string Address,
         double Price,
-        byte[] Photo,
+        List<Image> Images,
         string PhoneNumber,
         RealEstateStatus Status
         ) : IRequest<bool>;

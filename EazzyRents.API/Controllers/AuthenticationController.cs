@@ -18,14 +18,14 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<AuthResultForRegistration> Register([FromQuery] RegisterCommand command)
+        public async Task<AuthResultForRegistration> Register([FromBody] RegisterCommand command)
         {
-            var user = new RegisterCommand(command.FirstName, command.LastName, command.Email, command.Password, command.UserRole);
+            var user = new RegisterCommand(command.FirstName, command.LastName, command.PhoneNumber, command.Email, command.Password, command.UserRole);
             return await this.mediator.Send(user);
         }
 
-        [HttpGet("login")]
-        public async Task<AuthResultForLogin> Login([FromQuery] LoginQuery query)
+        [HttpPost("login")]
+        public async Task<AuthResultForLogin> Login([FromBody] LoginQuery query)
         {
             var user = new LoginQuery(query.Email, query.Password);
             return await this.mediator.Send(user);

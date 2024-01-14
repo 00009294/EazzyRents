@@ -20,6 +20,7 @@ namespace EazzyRents.Application.RealEstates.Commands
         {
             var realEstate = this.mapper.Map<RealEstate>(request);
 
+
             return Task.FromResult(this.realEstateRepository.Create(realEstate));
         }
     }

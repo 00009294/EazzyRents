@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
+using EazzyRents.Application.RealEstates.Commands;
 using EazzyRents.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.Helper
 {
@@ -12,7 +8,7 @@ namespace EazzyRents.Application.Helper
     {
         public AppMapper()
         {
-            CreateMap<RealEstate, TaskCreationOptions>().ReverseMap();
+            CreateMap<RealEstate, CreateCommand>().ReverseMap();
         }
     }
 }

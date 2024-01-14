@@ -26,10 +26,15 @@ namespace EazzyRents.Application.Authentication.Commands
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
                 UserRole = request.UserRole
             };
-
+            var userEmail = this.userRepository.GetUserByEmail(request.Email);
+            if (userEmail != null)
+            {
+                throw new Exception("Already registered user email");
+            }
+            user.Email = request.Email;
             user.Password = EnCryption.EnCrypt(request.Password);
             var token = this.jwtTokenGenerator.GenerateToken(user);
             this.userRepository.AddUser(user);

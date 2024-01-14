@@ -1,8 +1,6 @@
 ﻿using EazzyRents.Application.RealEstates.Commands;
 using EazzyRents.Application.RealEstates.Queries;
-using EazzyRents.Core.Models;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EazzyRents.API.Controllers
@@ -27,7 +25,7 @@ namespace EazzyRents.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromQuery] CreateCommand command)
         {
-            return Ok(await this.mediatr.Send(command));
+             return Ok(await this.mediatr.Send(command));
         }
 
         [HttpPut]
@@ -51,13 +49,13 @@ namespace EazzyRents.API.Controllers
         [HttpGet("address")]
         public async Task<IActionResult> GetByAddress([FromQuery] string address)
         {
-            return Ok(await this.mediatr.Send(new GetByAddressQuery(address))); 
+            return Ok(await this.mediatr.Send(new GetByAddressQuery(address)));
         }
 
         [HttpGet("price")]
         public async Task<IActionResult> GetByPrice([FromQuery] double price)
         {
-            return Ok(await this.mediatr.Send(new GetByPriceQuery(price))); 
+            return Ok(await this.mediatr.Send(new GetByPriceQuery(price)));
         }
     }
 }
