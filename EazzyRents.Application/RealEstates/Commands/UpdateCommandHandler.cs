@@ -21,6 +21,7 @@ namespace EazzyRents.Application.RealEstates.Commands
                 Address = request.Address,
                 Price = request.Price,
                 Images = request.Images,
+                OwnerId = request.OwnerId,
                 PhoneNumber = request.PhoneNumber,
                 RealEstateStatus = request.Status
             };
