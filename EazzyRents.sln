@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazzyRents.API", "EazzyRents.API\EazzyRents.API.csproj", "{B6BDFC9F-1E4D-44F6-B4DF-746AC9CD9146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazzyRents.API", "EazzyRents.API\EazzyRents.API.csproj", "{B6BDFC9F-1E4D-44F6-B4DF-746AC9CD9146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazzyRents.Core", "EazzyRents.Core\EazzyRents.Core.csproj", "{C1A29F6C-05D1-4E85-8C0D-FAB6A414EAA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazzyRents.Core", "EazzyRents.Core\EazzyRents.Core.csproj", "{C1A29F6C-05D1-4E85-8C0D-FAB6A414EAA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazzyRents.Application", "EazzyRents.Application\EazzyRents.Application.csproj", "{2FCE6D4E-FDDB-48D3-B0A3-F7F892775258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazzyRents.Application", "EazzyRents.Application\EazzyRents.Application.csproj", "{2FCE6D4E-FDDB-48D3-B0A3-F7F892775258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EazzyRents.Infrastructure", "EazzyRents.Infrastructure\EazzyRents.Infrastructure.csproj", "{4FFB21D3-9B2D-4145-87AB-0851EF3EDC07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EazzyRents.Infrastructure", "EazzyRents.Infrastructure\EazzyRents.Infrastructure.csproj", "{4FFB21D3-9B2D-4145-87AB-0851EF3EDC07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
