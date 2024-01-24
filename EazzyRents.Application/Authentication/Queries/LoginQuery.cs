@@ -4,7 +4,7 @@ using MediatR;
 namespace EazzyRents.Application.Authentication.Queries
 {
     public record LoginQuery(
-        string Email,
+        string Username,
         string Password) : IRequest<AuthResultForLogin>;
 
 }

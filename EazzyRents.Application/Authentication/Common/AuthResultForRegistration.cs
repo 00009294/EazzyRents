@@ -1,7 +1,10 @@
 ﻿namespace EazzyRents.Application.Authentication.Common
 {
-    public record AuthResultForRegistration(
-        bool IsRegistered,
-        string Message
-        );
+    public class AuthResultForRegistration
+    {
+       public bool IsRegistered { get; set; }
+       public string Message { get; set; }
+
+    }
+    
 }

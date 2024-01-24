@@ -1,6 +1,7 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Services;
 using EazzyRents.Core.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,39 +12,40 @@ namespace EazzyRents.Infrastructure.Authentication
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {
-        private readonly IDateTimerProvider dateTimerProvider;
-        private readonly JwtSettings jwtOptions;
+        private readonly IConfiguration configuration;
 
-        public JwtTokenGenerator(IDateTimerProvider dateTimerProvider, IOptions<JwtSettings> jwtOptions)
+        public JwtTokenGenerator(IConfiguration configuration)
         {
-            this.dateTimerProvider = dateTimerProvider;
-            this.jwtOptions = jwtOptions.Value;
+            this.configuration = configuration;
         }
         public string GenerateToken(User user)
         {
             var signingCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.jwtOptions.Secret)),
-                SecurityAlgorithms.HmacSha256
-                );
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                    this.configuration["JWT:SigningKey"])),
+                        SecurityAlgorithms.HmacSha512Signature);
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-                new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
                 new Claim("UserRole", user.UserRole.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var securityToken = new JwtSecurityToken(
-                issuer: this.jwtOptions.Issuer,
-                audience: this.jwtOptions.Audience,
-                expires: this.dateTimerProvider.UtcNow.AddMinutes(this.jwtOptions.ExpiryMinutes),
-                claims: claims,
-                signingCredentials: signingCredentials
-                );
+            var securityToken = new SecurityTokenDescriptor
+            {
 
-            return new JwtSecurityTokenHandler().WriteToken(securityToken);
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(2),
+                SigningCredentials = signingCredentials,
+                Issuer = this.configuration["JWT:Issuer"],
+                Audience = this.configuration["JWT:Audience"]
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(securityToken);
+
+            return tokenHandler.WriteToken(token);
 
         }
     }

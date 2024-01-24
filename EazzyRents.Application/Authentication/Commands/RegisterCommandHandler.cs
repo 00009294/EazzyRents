@@ -1,51 +1,51 @@
 ﻿using EazzyRents.Application.Authentication.Common;
+using EazzyRents.Application.Authentication.Common.Dtos.Account;
 using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthResultForRegistration>
     {
-        private readonly IJwtTokenGenerator jwtTokenGenerator;
-        private readonly IUserRepository userRepository;
+        private readonly UserManager<User> userManager;
 
-
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator,
-            IUserRepository userRepository
-            )
+        public RegisterCommandHandler(UserManager<User> userManager, IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
         {
-            this.jwtTokenGenerator = jwtTokenGenerator;
-            this.userRepository = userRepository;
-
+            this.userManager = userManager;
         }
-        public Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
+
+        public async Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            var user = new User()
+            try
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                PhoneNumber = request.PhoneNumber,
-                UserRole = request.UserRole
-            };
-            var userEmail = this.userRepository.GetUserByEmail(request.Email);
-            if (userEmail != null)
-            {
-                throw new Exception("Already registered user email");
+                if( request == null )
+                {
+                    throw new ArgumentNullException();
+                }
+                User user = new User()
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                };
+
+                var createdUSer = await this.userManager.CreateAsync(user, request.Password);
+                var roleResult = await this.userManager.AddToRoleAsync(user, request.UserRole.ToString());
+                return new AuthResultForRegistration
+                {
+                    IsRegistered = true,
+                    Message = "Successfully registered"
+                };
             }
-            user.Email = request.Email;
-            user.Password = EnCryption.EnCrypt(request.Password);
-            var token = this.jwtTokenGenerator.GenerateToken(user);
-            this.userRepository.AddUser(user);
-
-            if (token != null)
+            catch
             {
-                return Task.FromResult(new AuthResultForRegistration(IsRegistered: true, Message: "Registered successfully"));
-
+                return new AuthResultForRegistration {
+                    IsRegistered = false,
+                    Message = "Error occured while registering user"
+                };
             }
-            return Task.FromResult(new AuthResultForRegistration(IsRegistered: false, Message: "Registered successfully"));
-
         }
 
 

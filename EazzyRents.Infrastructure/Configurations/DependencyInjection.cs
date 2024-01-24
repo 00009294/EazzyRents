@@ -17,9 +17,15 @@ namespace EazzyRents.Infrastructure.Configurations
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                    
+                    sqlServerOptions =>
+                    {
+                        sqlServerOptions.CommandTimeout(3600);
+                        sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
+                    });
             });
-
+            //services.
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

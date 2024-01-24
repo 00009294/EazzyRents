@@ -3,6 +3,8 @@ using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
@@ -10,32 +12,40 @@ namespace EazzyRents.Application.Authentication.Queries
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
         private readonly IUserRepository userRepository;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator,
+            IUserRepository userRepository,
+                UserManager<User> userManager,
+                    SignInManager<User> signInManager)
         {
             this.jwtTokenGenerator = jwtTokenGenerator;
             this.userRepository = userRepository;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
         public async Task<AuthResultForLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
-
-            if (this.userRepository.GetUserByEmail(request.Email) is not User user)
+            var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.Username.ToLower());
+            if (user == null)
             {
-                throw new Exception("Invalid credentials");
+                return new AuthResultForLogin()
+                {
+                    Message = "Unauthorized user"
+                };
             }
 
-            var enCryptedPassword = EnCryption.EnCrypt(request.Password);
-
-            if (user.Password != enCryptedPassword)
+            var signInUser = await this.signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
+            if (signInUser != null)
             {
-                throw new Exception("Invalid password");
+                return new AuthResultForLogin()
+                {
+                    Message = "Welcome",
+                    Token = this.jwtTokenGenerator.GenerateToken(user)
+                };
             }
-
-            var token = this.jwtTokenGenerator.GenerateToken(user);
-
-            return new AuthResultForLogin(token);
+            else return new AuthResultForLogin() { Message = "Wrong password or username" };
         }
-
     }
 }

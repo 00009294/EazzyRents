@@ -5,9 +5,7 @@ using MediatR;
 namespace EazzyRents.Application.Authentication.Commands
 {
     public sealed record RegisterCommand(
-        string FirstName,
-        string LastName,
-        string PhoneNumber,
+        string UserName,
         string Email,
         string Password,
         UserRole UserRole

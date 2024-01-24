@@ -1,9 +1,12 @@
 ﻿using EazzyRents.Core.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace EazzyRents.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
@@ -19,8 +22,27 @@ namespace EazzyRents.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-        }
 
+        List<IdentityRole> roles = new List<IdentityRole>
+            {
+                new IdentityRole
+                {
+                    Name = "Landlord",
+                    NormalizedName = "LANDLORD"
+                },
+                new IdentityRole
+                {
+                    Name = "Tenant",
+                    NormalizedName = "TENANT"
+                },
+                new IdentityRole
+                {
+                    Name = "Guest",
+                    NormalizedName = "GUEST"
+                }
+            };
+        modelBuilder.Entity<IdentityRole>().HasData(roles);
+        }
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Image> Images { get; set; }

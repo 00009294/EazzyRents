@@ -12,7 +12,7 @@ namespace EazzyRents.Core.Models
         public List<Image> Images { get; set; }
         public RealEstateStatus RealEstateStatus { get; set; }
         
-        public int OwnerId { get; set; }
+        public int OwnerId { get; set; } 
         public User Owner { get; set; }
     }
 }

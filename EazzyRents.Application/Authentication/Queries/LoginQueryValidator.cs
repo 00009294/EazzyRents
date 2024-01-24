@@ -6,7 +6,6 @@ namespace EazzyRents.Application.Authentication.Queries
     {
         public LoginQueryValidator()
         {
-            RuleFor(u => u.Email).NotEmpty().EmailAddress();
             RuleFor(u => u.Password).NotEmpty();
         }
     }

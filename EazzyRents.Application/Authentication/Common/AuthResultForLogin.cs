@@ -1,6 +1,8 @@
 ﻿namespace EazzyRents.Application.Authentication.Common
 {
-    public record AuthResultForLogin(
-        string token
-        );
+    public class AuthResultForLogin : AuthResultForRegistration
+    {
+        public string Token { get; set; }
+
+    }
 }
