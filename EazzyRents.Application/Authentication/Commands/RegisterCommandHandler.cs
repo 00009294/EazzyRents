@@ -23,7 +23,7 @@ namespace EazzyRents.Application.Authentication.Commands
             {
                 if( request == null )
                 {
-                    throw new ArgumentNullException();
+                    return new AuthResultForRegistration { Message = "Null user" };
                 }
                 User user = new User()
                 {

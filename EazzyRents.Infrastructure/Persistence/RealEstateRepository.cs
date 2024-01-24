@@ -26,7 +26,7 @@ namespace EazzyRents.Infrastructure.Persistence
                 this.appDbContext.RealEstates.Remove(realEstate);
                 return this.appDbContext.SaveChanges() > 0;
             }
-            throw new Exception("Not Found");
+            return false;
         }
 
         public List<RealEstate> GetAll()
@@ -56,7 +56,7 @@ namespace EazzyRents.Infrastructure.Persistence
                 this.appDbContext.Update(realEstate);
                 return this.appDbContext.SaveChanges() > 0;
             }
-            throw new Exception("Not Found");
+            return false;
         }
     }
 }
