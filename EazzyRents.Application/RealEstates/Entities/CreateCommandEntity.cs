@@ -11,7 +11,7 @@ namespace EazzyRents.Application.RealEstates.Entities
         public double Price { get; init; }
         public string PhoneNumber { get; init; }
         public int OwnerId { get; init; }
-        public List<Image> Images { get; init; }
+        public List<Core.Models.File> Images { get; init; }
         public RealEstateStatus RealEstateStatus { get; init; }
     }
 }

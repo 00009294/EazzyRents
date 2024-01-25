@@ -9,7 +9,7 @@ namespace EazzyRents.Application.RealEstates.Commands
         string Descriprion,
         string Address,
         double Price,
-        List<Image> Images,
+        List<Core.Models.File> Images,
         string PhoneNumber,
         int OwnerId,
         RealEstateStatus Status

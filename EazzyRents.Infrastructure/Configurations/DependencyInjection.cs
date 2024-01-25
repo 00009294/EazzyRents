@@ -1,4 +1,5 @@
-﻿using EazzyRents.Application.Common.Interfaces.Authentication;
+﻿using Azure.Storage.Blobs;
+using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Application.Common.Interfaces.Services;
 using EazzyRents.Infrastructure.Authentication;
@@ -18,7 +19,7 @@ namespace EazzyRents.Infrastructure.Configurations
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                    
+
                     sqlServerOptions =>
                     {
                         sqlServerOptions.CommandTimeout(3600);
@@ -30,6 +31,8 @@ namespace EazzyRents.Infrastructure.Configurations
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IDateTimerProvider, DateTimeProvider>();
+
+            services.AddScoped<IBlobService, BlobService>();
 
             return services;
         }

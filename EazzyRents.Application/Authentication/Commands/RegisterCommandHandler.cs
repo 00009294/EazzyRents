@@ -1,5 +1,4 @@
 ﻿using EazzyRents.Application.Authentication.Common;
-using EazzyRents.Application.Authentication.Common.Dtos.Account;
 using EazzyRents.Application.Common.Interfaces.Authentication;
 using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
@@ -12,7 +11,7 @@ namespace EazzyRents.Application.Authentication.Commands
     {
         private readonly UserManager<User> userManager;
 
-        public RegisterCommandHandler(UserManager<User> userManager, IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public RegisterCommandHandler(UserManager<User> userManager)
         {
             this.userManager = userManager;
         }
@@ -21,7 +20,7 @@ namespace EazzyRents.Application.Authentication.Commands
         {
             try
             {
-                if( request == null )
+                if (request == null)
                 {
                     return new AuthResultForRegistration { Message = "Null user" };
                 }
@@ -41,7 +40,8 @@ namespace EazzyRents.Application.Authentication.Commands
             }
             catch
             {
-                return new AuthResultForRegistration {
+                return new AuthResultForRegistration
+                {
                     IsRegistered = false,
                     Message = "Error occured while registering user"
                 };

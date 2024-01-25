@@ -30,5 +30,12 @@ namespace EazzyRents.API.Controllers
             var user = new LoginQuery(query.Username, query.Password);
             return await this.mediator.Send(user);
         }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            return Ok(await this.mediator.Send(new LogoutCommand()));
+        }
+
     }
 }

@@ -2,7 +2,6 @@
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Configurations;
 using EazzyRents.Infrastructure.Data;
-using ErrorOr;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -52,7 +51,7 @@ namespace EazzyRents.API.Configurations
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = true;
-                
+
             })
                 .AddEntityFrameworkStores<AppDbContext>();
 
@@ -78,7 +77,7 @@ namespace EazzyRents.API.Configurations
                     )
                 };
             });
-         
+
             return services;
         }
     }

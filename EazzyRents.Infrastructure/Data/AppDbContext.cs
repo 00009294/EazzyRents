@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace EazzyRents.Infrastructure.Data
 {
@@ -23,7 +22,7 @@ namespace EazzyRents.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-        List<IdentityRole> roles = new List<IdentityRole>
+            List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
                 {
@@ -41,10 +40,10 @@ namespace EazzyRents.Infrastructure.Data
                     NormalizedName = "GUEST"
                 }
             };
-        modelBuilder.Entity<IdentityRole>().HasData(roles);
+            modelBuilder.Entity<IdentityRole>().HasData(roles);
         }
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Core.Models.File> Images { get; set; }
     }
 }
