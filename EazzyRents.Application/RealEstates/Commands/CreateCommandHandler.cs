@@ -27,32 +27,33 @@ namespace EazzyRents.Application.RealEstates.Commands
             this.azureBlobStorageOptions = azureBlobStorageOptions.Value;
         }
 
-        public async Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
             var realEstate = this.mapper.Map<RealEstate>(request);
-            var createdRealEstate = this.realEstateRepository.Create(realEstate);
-            
-            var createdPhotos = new List<FileDto>();
-            if (request.Images != null)
-            {
-                var folderName = Guid.NewGuid().ToString();
-                var photosPath = $"{this.azureBlobStorageOptions.PhotosFolderName}/{folderName}";
+            return Task.FromResult(this.realEstateRepository.Create(realEstate));
 
-                foreach (var photo in request.Images)
-                {
-                    await this.blobService.UploadFileBlobAsync(photo, photosPath);
-                    var file = new Core.Models.File
-                    {
-                        FileName = photo.FileName,
-                        Path = photosPath,
-                        RealEstateId = realEstate.Id
-                    };
-                    //var res = await _fileRepository.AddAsync(file);
-                    //createdPhotos.Add(this.mapper.Map<FileDto>(res));
-                    //return Task.FromResult());
-                }
-            }
-            return true;
+            //var createdRealEstate = this.realEstateRepository.Create(realEstate);
+            
+            //var createdPhotos = new List<FileDto>();
+            //if (request.Images != null)
+            //{
+            //    var folderName = Guid.NewGuid().ToString();
+            //    var photosPath = $"{this.azureBlobStorageOptions.PhotosFolderName}/{folderName}";
+
+            //    foreach (var photo in request.Images)
+            //    {
+            //        await this.blobService.UploadFileBlobAsync(photo, photosPath);
+            //        var file = new Core.Models.File
+            //        {
+            //            FileName = photo.FileName,
+            //            Path = photosPath,
+            //            RealEstateId = realEstate.Id
+            //        };
+            //        //var res = await _fileRepository.AddAsync(file);
+            //        //createdPhotos.Add(this.mapper.Map<FileDto>(res));
+            //        //return Task.FromResult());
+            //    }
+            //}
         }
     }
 }

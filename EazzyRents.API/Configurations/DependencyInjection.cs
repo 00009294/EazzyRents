@@ -14,7 +14,7 @@ namespace EazzyRents.API.Configurations
         public static IServiceCollection AddAllDependecies(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddInfrastructure(configuration);
-            services.AddApplication();
+            services.AddApplication(configuration);
 
             services.AddSwaggerGen(option =>
             {
