@@ -2,8 +2,8 @@
 
 namespace EazzyRents.Infrastructure.Services
 {
-    public class DateTimeProvider : IDateTimerProvider
-    {
-        public DateTime UtcNow => DateTime.UtcNow;
-    }
+      public class DateTimeProvider : IDateTimerProvider
+      {
+            public DateTime UtcNow => DateTime.UtcNow;
+      }
 }

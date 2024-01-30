@@ -1,28 +1,29 @@
 ﻿using EazzyRents.Core.Models;
+using EazzyRents.Core.Models.BlobStorage;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EazzyRents.Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext<User>
-    {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
+      public class AppDbContext : IdentityDbContext<User>
+      {
+            public AppDbContext (DbContextOptions<AppDbContext> options)
+                : base(options)
+            {
 
-        }
+            }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
+            protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
+            {
+                  base.OnConfiguring(optionsBuilder);
+            }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+            protected override void OnModelCreating (ModelBuilder modelBuilder)
+            {
+                  base.OnModelCreating(modelBuilder);
 
-            List<IdentityRole> roles = new List<IdentityRole>
+                  List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
                 {
@@ -40,10 +41,10 @@ namespace EazzyRents.Infrastructure.Data
                     NormalizedName = "GUEST"
                 }
             };
-            modelBuilder.Entity<IdentityRole>().HasData(roles);
-        }
-        public DbSet<RealEstate> RealEstates { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Core.Models.File> Images { get; set; }
-    }
+                  modelBuilder.Entity<IdentityRole>().HasData(roles);
+            }
+            public DbSet<RealEstate> RealEstates { get; set; }
+            public DbSet<User> Users { get; set; }
+            public DbSet<BlobContent> Images { get; set; }
+      }
 }

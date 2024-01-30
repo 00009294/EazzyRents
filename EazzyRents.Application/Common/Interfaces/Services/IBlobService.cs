@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EazzyRents.Core.Models.BlobStorage;
 
 namespace EazzyRents.Application.Common.Interfaces.Services
 {
-    public interface IBlobService
-    {
-        Task UploadFileBlobAsync(IFormFile file, string filePath, string guid = null);
-        string GetBlobUrl(string filePath, string fileName);
-        Task DeleteFileBlobAsync(string filePath, string fileName);
-    }
+      public interface IBlobService
+      {
+            Task<string> UploadBlobFileAsync (string fileName, string filePath);
+            Task<BlobObject> GetBlobFile (string name);
+            void DeleteBlobFileAsync (string name);
+            Task<List<string>> ListBlobFilesAsync ();
+      }
 }

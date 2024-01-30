@@ -1,10 +1,10 @@
 ﻿namespace EazzyRents.Core.Enums
 {
-    public enum UserRole
-    {
-        Guest,
-        Landlord,
-        Tenant
-    };
+      public enum UserRole
+      {
+            Guest,
+            Landlord,
+            Tenant
+      };
 
 }

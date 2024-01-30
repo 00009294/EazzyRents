@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Queries
 {
-    public record GetByAddressQuery(string address) : IRequest<List<RealEstate>>;
+      public record GetByAddressQuery (string address) : IRequest<List<RealEstate>>;
 
 }

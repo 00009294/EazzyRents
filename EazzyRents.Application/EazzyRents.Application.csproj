@@ -24,4 +24,8 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helper\Dtos\" />
+  </ItemGroup>
+
 </Project>

@@ -1,80 +1,82 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using EazzyRents.Application.Common.Interfaces.Services;
-using EazzyRents.Application.Common.Options;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EazzyRents.Core.Models.BlobStorage;
 
 namespace EazzyRents.Infrastructure.Services
 {
-    public class BlobService : IBlobService
-    {
-        private readonly BlobServiceClient blobServiceClient;
-        private readonly AzureBlobStorageOptions azureBlobStorageOptions;
+      public class BlobService : IBlobService
+      {
+            private readonly BlobServiceClient blobServiceClient;
+            private readonly BlobContainerClient blobContainerClient;
+            private static readonly List<string> imageExtensions = [" .JPG ", " .JPEG ", " .PNG ", " .TXT "];
 
-        public BlobService(BlobServiceClient blobServiceClient, IOptions<AzureBlobStorageOptions> azureBlobStorageOptions)
-        {
-            this.blobServiceClient = blobServiceClient;
-            this.azureBlobStorageOptions = azureBlobStorageOptions.Value;
-        }
-        public async Task DeleteFileBlobAsync(string filePath, string fileName)
-        {
-            var containerClient = this.blobServiceClient.GetBlobContainerClient(
-                this.azureBlobStorageOptions.ContainerName
-            );
-
-            var blobClient = containerClient.GetBlobClient($"{filePath}/{fileName}");
-
-            await blobClient.DeleteIfExistsAsync();
-        }
-
-        public string GetBlobUrl(string filePath, string fileName)
-        {
-            var containerClient = this.blobServiceClient.GetBlobContainerClient(
-                this.azureBlobStorageOptions.ContainerName
-            );
-
-            var blobClient = containerClient.GetBlobClient($"{filePath}/{fileName}");
-
-            var url = blobClient.Uri.AbsoluteUri;
-
-            return url;
-        }
-
-        public async Task UploadFileBlobAsync(IFormFile file,
-            string filePath,
-            string guid = null
-        )
-        {
-            string fileName =
-                guid != null
-                    ? $"{Path.GetFileNameWithoutExtension(file.FileName)}_{guid}{Path.GetExtension(file.FileName)}"
-                    : file.FileName;
-
-            var containerClient = this.blobServiceClient.GetBlobContainerClient(
-                this.azureBlobStorageOptions.ContainerName
-            );
-
-            var blobClient = containerClient.GetBlobClient($"{filePath}/{fileName}");
-
-            if (await blobClient.ExistsAsync())
+            public BlobService (BlobServiceClient blobServiceClient)
             {
-                throw new InvalidOperationException(
-                    $"File '{fileName}' already exists in the specified path."
-                );
+                  this.blobServiceClient = blobServiceClient;
+                  this.blobContainerClient = this.blobServiceClient.GetBlobContainerClient("blobcontainer");
             }
 
-            var blobUploadOptions = new BlobUploadOptions
+            public async Task<string> UploadBlobFileAsync (string fileName, string filePath)
             {
-                HttpHeaders = new BlobHttpHeaders { ContentType = file.ContentType }
-            };
+                  var blobClient = this.blobContainerClient.GetBlobClient(fileName);
+                  var status = await blobClient.UploadAsync(filePath);
 
-            await blobClient.UploadAsync(file.OpenReadStream(), blobUploadOptions);
-        }
-    }
+                  return blobClient.Uri.AbsoluteUri;
+            }
+
+            public async Task<BlobObject> GetBlobFile (string name)
+            {
+                  var fileName = new Uri(name).Segments.LastOrDefault();
+
+                  try
+                  {
+                        var blobClient = this.blobContainerClient.GetBlobClient(name);
+                        if (await blobClient.ExistsAsync())
+                        {
+                              BlobDownloadResult content = await blobClient.DownloadContentAsync();
+                              var downloadedData = content.Content.ToStream();
+
+                              if (imageExtensions.Contains(Path.GetExtension(fileName.ToUpperInvariant())))
+                              {
+                                    var extension = Path.GetExtension(fileName);
+
+                                    return new BlobObject { Content = downloadedData, ContentType = "image/" + extension.Remove(0, 1) };
+                              }
+                              else
+                              {
+                                    return new BlobObject { Content = downloadedData, ContentType = content.Details.ContentType };
+                              }
+                        }
+                        else
+                        {
+                              return null;
+                        }
+
+                  }
+                  catch (Exception ex)
+                  {
+                        throw;
+                  }
+            }
+
+            public async void DeleteBlobFileAsync (string name)
+            {
+                  var fileName = new Uri(name).Segments.LastOrDefault();
+                  var blobClient = this.blobContainerClient.GetBlobClient(fileName);
+                  await blobClient.DeleteIfExistsAsync();
+            }
+
+            public async Task<List<string>> ListBlobFilesAsync ()
+            {
+                  List<string> bloblList = new List<string>();
+
+                  await foreach (var blobItem in this.blobContainerClient.GetBlobsAsync())
+                  {
+                        bloblList.Add(blobItem.Name);
+                  }
+
+                  return bloblList;
+            }
+      }
 }

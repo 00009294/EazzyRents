@@ -1,15 +1,15 @@
 ﻿using EazzyRents.Core.Enums;
-using EazzyRents.Core.Models;
+using EazzyRents.Core.Models.BlobStorage;
 using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
-    public record UpdateCommand(
+      public record UpdateCommand (
         int Id,
         string Descriprion,
         string Address,
         double Price,
-        List<Core.Models.File> Images,
+        List<BlobContent> Images,
         string PhoneNumber,
         int OwnerId,
         RealEstateStatus Status

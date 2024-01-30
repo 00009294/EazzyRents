@@ -12,29 +12,32 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EazzyRents.Infrastructure.Configurations
 {
-    public static class DependencyInjection
-    {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<AppDbContext>(options =>
+      public static class DependencyInjection
+      {
+            public static IServiceCollection AddInfrastructure (this IServiceCollection services, IConfiguration configuration)
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                  // Database connection
+                  services.AddDbContext<AppDbContext>(options =>
+                  {
+                        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
 
-                    sqlServerOptions =>
-                    {
-                        sqlServerOptions.CommandTimeout(3600);
-                        sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
-                    });
-            });
-            //services.
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRealEstateRepository, RealEstateRepository>();
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-            services.AddScoped<IDateTimerProvider, DateTimeProvider>();
+                      sqlServerOptions =>
+                      {
+                            sqlServerOptions.CommandTimeout(3600);
+                            sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
+                      });
+                  });
+                  // Blob Storage connection
+                  services.AddSingleton(x => new BlobServiceClient(configuration.GetConnectionString("AzureBlobConnectionString")));
 
-            services.AddScoped<IBlobService, BlobService>();
+                  // Services
+                  services.AddScoped<IUserRepository, UserRepository>();
+                  services.AddScoped<IRealEstateRepository, RealEstateRepository>();
+                  services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+                  services.AddScoped<IDateTimerProvider, DateTimeProvider>();
+                  services.AddScoped<IBlobService, BlobService>();
 
-            return services;
-        }
-    }
+                  return services;
+            }
+      }
 }
