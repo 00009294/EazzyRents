@@ -7,7 +7,7 @@ namespace EazzyRents.Application.Common.Interfaces.Services
       {
             Task<string> UploadBlobFileAsync (IFormFile formFile);
             Task<BlobObject> GetBlobFile (string name);
-            void DeleteBlobFileAsync (string name);
+            void DeleteBlobFile (string name);
             Task<List<string>> ListBlobFilesAsync ();
       }
 }

@@ -65,11 +65,11 @@ namespace EazzyRents.Infrastructure.Services
                   }
             }
 
-            public async void DeleteBlobFileAsync (string name)
+            public  void DeleteBlobFile (string name)
             {
                   var fileName = new Uri(name).Segments.LastOrDefault();
                   var blobClient = this.blobContainerClient.GetBlobClient(fileName);
-                  await blobClient.DeleteIfExistsAsync();
+                  blobClient.DeleteIfExists();
             }
 
             public async Task<List<string>> ListBlobFilesAsync ()
