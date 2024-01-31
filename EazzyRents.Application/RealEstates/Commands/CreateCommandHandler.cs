@@ -22,14 +22,13 @@ namespace EazzyRents.Application.RealEstates.Commands
             }
 
             public async Task<bool> Handle (CreateCommand request, CancellationToken cancellationToken)
-            {
+             {
                   var realEstate = this.mapper.Map<RealEstate>(request);
-
                   if (realEstate == null) return false;
-
+                  
                   foreach (var image in request.Images)
                   {
-                        var res = await this.blobService.UploadBlobFileAsync(image.Name, image.FileName);
+                        await this.blobService.UploadBlobFileAsync(image);
                   }
 
                   return this.realEstateRepository.Create(realEstate);

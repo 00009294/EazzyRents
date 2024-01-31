@@ -1,5 +1,8 @@
 ﻿using EazzyRents.Core.Enums;
 using EazzyRents.Core.Models.BlobStorage;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EazzyRents.Core.Models
 {
@@ -10,7 +13,8 @@ namespace EazzyRents.Core.Models
             public string Address { get; set; }
             public double Price { get; set; }
             public string PhoneNumber { get; set; }
-            public List<BlobContent> Images { get; set; }
+            [NotMapped]
+            public List<IFormFile> Images { get; set; }
             public RealEstateStatus RealEstateStatus { get; set; }
 
             public int OwnerId { get; set; }

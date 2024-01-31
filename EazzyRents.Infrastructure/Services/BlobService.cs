@@ -1,7 +1,9 @@
-﻿using Azure.Storage.Blobs;
+﻿using System.IO;
+using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using EazzyRents.Application.Common.Interfaces.Services;
 using EazzyRents.Core.Models.BlobStorage;
+using Microsoft.AspNetCore.Http;
 
 namespace EazzyRents.Infrastructure.Services
 {
@@ -17,11 +19,14 @@ namespace EazzyRents.Infrastructure.Services
                   this.blobContainerClient = this.blobServiceClient.GetBlobContainerClient("blobcontainer");
             }
 
-            public async Task<string> UploadBlobFileAsync (string fileName, string filePath)
+            public async Task<string> UploadBlobFileAsync (IFormFile formFile)
             {
-                  var blobClient = this.blobContainerClient.GetBlobClient(fileName);
-                  var status = await blobClient.UploadAsync(filePath);
-
+                  var blobClient = this.blobContainerClient.GetBlobClient(formFile.FileName);
+                  using (var stream = formFile.OpenReadStream())
+                  {
+                        await blobClient.UploadAsync(stream, true);
+                  }
+                  
                   return blobClient.Uri.AbsoluteUri;
             }
 

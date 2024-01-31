@@ -22,32 +22,6 @@ namespace EazzyRents.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EazzyRents.Core.Models.BlobStorage.BlobContent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RealEstateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstateId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
                     b.Property<int>("Id")
@@ -184,19 +158,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "61e202b0-bb29-47d3-a34d-a660393e52ad",
+                            Id = "30af1d7a-048b-452e-865d-b55379f252fb",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "0d81c1ef-d16f-4ce9-a1bf-05d7e4bc15fc",
+                            Id = "5a4dc559-23a3-45ef-9316-4d39e5feea9b",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "b63d097c-4c5c-4d34-87c9-3d06cec8fbae",
+                            Id = "36004230-8ebd-4ac3-9898-2683c70565f9",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -308,13 +282,6 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EazzyRents.Core.Models.BlobStorage.BlobContent", b =>
-                {
-                    b.HasOne("EazzyRents.Core.Models.RealEstate", null)
-                        .WithMany("Images")
-                        .HasForeignKey("RealEstateId");
-                });
-
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
                     b.HasOne("EazzyRents.Core.Models.User", "Owner")
@@ -373,11 +340,6 @@ namespace EazzyRents.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
-                {
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

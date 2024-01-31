@@ -1,6 +1,7 @@
 ﻿using EazzyRents.Core.Enums;
 using EazzyRents.Core.Models.BlobStorage;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
@@ -9,7 +10,7 @@ namespace EazzyRents.Application.RealEstates.Commands
         string Descriprion,
         string Address,
         double Price,
-        List<BlobContent> Images,
+        List<IFormFile> Images,
         string PhoneNumber,
         int OwnerId,
         RealEstateStatus Status

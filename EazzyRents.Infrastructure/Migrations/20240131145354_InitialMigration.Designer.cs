@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazzyRents.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240124101900_SettingIdentityUser")]
-    partial class SettingIdentityUser
+    [Migration("20240131145354_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,28 +24,6 @@ namespace EazzyRents.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EazzyRents.Core.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RealEstateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstateId");
-
-                    b.ToTable("Images");
-                });
 
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
@@ -183,19 +161,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "43500a5f-9bab-4948-88ee-66195d1d4dca",
+                            Id = "30af1d7a-048b-452e-865d-b55379f252fb",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "35638662-29f0-45a8-a228-40bcf644dfd1",
+                            Id = "5a4dc559-23a3-45ef-9316-4d39e5feea9b",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "35a1ce92-8d31-42e4-aced-f8f4a88fef5e",
+                            Id = "36004230-8ebd-4ac3-9898-2683c70565f9",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -307,13 +285,6 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EazzyRents.Core.Models.Image", b =>
-                {
-                    b.HasOne("EazzyRents.Core.Models.RealEstate", null)
-                        .WithMany("Images")
-                        .HasForeignKey("RealEstateId");
-                });
-
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
                     b.HasOne("EazzyRents.Core.Models.User", "Owner")
@@ -372,11 +343,6 @@ namespace EazzyRents.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
-                {
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }
