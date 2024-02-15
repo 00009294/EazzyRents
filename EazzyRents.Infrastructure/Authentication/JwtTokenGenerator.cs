@@ -12,11 +12,11 @@ namespace EazzyRents.Infrastructure.Authentication
       {
             private readonly IConfiguration configuration;
 
-            public JwtTokenGenerator (IConfiguration configuration)
+            public JwtTokenGenerator(IConfiguration configuration)
             {
                   this.configuration = configuration;
             }
-            public string GenerateToken (User user)
+            public string GenerateToken(User user)
             {
                   var signingCredentials = new SigningCredentials(
                       new SymmetricSecurityKey(Encoding.UTF8.GetBytes(

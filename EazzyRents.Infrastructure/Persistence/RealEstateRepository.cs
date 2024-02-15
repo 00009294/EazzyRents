@@ -8,20 +8,21 @@ namespace EazzyRents.Infrastructure.Persistence
       {
             private readonly AppDbContext appDbContext;
 
-            public RealEstateRepository (AppDbContext appDbContext)
+            public RealEstateRepository(AppDbContext appDbContext)
             {
                   this.appDbContext = appDbContext;
             }
-            public bool Create (RealEstate realEstate)
+            public RealEstate Create(RealEstate realEstate)
             {
                   this.appDbContext.RealEstates.Add(realEstate);
-                  return this.appDbContext.SaveChanges() > 0;
+                  this.appDbContext.SaveChanges();
+                  return realEstate;
             }
 
-            public bool Delete (int id)
+            public bool Delete(int id)
             {
                   var realEstate = this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
-                  if (realEstate != null)
+                  if(realEstate != null)
                   {
                         this.appDbContext.RealEstates.Remove(realEstate);
                         return this.appDbContext.SaveChanges() > 0;
@@ -29,29 +30,29 @@ namespace EazzyRents.Infrastructure.Persistence
                   return false;
             }
 
-            public List<RealEstate> GetAll ()
+            public List<RealEstate> GetAll()
             {
                   return this.appDbContext.RealEstates.ToList();
             }
 
-            public List<RealEstate> GetByAddress (string address)
+            public List<RealEstate> GetByAddress(string address)
             {
                   return this.appDbContext.RealEstates.Where(r => r.Address == address).ToList();
             }
 
-            public RealEstate? GetById (int id)
+            public RealEstate? GetById(int id)
             {
                   return this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
             }
 
-            public List<RealEstate> GetByPrice (double price)
+            public List<RealEstate> GetByPrice(double price)
             {
                   return this.appDbContext.RealEstates.Where(r => r.Price >= price).ToList();
             }
 
-            public bool Update (RealEstate realEstate)
+            public bool Update(RealEstate realEstate)
             {
-                  if (realEstate != null)
+                  if(realEstate != null)
                   {
                         this.appDbContext.Update(realEstate);
                         return this.appDbContext.SaveChanges() > 0;

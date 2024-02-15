@@ -3,5 +3,5 @@ using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Queries
 {
-      public record GetByIdQuery (int id) : IRequest<RealEstate>;
+      public record GetByIdQuery(int id) : IRequest<RealEstate>;
 }

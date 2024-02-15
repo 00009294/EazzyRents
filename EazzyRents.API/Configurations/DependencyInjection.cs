@@ -11,15 +11,15 @@ namespace EazzyRents.API.Configurations
 {
       public static class DependencyInjection
       {
-            public static IServiceCollection AddAllDependecies (this IServiceCollection services, IConfiguration configuration)
+            public static IServiceCollection AddAllDependecies(this IServiceCollection services,IConfiguration configuration)
             {
                   services.AddInfrastructure(configuration);
                   services.AddApplication(configuration);
 
                   services.AddSwaggerGen(option =>
                   {
-                        option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
-                        option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                        option.SwaggerDoc("v1",new OpenApiInfo { Title = "Demo API",Version = "v1" });
+                        option.AddSecurityDefinition("Bearer",new OpenApiSecurityScheme
                         {
                               In = ParameterLocation.Header,
                               Description = "Please enter a valid token",
@@ -44,7 +44,7 @@ namespace EazzyRents.API.Configurations
                       });
                   });
 
-                  services.AddIdentity<User, IdentityRole>(options =>
+                  services.AddIdentity<User,IdentityRole>(options =>
                   {
                         options.Password.RequiredLength = 7;
                         options.Password.RequireNonAlphanumeric = true;
