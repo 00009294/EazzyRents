@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
-      public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResultForLogin>
+      public class LoginQueryHandler : IRequestHandler<LoginQuery,AuthResultForLogin>
       {
             private readonly IJwtTokenGenerator jwtTokenGenerator;
             private readonly IUserRepository userRepository;
             private readonly UserManager<User> userManager;
             private readonly SignInManager<User> signInManager;
 
-            public LoginQueryHandler (IJwtTokenGenerator jwtTokenGenerator,
+            public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator,
                 IUserRepository userRepository,
                     UserManager<User> userManager,
                         SignInManager<User> signInManager)
@@ -25,10 +25,10 @@ namespace EazzyRents.Application.Authentication.Queries
                   this.userManager = userManager;
                   this.signInManager = signInManager;
             }
-            public async Task<AuthResultForLogin> Handle (LoginQuery request, CancellationToken cancellationToken)
+            public async Task<AuthResultForLogin> Handle(LoginQuery request,CancellationToken cancellationToken)
             {
                   var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.Username.ToLower());
-                  if (user == null)
+                  if(user == null)
                   {
                         return new AuthResultForLogin()
                         {
@@ -36,8 +36,8 @@ namespace EazzyRents.Application.Authentication.Queries
                         };
                   }
 
-                  var signInUser = await this.signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
-                  if (signInUser != null)
+                  var signInUser = await this.signInManager.CheckPasswordSignInAsync(user,request.Password,lockoutOnFailure: false);
+                  if(signInUser != null)
                   {
                         return new AuthResultForLogin()
                         {
@@ -45,7 +45,8 @@ namespace EazzyRents.Application.Authentication.Queries
                               Token = this.jwtTokenGenerator.GenerateToken(user)
                         };
                   }
-                  else return new AuthResultForLogin() { Message = "Wrong password or username" };
+                  else
+                        return new AuthResultForLogin() { Message = "Wrong password or username" };
             }
       }
 }

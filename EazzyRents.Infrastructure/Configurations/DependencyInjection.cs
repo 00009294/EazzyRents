@@ -14,7 +14,7 @@ namespace EazzyRents.Infrastructure.Configurations
 {
       public static class DependencyInjection
       {
-            public static IServiceCollection AddInfrastructure (this IServiceCollection services, IConfiguration configuration)
+            public static IServiceCollection AddInfrastructure(this IServiceCollection services,IConfiguration configuration)
             {
                   // Database connection
                   services.AddDbContext<AppDbContext>(options =>
@@ -24,18 +24,19 @@ namespace EazzyRents.Infrastructure.Configurations
                       sqlServerOptions =>
                       {
                             sqlServerOptions.CommandTimeout(3600);
-                            sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
+                            sqlServerOptions.EnableRetryOnFailure(60,TimeSpan.FromSeconds(60),null);
                       });
                   });
                   // Blob Storage connection
                   services.AddSingleton(x => new BlobServiceClient(configuration.GetConnectionString("AzureBlobConnectionString")));
 
                   // Services
-                  services.AddScoped<IUserRepository, UserRepository>();
-                  services.AddScoped<IRealEstateRepository, RealEstateRepository>();
-                  services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-                  services.AddScoped<IDateTimerProvider, DateTimeProvider>();
-                  services.AddScoped<IBlobService, BlobService>();
+                  services.AddScoped<IUserRepository,UserRepository>();
+                  services.AddScoped<IRealEstateRepository,RealEstateRepository>();
+                  services.AddScoped<IFileRepository,FileRepository>();
+                  services.AddScoped<IJwtTokenGenerator,JwtTokenGenerator>();
+                  services.AddScoped<IDateTimerProvider,DateTimeProvider>();
+                  services.AddScoped<IBlobService,BlobService>();
 
                   return services;
             }

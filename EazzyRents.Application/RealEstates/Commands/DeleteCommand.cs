@@ -2,5 +2,5 @@
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
-      public record DeleteCommand (int id) : IRequest<bool>;
+      public record DeleteCommand(int id) : IRequest<bool>;
 }
