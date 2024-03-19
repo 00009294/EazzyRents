@@ -48,6 +48,36 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.ToTable("Files");
                 });
 
+            modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
                     b.Property<int>("Id")
@@ -188,19 +218,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "295efbd8-de45-4115-9fcb-c19993291065",
+                            Id = "5007067d-7cba-4cf7-8103-3ccd77a95dc8",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "b978b548-8246-4671-88e8-dfaf13456c22",
+                            Id = "2718ef3b-db11-4ace-a87a-76789e12afb7",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "ae1449ff-b7a9-418e-8a76-3dd07874b927",
+                            Id = "fbc04dcf-46a1-4456-b611-9f09a68d84b6",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -323,6 +353,13 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.Navigation("RealEstate");
                 });
 
+            modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
+                {
+                    b.HasOne("EazzyRents.Core.Models.RealEstate", null)
+                        .WithMany("ImageDataList")
+                        .HasForeignKey("RealEstateId");
+                });
+
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
                 {
                     b.HasOne("EazzyRents.Core.Models.User", "Owner")
@@ -381,6 +418,11 @@ namespace EazzyRents.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
+                {
+                    b.Navigation("ImageDataList");
                 });
 #pragma warning restore 612, 618
         }

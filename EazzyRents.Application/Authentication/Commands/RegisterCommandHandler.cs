@@ -5,49 +5,49 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EazzyRents.Application.Authentication.Commands
 {
-      public class RegisterCommandHandler : IRequestHandler<RegisterCommand,AuthResultForRegistration>
-      {
-            private readonly UserManager<User> userManager;
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, AuthResultForRegistration>
+    {
+        private readonly UserManager<User> userManager;
 
-            public RegisterCommandHandler(UserManager<User> userManager)
+        public RegisterCommandHandler(UserManager<User> userManager)
+        {
+            this.userManager = userManager;
+        }
+
+        public async Task<AuthResultForRegistration> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        {
+            try
             {
-                  this.userManager = userManager;
-            }
+                if (request == null)
+                {
+                    return new AuthResultForRegistration { Message = "Null user" };
+                }
+                User user = new User()
+                {
+                    UserName = request.UserName,
+                    Email = request.Email,
+                    UserRole = request.UserRole
+                };
 
-            public async Task<AuthResultForRegistration> Handle(RegisterCommand request,CancellationToken cancellationToken)
+                var createdUSer = await this.userManager.CreateAsync(user, request.Password);
+                var roleResult = await this.userManager.AddToRoleAsync(user, request.UserRole.ToString());
+                return new AuthResultForRegistration
+                {
+                    IsRegistered = true,
+                    Message = "Successfully registered"
+                };
+            }
+            catch
             {
-                  try
-                  {
-                        if(request == null)
-                        {
-                              return new AuthResultForRegistration { Message = "Null user" };
-                        }
-                        User user = new User()
-                        {
-                              UserName = request.UserName,
-                              Email = request.Email,
-                              UserRole = request.UserRole
-                        };
-
-                        var createdUSer = await this.userManager.CreateAsync(user,request.Password);
-                        var roleResult = await this.userManager.AddToRoleAsync(user,request.UserRole.ToString());
-                        return new AuthResultForRegistration
-                        {
-                              IsRegistered = true,
-                              Message = "Successfully registered"
-                        };
-                  }
-                  catch
-                  {
-                        return new AuthResultForRegistration
-                        {
-                              IsRegistered = false,
-                              Message = "Error occured while registering user"
-                        };
-                  }
+                return new AuthResultForRegistration
+                {
+                    IsRegistered = false,
+                    Message = "Error occured while registering user"
+                };
             }
+        }
 
 
 
-      }
+    }
 }

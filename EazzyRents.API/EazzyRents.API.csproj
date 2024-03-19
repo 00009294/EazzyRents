@@ -22,4 +22,8 @@
     <ProjectReference Include="..\EazzyRents.Infrastructure\EazzyRents.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StaticFiles\" />
+  </ItemGroup>
+
 </Project>

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
-      public record UpdateCommand(
+    public record UpdateCommand(
         int Id,
         string Descriprion,
         string Address,

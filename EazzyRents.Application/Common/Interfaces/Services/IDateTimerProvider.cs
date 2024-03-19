@@ -1,7 +1,7 @@
 ﻿namespace EazzyRents.Application.Common.Interfaces.Services
 {
-      public interface IDateTimerProvider
-      {
-            DateTime UtcNow { get; }
-      }
+    public interface IDateTimerProvider
+    {
+        DateTime UtcNow { get; }
+    }
 }

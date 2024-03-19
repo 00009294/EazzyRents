@@ -2,7 +2,7 @@
 
 namespace EazzyRents.Application.Authentication.Common
 {
-      public record AuthResult
+    public record AuthResult
     (
         User User,
         string Token
