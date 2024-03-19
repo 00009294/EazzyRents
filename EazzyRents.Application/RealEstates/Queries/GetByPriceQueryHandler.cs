@@ -4,18 +4,28 @@ using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Queries
 {
-      public class GetByPriceQueryHandler : IRequestHandler<GetByPriceQuery,List<RealEstate>>
-      {
-            private readonly IRealEstateRepository realEstateRepository;
+    public class GetByPriceQueryHandler : IRequestHandler<GetByPriceQuery, List<RealEstate>>
+    {
+        private readonly IRealEstateRepository realEstateRepository;
+        private readonly IImageRepository imageRepository;
 
-            public GetByPriceQueryHandler(IRealEstateRepository realEstateRepository)
+        public GetByPriceQueryHandler(IRealEstateRepository realEstateRepository, IImageRepository imageRepository)
+        {
+            this.realEstateRepository = realEstateRepository;
+            this.imageRepository = imageRepository;
+        }
+
+        public Task<List<RealEstate>> Handle(GetByPriceQuery request, CancellationToken cancellationToken)
+        {
+            List<RealEstate> realEstateList = this.realEstateRepository.GetByPrice(request.price);
+            
+            foreach (var realEstate in realEstateList)
             {
-                  this.realEstateRepository = realEstateRepository;
+                var imageList = this.imageRepository.GetImages(realEstate.Email);
+                realEstate.ImageDataList = imageList;
             }
 
-            public Task<List<RealEstate>> Handle(GetByPriceQuery request,CancellationToken cancellationToken)
-            {
-                  return Task.FromResult(this.realEstateRepository.GetByPrice(request.price));
-            }
-      }
+            return Task.FromResult(realEstateList);
+        }
+    }
 }

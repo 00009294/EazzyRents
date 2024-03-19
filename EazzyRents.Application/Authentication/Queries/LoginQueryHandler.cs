@@ -8,45 +8,45 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EazzyRents.Application.Authentication.Queries
 {
-      public class LoginQueryHandler : IRequestHandler<LoginQuery,AuthResultForLogin>
-      {
-            private readonly IJwtTokenGenerator jwtTokenGenerator;
-            private readonly IUserRepository userRepository;
-            private readonly UserManager<User> userManager;
-            private readonly SignInManager<User> signInManager;
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResultForLogin>
+    {
+        private readonly IJwtTokenGenerator jwtTokenGenerator;
+        private readonly IUserRepository userRepository;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-            public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator,
-                IUserRepository userRepository,
-                    UserManager<User> userManager,
-                        SignInManager<User> signInManager)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator,
+            IUserRepository userRepository,
+                UserManager<User> userManager,
+                    SignInManager<User> signInManager)
+        {
+            this.jwtTokenGenerator = jwtTokenGenerator;
+            this.userRepository = userRepository;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
+        public async Task<AuthResultForLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
+        {
+            var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.Username.ToLower());
+            if (user == null)
             {
-                  this.jwtTokenGenerator = jwtTokenGenerator;
-                  this.userRepository = userRepository;
-                  this.userManager = userManager;
-                  this.signInManager = signInManager;
+                return new AuthResultForLogin()
+                {
+                    Message = "Unauthorized user"
+                };
             }
-            public async Task<AuthResultForLogin> Handle(LoginQuery request,CancellationToken cancellationToken)
-            {
-                  var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.Username.ToLower());
-                  if(user == null)
-                  {
-                        return new AuthResultForLogin()
-                        {
-                              Message = "Unauthorized user"
-                        };
-                  }
 
-                  var signInUser = await this.signInManager.CheckPasswordSignInAsync(user,request.Password,lockoutOnFailure: false);
-                  if(signInUser != null)
-                  {
-                        return new AuthResultForLogin()
-                        {
-                              Message = "Welcome",
-                              Token = this.jwtTokenGenerator.GenerateToken(user)
-                        };
-                  }
-                  else
-                        return new AuthResultForLogin() { Message = "Wrong password or username" };
+            var signInUser = await this.signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
+            if (signInUser != null)
+            {
+                return new AuthResultForLogin()
+                {
+                    Message = "Welcome",
+                    Token = this.jwtTokenGenerator.GenerateToken(user)
+                };
             }
-      }
+            else
+                return new AuthResultForLogin() { Message = "Wrong password or username" };
+        }
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace EazzyRents.Application.Authentication.Commands
 {
-      public record LogoutCommand : IRequest<Unit>
-      {
-      }
+    public record LogoutCommand : IRequest<Unit>
+    {
+    }
 }

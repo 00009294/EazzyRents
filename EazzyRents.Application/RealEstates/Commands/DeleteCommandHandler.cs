@@ -1,28 +1,34 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Application.Common.Interfaces.Services;
+using EazzyRents.Core.Models;
 using MediatR;
 
 namespace EazzyRents.Application.RealEstates.Commands
 {
-      public class DeleteCommandHandler : IRequestHandler<DeleteCommand,bool>
-      {
-            private readonly IRealEstateRepository realEstateRepository;
-            private readonly IBlobService blobService;
+    public class DeleteCommandHandler : IRequestHandler<DeleteCommand, bool>
+    {
+        private readonly IRealEstateRepository realEstateRepository;
+        private readonly IImageRepository imageRepository;
+        private readonly IBlobService blobService;
 
-            public DeleteCommandHandler(IRealEstateRepository realEstateRepository,IBlobService blobService)
+        public DeleteCommandHandler(
+              IRealEstateRepository realEstateRepository,
+              IImageRepository imageRepository,
+              IBlobService blobService)
+        {
+            this.realEstateRepository = realEstateRepository;
+            this.imageRepository = imageRepository;
+            this.blobService = blobService;
+        }
+        public async Task<bool> Handle(DeleteCommand request, CancellationToken cancellationToken)
+        {
+            var realEstate = this.realEstateRepository.GetById(request.id);
+            if (realEstate != null)
             {
-                  this.realEstateRepository = realEstateRepository;
-                  this.blobService = blobService;
+                this.imageRepository.DeleteImages(realEstate.Email);
             }
-            public Task<bool> Handle(DeleteCommand request,CancellationToken cancellationToken)
-            {
-                  var realEstate = this.realEstateRepository.GetById(request.id);
-                  //foreach(var image in realEstate.Images)
-                  //{
-                  //      //this.blobService.DeleteBlobFile(image.ToString());
-                  //}
 
-                  return Task.FromResult(this.realEstateRepository.Delete(request.id));
-            }
-      }
+            return this.realEstateRepository.Delete(request.id);
+        }
+    }
 }
