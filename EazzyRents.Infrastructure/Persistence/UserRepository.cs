@@ -18,9 +18,19 @@ namespace EazzyRents.Infrastructure.Persistence
             this.appDbContext.SaveChanges();
         }
 
+        public List<User> GetAll()
+        {
+            return this.appDbContext.Users.ToList();
+        }
+
         public User? GetUserByEmail(string email)
         {
             return this.appDbContext.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        public User? GetUserById(int id)
+        {
+            return this.appDbContext.Users.FirstOrDefault(u => u.Id == id.ToString());
         }
     }
 }

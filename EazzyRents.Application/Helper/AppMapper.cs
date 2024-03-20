@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EazzyRents.Application.RealEstates.Commands;
+using EazzyRents.Application.UseCases.RealEstates.Commands;
 using EazzyRents.Core.Models;
 
 namespace EazzyRents.Application.Helper

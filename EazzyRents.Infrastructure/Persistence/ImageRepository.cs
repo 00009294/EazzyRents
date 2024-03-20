@@ -1,15 +1,7 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
-using EazzyRents.Application.Helper;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -45,16 +37,16 @@ namespace EazzyRents.Infrastructure.Persistence
         public List<ImageData> GetImages(string emailAddress)
         {
             string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
-            List<ImageData> images = new List<ImageData>(); 
+            List<ImageData> images = new List<ImageData>();
             try
             {
                 if (Directory.Exists(folderPath))
                 {
                     string[] imageFiles = Directory.GetFiles(folderPath);
-                    foreach(var imagePath in imageFiles)
+                    foreach (var imagePath in imageFiles)
                     {
                         byte[] imageBytes = File.ReadAllBytes(imagePath);
-                        string fileName =Path.GetFileName(imagePath);
+                        string fileName = Path.GetFileName(imagePath);
 
                         images.Add(new ImageData
                         {
@@ -87,7 +79,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -99,13 +91,13 @@ namespace EazzyRents.Infrastructure.Persistence
             {
                 string fileName = file.FileName;
                 byte[] fileContent;
-                
-                using(var memoryStream =  new MemoryStream())
+
+                using (var memoryStream = new MemoryStream())
                 {
                     file.CopyTo(memoryStream);
                     fileContent = memoryStream.ToArray();
                 }
-                
+
                 ImageData formFile = new ImageData()
                 {
                     FileName = fileName,
