@@ -1,5 +1,5 @@
-﻿using EazzyRents.Application.RealEstates.Commands;
-using EazzyRents.Application.RealEstates.Queries;
+﻿using EazzyRents.Application.UseCases.RealEstates.Commands;
+using EazzyRents.Application.UseCases.RealEstates.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

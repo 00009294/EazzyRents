@@ -42,10 +42,13 @@ namespace EazzyRents.Infrastructure.Data
             };
             modelBuilder.Entity<IdentityRole>().HasData(roles);
         }
+        public DbSet<RealEstateRatingAndReview> RealEstateRatingAndReviews { get; set; }
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ImageData> Images { get; set; }
+        public DbSet<RatingAndReview> RatingAndReviews { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
-        //public DbSet<BlobContent> Images { get; set; }
+
     }
 }

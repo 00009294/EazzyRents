@@ -22,32 +22,6 @@ namespace EazzyRents.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EazzyRents.Core.Models.File", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RealEstateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstateId");
-
-                    b.ToTable("Files");
-                });
-
             modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
                 {
                     b.Property<int>("Id")
@@ -76,6 +50,32 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasIndex("RealEstateId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.RatingAndReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RatingAndReviews");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>
@@ -119,6 +119,66 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasIndex("OwnerId1");
 
                     b.ToTable("RealEstates");
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.RealEstateRatingAndReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RealEstateRatingAndReviews");
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.Request", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LandlordId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("MoveInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("MoveOutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("requestStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.User", b =>
@@ -218,19 +278,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5007067d-7cba-4cf7-8103-3ccd77a95dc8",
+                            Id = "fe822c04-9838-4cf4-93d2-68af15916086",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "2718ef3b-db11-4ace-a87a-76789e12afb7",
+                            Id = "af665deb-56f7-402d-960e-99780731bfe8",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "fbc04dcf-46a1-4456-b611-9f09a68d84b6",
+                            Id = "a42387ec-4046-4438-9b45-e5811836fe33",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -340,17 +400,6 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.File", b =>
-                {
-                    b.HasOne("EazzyRents.Core.Models.RealEstate", "RealEstate")
-                        .WithMany()
-                        .HasForeignKey("RealEstateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
