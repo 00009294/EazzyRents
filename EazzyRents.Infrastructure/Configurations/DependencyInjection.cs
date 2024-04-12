@@ -39,6 +39,8 @@ namespace EazzyRents.Infrastructure.Configurations
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IDateTimerProvider, DateTimeProvider>();
+            services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+            services.AddScoped<IConversationRepository, ConversationRepository>();
 
             return services;
         }

@@ -48,6 +48,8 @@ namespace EazzyRents.Infrastructure.Data
         public DbSet<ImageData> Images { get; set; }
         public DbSet<RatingAndReview> RatingAndReviews { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
 
 
     }

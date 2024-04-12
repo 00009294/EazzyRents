@@ -44,15 +44,22 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
                 Price = request.Price,
                 PhoneNumber = request.PhoneNumber,
                 RealEstateStatus = request.RealEstateStatus,
-                Email = user.Email
+                Email = user.Email,
             };
+
+            List<ImageData> imageDataList = new List<ImageData>();
 
             if (request.ImageDataList != null)
             {
                 foreach (var image in request.ImageDataList)
                 {
-                    imageRepository.UploadImage(image, request.Email);
-
+                    var imageList = imageRepository.UploadImage(image, request.Email);
+                    imageDataList.Add(
+                        new ImageData { 
+                            FileName = imageList.FileName,
+                            Url = imageList.Url,
+                            Data = imageList.Data
+                        });
                 }
             }
 
