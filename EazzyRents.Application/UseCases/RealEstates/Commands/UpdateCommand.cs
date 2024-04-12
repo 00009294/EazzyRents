@@ -11,6 +11,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         double Price,
         List<IFormFile> Images,
         string PhoneNumber,
+        string Email,
         RealEstateStatus Status
         ) : IRequest<bool>;
 

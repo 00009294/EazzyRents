@@ -20,16 +20,16 @@ namespace EazzyRents.Infrastructure.Configurations
             services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-
-                    sqlServerOptions =>
-                    {
-                        sqlServerOptions.CommandTimeout(3600);
-                        sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
-                    });
+                sqlServerOptions =>
+                {   
+                    sqlServerOptions.CommandTimeout(3600);
+                    sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
+                });
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             // Blob Storage connection
             services.AddSingleton(x => new BlobServiceClient(configuration.GetConnectionString("AzureBlobConnectionString")));
-
+            ;
             // Services
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();

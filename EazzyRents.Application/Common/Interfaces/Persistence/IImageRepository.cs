@@ -8,6 +8,6 @@ namespace EazzyRents.Application.Common.Interfaces.Persistence
         ImageData UploadImage(IFormFile files, string emailAddress);
         List<string> GetImages(string emailAddress);
         bool DeleteImages(string emailAddress);
-        bool UpdateImage(string emailAddress, ImageData imageData);
+        ImageData UpdateImage(IFormFile files, string emailAddress);
     }
 }
