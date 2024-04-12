@@ -1,11 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Enums;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.UseCases.Hubs.Conversations.Commands
 {
@@ -28,8 +23,8 @@ namespace EazzyRents.Application.UseCases.Hubs.Conversations.Commands
             var tenant = this.userRepository.GetUserById(tenantId);
             var landlord = this.userRepository.GetUserById(landlordId);
 
-            if( tenant != null && landlord != null 
-                && tenant.UserRole != UserRole.Tenant 
+            if (tenant != null && landlord != null
+                && tenant.UserRole != UserRole.Tenant
                 && landlord.UserRole != UserRole.Landlord)
             {
                 var result = this.conversationRepository.Add(request.conversation);

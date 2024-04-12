@@ -18,7 +18,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         public Task<bool> Handle(UpdateCommand request, CancellationToken cancellationToken)
         {
             var oldRealEstate = this.realEstateRepository.GetById(request.Id);
-            
+
             if (oldRealEstate == null) return Task.FromResult(false);
 
             var realEstate = new RealEstate()

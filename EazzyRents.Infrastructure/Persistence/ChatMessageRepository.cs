@@ -1,11 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -30,16 +25,16 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public ChatMessage? GetById(int id)
         {
-            return this.appDbContext.ChatMessages.FirstOrDefault(c=>c.Id == id);
+            return this.appDbContext.ChatMessages.FirstOrDefault(c => c.Id == id);
         }
 
         public bool Remove(ChatMessage chatMessage)
         {
-            if(chatMessage == null)
+            if (chatMessage == null)
             {
                 return false;
             }
-            
+
             this.appDbContext.ChatMessages.Remove(chatMessage);
 
             return this.appDbContext.SaveChanges() > 0;
@@ -47,7 +42,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public bool Update(ChatMessage chatMessage)
         {
-            if(chatMessage == null)
+            if (chatMessage == null)
             {
                 return false;
             }

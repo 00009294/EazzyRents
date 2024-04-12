@@ -22,7 +22,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
             foreach (var realEstate in realEstateList)
             {
                 var images = imageRepository.GetImages(realEstate.Email);
-                
+
                 realEstate.ImageUrls = images;
             }
 

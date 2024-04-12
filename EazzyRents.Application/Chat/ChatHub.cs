@@ -1,11 +1,4 @@
-﻿using EazzyRents.Core.Models;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.SignalR;
 
 namespace EazzyRents.Application.Chat
 {
