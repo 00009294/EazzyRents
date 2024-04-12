@@ -4,6 +4,7 @@ using EazzyRents.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,86 +12,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazzyRents.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240321100242_AddMessage")]
+    partial class AddMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("EazzyRents.Core.Models.ChatMessage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ConversationId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SenderId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConversationId");
-
-                    b.HasIndex("SenderId1");
-
-                    b.ToTable("ChatMessages");
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.Conversation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("LandlordId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RealEstateId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TenantId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RealEstateId");
-
-                    b.HasIndex("TenantId1");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Conversations");
-                });
 
             modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
                 {
@@ -104,6 +37,10 @@ namespace EazzyRents.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -111,15 +48,34 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.Property<int?>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RealEstateId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("EazzyRents.Core.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.RatingAndReview", b =>
@@ -165,10 +121,6 @@ namespace EazzyRents.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrls")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -358,19 +310,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4fad90a7-cd10-4e9d-bb50-627bfa1ff8da",
+                            Id = "8cfb06ea-8d31-425d-8bd4-c2ffe5125f7f",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "58d009b4-6bc7-47c5-be5f-a529d49c1775",
+                            Id = "7cfb22e6-77fb-4362-b1c2-b9d690a7445b",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "2f92cab9-9253-466b-8572-9dbe15abb26a",
+                            Id = "20a129b0-98d7-4fd2-8670-22f3a1c01bab",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -482,46 +434,6 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EazzyRents.Core.Models.ChatMessage", b =>
-                {
-                    b.HasOne("EazzyRents.Core.Models.Conversation", "Conversation")
-                        .WithMany("ChatMessages")
-                        .HasForeignKey("ConversationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EazzyRents.Core.Models.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId1");
-
-                    b.Navigation("Conversation");
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.Conversation", b =>
-                {
-                    b.HasOne("EazzyRents.Core.Models.RealEstate", "RealEstate")
-                        .WithMany()
-                        .HasForeignKey("RealEstateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EazzyRents.Core.Models.User", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId1");
-
-                    b.HasOne("EazzyRents.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("RealEstate");
-
-                    b.Navigation("Tenant");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EazzyRents.Core.Models.ImageData", b =>
                 {
                     b.HasOne("EazzyRents.Core.Models.RealEstate", null)
@@ -587,11 +499,6 @@ namespace EazzyRents.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EazzyRents.Core.Models.Conversation", b =>
-                {
-                    b.Navigation("ChatMessages");
                 });
 
             modelBuilder.Entity("EazzyRents.Core.Models.RealEstate", b =>

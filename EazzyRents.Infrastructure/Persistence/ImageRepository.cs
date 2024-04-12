@@ -34,29 +34,30 @@ namespace EazzyRents.Infrastructure.Persistence
             }
         }
 
-        public List<ImageData> GetImages(string emailAddress)
+        public List<string> GetImages(string emailAddress)
         {
-            string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
-            List<ImageData> images = new List<ImageData>();
+            //string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+
+            var allImages = this.appDbContext.Images.FirstOrDefault(e=>e.Url == emailAddress);
+
+            if (allImages == null) return new List<string>();
+
+            List<string> allUrls = new List<string>();
             try
             {
-                if (Directory.Exists(folderPath))
+                if (Directory.Exists(allImages.Url))
                 {
-                    string[] imageFiles = Directory.GetFiles(folderPath);
+                    string[] imageFiles = Directory.GetFiles(allImages.Url);
                     foreach (var imagePath in imageFiles)
                     {
                         byte[] imageBytes = File.ReadAllBytes(imagePath);
                         string fileName = Path.GetFileName(imagePath);
 
-                        images.Add(new ImageData
-                        {
-                            FileName = fileName,
-                            Data = imageBytes
-                        });
+                        allUrls.Add(fileName+"/"+emailAddress);
                     }
                 }
 
-                return images;
+                return allUrls;
             }
             catch (Exception ex)
             {
@@ -85,7 +86,7 @@ namespace EazzyRents.Infrastructure.Persistence
             }
         }
 
-        public void UploadImage(IFormFile file, string emailAddress)
+        public ImageData UploadImage(IFormFile file, string emailAddress)
         {
             try
             {
@@ -98,21 +99,28 @@ namespace EazzyRents.Infrastructure.Persistence
                     fileContent = memoryStream.ToArray();
                 }
 
-                ImageData formFile = new ImageData()
-                {
-                    FileName = fileName,
-                    Data = fileContent
-                };
 
-                string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}"; // Replace this with the folder path
+                string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
 
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
                 }
 
+                ImageData formFile = new ImageData()
+                {
+                    FileName = fileName,
+                    Url = folderPath,
+                    Data = fileContent
+                };
+
                 string filePath = Path.Combine(folderPath, formFile.FileName);
                 File.WriteAllBytes(filePath, formFile.Data);
+
+                this.appDbContext.Images.Add(formFile);
+                this.appDbContext.SaveChanges();
+
+                return formFile;
 
             }
             catch (Exception ex)

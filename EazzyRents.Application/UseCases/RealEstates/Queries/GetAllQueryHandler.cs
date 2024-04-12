@@ -22,7 +22,8 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
             foreach (var realEstate in realEstateList)
             {
                 var images = imageRepository.GetImages(realEstate.Email);
-                realEstate.ImageDataList = images;
+                
+                realEstate.ImageUrls = images;
             }
 
             return Task.FromResult(realEstateList);
