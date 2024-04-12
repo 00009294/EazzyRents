@@ -17,6 +17,9 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         }
         public Task<bool> Handle(UpdateCommand request, CancellationToken cancellationToken)
         {
+            var oldRealEstate = this.realEstateRepository.GetById(request.Id);
+            
+            if (oldRealEstate == null) return Task.FromResult(false);
 
             var realEstate = new RealEstate()
             {
@@ -24,9 +27,26 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
                 Description = request.Descriprion,
                 Address = request.Address,
                 Price = request.Price,
+                Email = oldRealEstate.Email,
                 PhoneNumber = request.PhoneNumber,
-                RealEstateStatus = request.Status
+                RealEstateStatus = request.Status,
+                ImageUrls = new List<string>()
             };
+
+            List<string> imageDataList = new List<string>();
+
+            if (request.Images != null)
+            {
+                foreach (var image in request.Images)
+                {
+                    var imageList = imageRepository.UpdateImage(image, oldRealEstate.Email);
+                    imageDataList.Add(imageList.Url + "/" + imageList.FileName);
+                }
+
+                realEstate.ImageUrls = imageDataList;
+            }
+
+
             return Task.FromResult(realEstateRepository.Update(realEstate));
         }
     }

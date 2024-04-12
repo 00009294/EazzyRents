@@ -18,11 +18,16 @@ namespace EazzyRents.Infrastructure.Persistence
         {
 
             string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+            var allImages = this.appDbContext.Images.FirstOrDefault(e => e.Url == folderPath);
+
             try
             {
                 if (Directory.Exists(folderPath))
                 {
                     Directory.Delete(folderPath, true);
+                    this.appDbContext.Images.Remove(allImages);
+                    this.appDbContext.SaveChanges();
+
                     return true;
                 }
 
@@ -36,9 +41,9 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public List<string> GetImages(string emailAddress)
         {
-            //string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+            string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
 
-            var allImages = this.appDbContext.Images.FirstOrDefault(e=>e.Url == emailAddress);
+            var allImages = this.appDbContext.Images.FirstOrDefault(e=>e.Url == folderPath);
 
             if (allImages == null) return new List<string>();
 
@@ -53,7 +58,7 @@ namespace EazzyRents.Infrastructure.Persistence
                         byte[] imageBytes = File.ReadAllBytes(imagePath);
                         string fileName = Path.GetFileName(imagePath);
 
-                        allUrls.Add(fileName+"/"+emailAddress);
+                        allUrls.Add(folderPath + "/" + fileName);
                     }
                 }
 
@@ -65,24 +70,53 @@ namespace EazzyRents.Infrastructure.Persistence
             }
         }
 
-        public bool UpdateImage(string emailAddress, ImageData imageData)
+        public ImageData UpdateImage(IFormFile file, string emailAddress)
         {
-            string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
-            string imagePath = Path.Combine(folderPath, imageData.FileName);
             try
             {
-                if (!Directory.Exists(folderPath))
+                DeleteImages(emailAddress);
+                string fileName = file.FileName;
+                byte[] fileContent;
+
+                using (var memoryStream = new MemoryStream())
                 {
-                    return false;
+                    file.CopyTo(memoryStream);
+                    fileContent = memoryStream.ToArray();
                 }
 
-                File.WriteAllBytes(imagePath, imageData.Data);
+                string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
 
-                return true;
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                string filePath = Path.Combine(folderPath, fileName);
+
+                var imageData = this.appDbContext.Images.FirstOrDefault(img => img.FileName == fileName && img.Url == folderPath);
+
+                if (imageData != null)
+                {
+                    imageData.Data = fileContent;
+                    File.WriteAllBytes(filePath, fileContent); 
+                }
+                
+                imageData = new ImageData()
+                {
+                    FileName = fileName,
+                    Url = folderPath,
+                    Data = fileContent
+                };
+
+                this.appDbContext.Images.Add(imageData); 
+                this.appDbContext.SaveChanges();
+
+
+                return imageData;
             }
             catch (Exception ex)
             {
-                throw;
+                throw; 
             }
         }
 
