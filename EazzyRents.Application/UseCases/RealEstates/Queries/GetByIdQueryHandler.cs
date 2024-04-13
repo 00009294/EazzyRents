@@ -19,11 +19,11 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
         {
             RealEstate? realEstate = realEstateRepository.GetById(request.id);
 
-            if (realEstate != null)
-            {
-                var imageList = imageRepository.GetImages(realEstate.Email);
-                realEstate.ImageUrls = imageList;
-            }
+            //if (realEstate != null)
+            //{
+            //    var imageList = imageRepository.GetImages(realEstate.Email);
+            //    realEstate.ImageUrls = imageList;
+            //}
 
             return Task.FromResult(realEstate);
         }

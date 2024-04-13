@@ -19,12 +19,12 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
         {
             List<RealEstate> realEstateList = realEstateRepository.GetAll();
 
-            foreach (var realEstate in realEstateList)
-            {
-                var images = imageRepository.GetImages(realEstate.Email);
+            //foreach (var realEstate in realEstateList)
+            //{
+            //    var images = imageRepository.GetImages(realEstate.Email);
 
-                realEstate.ImageUrls = images;
-            }
+            //    realEstate.ImageUrls = images;
+            //}
 
             return Task.FromResult(realEstateList);
         }

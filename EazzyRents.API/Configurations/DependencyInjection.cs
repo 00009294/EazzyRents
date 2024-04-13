@@ -54,7 +54,8 @@ namespace EazzyRents.API.Configurations
                 options.Password.RequireLowercase = true;
 
             })
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>
             {

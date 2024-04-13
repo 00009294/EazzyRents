@@ -2,7 +2,9 @@
 using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Encodings.Web;
 
 namespace EazzyRents.API.Controllers
 {
@@ -20,7 +22,7 @@ namespace EazzyRents.API.Controllers
         [HttpPost("register")]
         public async Task<AuthResultForRegistration> Register([FromQuery] RegisterCommand command)
         {
-            var user = new RegisterCommand(command.UserName, command.Email, command.Password, command.UserRole);
+            var user = new RegisterCommand(command.UserName, command.Email, command.Password, command.ConfirmPassword, command.UserRole);
             return await this.mediator.Send(user);
         }
 
