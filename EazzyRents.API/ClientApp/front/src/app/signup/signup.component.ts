@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +10,11 @@ import { RegistrationService } from '../registration.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-
+  selectedRole: string = ''; 
+  signupForm = new FormGroup({
+    // ... other form controls like 'fullName', 'email', etc.
+    role: new FormControl('', [Validators.required])
+  });
   constructor(private registrationService: RegistrationService) { }
 
   onRegister(form: NgForm) {
@@ -24,4 +30,14 @@ export class SignupComponent {
       }
     );
   }
+
+  onSubmit() {
+    console.log(this.signupForm.value);
+    // Handle form submission
+  }
+
+  selectRole(role: string) {
+    this.selectedRole = role;
+  }
+
 }
