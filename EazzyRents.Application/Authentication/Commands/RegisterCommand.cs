@@ -8,6 +8,7 @@ namespace EazzyRents.Application.Authentication.Commands
         string UserName,
         string Email,
         string Password,
+        string ConfirmPassword,
         UserRole UserRole
         ) : IRequest<AuthResultForRegistration>;
 

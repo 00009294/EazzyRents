@@ -1,11 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -25,12 +20,12 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public List<Conversation> GetAll(int conversationId)
         {
-            return this.appDbContext.Conversations.Where(c=>c.Id == conversationId).ToList(); 
+            return this.appDbContext.Conversations.Where(c => c.Id == conversationId).ToList();
         }
 
         public Conversation? GetById(int id)
         {
-            if(id < 0)
+            if (id < 0)
             {
                 return this.appDbContext.Conversations.FirstOrDefault(c => c.Id == id);
             }
@@ -40,7 +35,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public bool Remove(Conversation conversation)
         {
-            if(conversation == null)
+            if (conversation == null)
             {
                 return false;
             }
@@ -55,7 +50,7 @@ namespace EazzyRents.Infrastructure.Persistence
             if (conversation != null)
             {
                 this.appDbContext.Conversations.Update(conversation);
-                
+
                 return this.appDbContext.SaveChanges() > 0;
             }
 

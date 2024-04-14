@@ -21,7 +21,7 @@ namespace EazzyRents.Infrastructure.Configurations
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 sqlServerOptions =>
-                {   
+                {
                     sqlServerOptions.CommandTimeout(3600);
                     sqlServerOptions.EnableRetryOnFailure(60, TimeSpan.FromSeconds(60), null);
                 });

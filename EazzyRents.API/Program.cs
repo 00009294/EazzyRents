@@ -1,5 +1,4 @@
 using EazzyRents.API.Configurations;
-using EazzyRents.Application.Chat;
 
 var builder = WebApplication.CreateBuilder(args);
 

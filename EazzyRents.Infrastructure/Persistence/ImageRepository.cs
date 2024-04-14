@@ -43,7 +43,7 @@ namespace EazzyRents.Infrastructure.Persistence
         {
             string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
 
-            var allImages = this.appDbContext.Images.FirstOrDefault(e=>e.Url == folderPath);
+            var allImages = this.appDbContext.Images.FirstOrDefault(e => e.Url == folderPath);
 
             if (allImages == null) return new List<string>();
 
@@ -98,9 +98,9 @@ namespace EazzyRents.Infrastructure.Persistence
                 if (imageData != null)
                 {
                     imageData.Data = fileContent;
-                    File.WriteAllBytes(filePath, fileContent); 
+                    File.WriteAllBytes(filePath, fileContent);
                 }
-                
+
                 imageData = new ImageData()
                 {
                     FileName = fileName,
@@ -108,7 +108,7 @@ namespace EazzyRents.Infrastructure.Persistence
                     Data = fileContent
                 };
 
-                this.appDbContext.Images.Add(imageData); 
+                this.appDbContext.Images.Add(imageData);
                 this.appDbContext.SaveChanges();
 
 
@@ -116,7 +116,7 @@ namespace EazzyRents.Infrastructure.Persistence
             }
             catch (Exception ex)
             {
-                throw; 
+                throw;
             }
         }
 
