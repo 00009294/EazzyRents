@@ -1,6 +1,6 @@
 export interface RealEstateModel{
     description: any;
     price: any;
-    imageUrls: any;
+    imageUrls: string[];
     address: any;
 }

@@ -22,17 +22,20 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod();
     });
 });
+
+builder.Services.AddDirectoryBrowser();
+
 var app = builder.Build();
 
 app.UseStaticFiles(); // For wwwroot folder
 
 // Or to serve from a custom folder
-app.UseStaticFiles(new StaticFileOptions
+app.UseFileServer(new FileServerOptions
 {
-    FileProvider = new PhysicalFileProvider("/"),
-    RequestPath = ""
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "StaticFiles")),
+    RequestPath = "/StaticFiles"
 });
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

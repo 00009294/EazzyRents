@@ -17,7 +17,7 @@ namespace EazzyRents.Infrastructure.Persistence
         public bool DeleteImages(string emailAddress)
         {
 
-            string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+            string folderPath = $@"StaticFiles\{emailAddress}";
             var allImages = this.appDbContext.Images.FirstOrDefault(e => e.Url == folderPath);
 
             try
@@ -41,7 +41,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public List<string> GetImages(string emailAddress)
         {
-            string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+            string folderPath = $@"StaticFiles\{emailAddress}";
 
             var allImages = this.appDbContext.Images.FirstOrDefault(e => e.Url == folderPath);
 
@@ -84,7 +84,7 @@ namespace EazzyRents.Infrastructure.Persistence
                     fileContent = memoryStream.ToArray();
                 }
 
-                string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+                string folderPath = $@"StaticFiles\{emailAddress}";
 
                 if (!Directory.Exists(folderPath))
                 {
@@ -134,7 +134,7 @@ namespace EazzyRents.Infrastructure.Persistence
                 }
 
 
-                string folderPath = $@"C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\{emailAddress}";
+                string folderPath = $@"StaticFiles\{emailAddress}";
 
                 if (!Directory.Exists(folderPath))
                 {
