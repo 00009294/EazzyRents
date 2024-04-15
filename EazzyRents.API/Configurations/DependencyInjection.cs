@@ -80,6 +80,8 @@ namespace EazzyRents.API.Configurations
                 };
             });
 
+            
+
             return services;
         }
     }

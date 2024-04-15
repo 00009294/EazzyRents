@@ -2,6 +2,7 @@
 using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
@@ -19,15 +20,15 @@ namespace EazzyRents.API.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost("register")]
-        public async Task<AuthResultForRegistration> Register([FromQuery] RegisterCommand command)
+        [HttpPost("signup")]
+        public async Task<AuthResultForRegistration> SignUp([FromBody] RegisterCommand command)
         {
             var user = new RegisterCommand(command.UserName, command.Email, command.Password, command.ConfirmPassword, command.UserRole);
             return await this.mediator.Send(user);
         }
 
-        [HttpPost("login")]
-        public async Task<AuthResultForLogin> Login([FromQuery] LoginQuery query)
+        [HttpPost("signin")]
+        public async Task<AuthResultForLogin> SignIn([FromBody] LoginQuery query)
         {
             var user = new LoginQuery(query.Username, query.Password);
             return await this.mediator.Send(user);

@@ -41,6 +41,7 @@ namespace EazzyRents.Application.Authentication.Queries
             {
                 return new AuthResultForLogin()
                 {
+                    IsRegistered = true,
                     Message = "Welcome",
                     Token = this.jwtTokenGenerator.GenerateToken(user)
                 };
