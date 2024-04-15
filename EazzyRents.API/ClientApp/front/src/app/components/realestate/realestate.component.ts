@@ -8,4 +8,6 @@ import { RealEstateModel } from '../../models/realestate.model';
 })
 export class RealestateComponent {
   @Input() estate!: RealEstateModel;
+
+  baseUrl: any = "https://localhost:44379/";
 }
