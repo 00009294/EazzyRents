@@ -1,0 +1,9 @@
+<!-- Adjust the property bindings to match the exact property names from the model -->
+<div class="real-estate-item">
+    <img *ngFor="let imageUrl of estate.imageUrls" [src]="imageUrl" alt="Real Estate Image">
+    <h2>{{ estate.description }}</h2>
+    <p>{{ estate.address }}</p>
+    <p>{{ estate.price }}</p>
+    <img src="C:\Users\fayzu\projects\EazzyRents\EazzyRents.API\StaticFiles\stringjj@gmail.com/images.jpg" />  
+  </div>
+  

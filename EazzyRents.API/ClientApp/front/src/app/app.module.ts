@@ -8,12 +8,16 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './components/signin/signin.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ListComponent } from './components/list/list.component';
+import { RealestateComponent } from './components/realestate/realestate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    ListComponent,
+    RealestateComponent
   ],
   imports: [
     BrowserModule,

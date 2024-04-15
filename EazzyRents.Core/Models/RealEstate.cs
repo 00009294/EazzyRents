@@ -9,8 +9,9 @@ namespace EazzyRents.Core.Models
         public double Price { get; set; }
         public string PhoneNumber { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;
+        public string Latitude { get; set; } = String.Empty;
+        public string Longitude { get; set; } = String.Empty;
         public List<string> ImageUrls { get; set; } = new List<string>();
-        //public List<ImageData> ImageDataList { get; set; } = new List<ImageData>();
         public Address Address { get; set; } 
         public RealEstateStatus RealEstateStatus { get; set; }
 

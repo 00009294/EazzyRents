@@ -7,13 +7,11 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<RealEstate>>
     {
         private readonly IRealEstateRepository realEstateRepository;
-        private readonly IImageRepository imageRepository;
 
-        public GetAllQueryHandler(IRealEstateRepository realEstateRepository,
-            IImageRepository imageRepository)
+        public GetAllQueryHandler(IRealEstateRepository realEstateRepository
+            )
         {
             this.realEstateRepository = realEstateRepository;
-            this.imageRepository = imageRepository;
         }
         public Task<List<RealEstate>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
