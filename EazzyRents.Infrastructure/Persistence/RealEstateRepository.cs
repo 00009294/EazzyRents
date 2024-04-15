@@ -1,4 +1,5 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
+using EazzyRents.Core.Enums;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
 
@@ -35,7 +36,7 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.RealEstates.ToList();
         }
 
-        public List<RealEstate> GetByAddress(string address)
+        public List<RealEstate> GetByAddress(Address address)
         {
             return this.appDbContext.RealEstates.Where(r => r.Address == address).ToList();
         }
@@ -45,9 +46,9 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
         }
 
-        public List<RealEstate> GetByPrice(double price)
+        public List<RealEstate> GetByPrice(double fromPrice, double toPrice)
         {
-            return this.appDbContext.RealEstates.Where(r => r.Price >= price).ToList();
+            return this.appDbContext.RealEstates.Where(r => r.Price >= fromPrice && r.Price <= toPrice).ToList();
         }
 
         public bool Update(RealEstate realEstate)

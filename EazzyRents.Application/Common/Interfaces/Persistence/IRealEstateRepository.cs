@@ -1,4 +1,5 @@
-﻿using EazzyRents.Core.Models;
+﻿using EazzyRents.Core.Enums;
+using EazzyRents.Core.Models;
 
 namespace EazzyRents.Application.Common.Interfaces.Persistence
 {
@@ -9,7 +10,7 @@ namespace EazzyRents.Application.Common.Interfaces.Persistence
         RealEstate Create(RealEstate realEstate);
         bool Update(RealEstate realEstate);
         bool Delete(int id);
-        List<RealEstate> GetByAddress(string address);
-        List<RealEstate> GetByPrice(double price);
+        List<RealEstate> GetByAddress(Address address);
+        List<RealEstate> GetByPrice(double fromPrice, double toPrice);
     }
 }

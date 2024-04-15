@@ -1,5 +1,6 @@
 ﻿using EazzyRents.Application.UseCases.RealEstates.Commands;
 using EazzyRents.Application.UseCases.RealEstates.Queries;
+using EazzyRents.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,16 +50,16 @@ namespace EazzyRents.API.Controllers
 
         [HttpGet]
         [Route("GetByAddress/{address}")]
-        public async Task<IActionResult> GetByAddress(string address)
+        public async Task<IActionResult> GetByAddress(Address address)
         {
             return Ok(await this.mediatr.Send(new GetByAddressQuery(address)));
         }
 
         [HttpGet]
-        [Route("GetByPrice/{price}")]
-        public async Task<IActionResult> GetByPrice(double price)
+        [Route("GetByPrice")]
+        public async Task<IActionResult> GetByPrice(double fromPrice, double toPrice)
         {
-            return Ok(await this.mediatr.Send(new GetByPriceQuery(price)));
+            return Ok(await this.mediatr.Send(new GetByPriceQuery(fromPrice, toPrice)));
         }
     }
 }

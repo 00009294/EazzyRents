@@ -3,6 +3,6 @@ using MediatR;
 
 namespace EazzyRents.Application.UseCases.RealEstates.Queries
 {
-    public record GetByPriceQuery(double price) : IRequest<List<RealEstate>>;
+    public record GetByPriceQuery(double fromPrice, double toPrice) : IRequest<List<RealEstate>>;
 
 }
