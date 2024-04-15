@@ -17,7 +17,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
 
         public Task<List<RealEstate>> Handle(GetByPriceQuery request, CancellationToken cancellationToken)
         {
-            List<RealEstate> realEstateList = realEstateRepository.GetByPrice(request.price);
+            List<RealEstate> realEstateList = realEstateRepository.GetByPrice(request.fromPrice, request.toPrice);
 
             //foreach (var realEstate in realEstateList)
             //{

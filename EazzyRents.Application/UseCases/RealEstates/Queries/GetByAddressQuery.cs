@@ -1,8 +1,9 @@
-﻿using EazzyRents.Core.Models;
+﻿using EazzyRents.Core.Enums;
+using EazzyRents.Core.Models;
 using MediatR;
 
 namespace EazzyRents.Application.UseCases.RealEstates.Queries
 {
-    public record GetByAddressQuery(string address) : IRequest<List<RealEstate>>;
+    public record GetByAddressQuery(Address address) : IRequest<List<RealEstate>>;
 
 }
