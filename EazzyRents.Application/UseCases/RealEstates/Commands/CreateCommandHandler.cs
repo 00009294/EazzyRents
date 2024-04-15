@@ -45,6 +45,8 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
                 PhoneNumber = request.PhoneNumber,
                 RealEstateStatus = request.RealEstateStatus,
                 Email = user.Email,
+                Longitude = request.Longitude,
+                Latitude = request.Latitude,
                 ImageUrls = new List<string>()
             };
 
