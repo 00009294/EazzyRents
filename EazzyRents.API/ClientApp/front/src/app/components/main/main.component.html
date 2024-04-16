@@ -1,0 +1,43 @@
+<!-- Container for the whole layout -->
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+
+    <!-- Sidebar: full height, flex column -->
+    <div class="flex flex-col w-full max-w-48 h-full text-black font-semibold">
+      <!-- Top Links -->
+      <img class="pt-6 px-4" src="../../../assets/images/eazzyRents.png" alt="">
+      <div class="flex flex-col px-4 py-10 space-y-2">
+
+        <a href="/" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
+            <i class="fa fa-home mr-2" aria-hidden="true"></i> Home
+        </a>
+        <a href="/dashboard" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
+            <i class="fa fa-list mr-2" aria-hidden="true"></i> Dashboard
+        </a>
+        <a href="/profile" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
+            <i class="fas fa-user mr-2"></i> My Profile
+        </a>
+      </div>
+      
+      <!-- Spacer to push bottom links to the bottom -->
+      <div class="flex-grow"></div>
+  
+      <!-- Bottom Links -->
+      <div class="flex flex-col p-4 space-y-2">
+        <a href="javascript:void(0)" (click)="downloadSupportPDF()" class="hover:bg-blue-700 p-2 rounded transition flex items-center">
+            <i class="fa fa-info-circle mr-2" aria-hidden="true"></i> Support
+          </a>
+          
+        <a href="/logout" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
+            <i class="fa fa-sign-out mr-2" aria-hidden="true"></i> Logout
+        </a>
+      </div>
+    </div>
+  
+    <!-- Main content area with the list, starts after the sidebar -->
+    <div class="flex-1 h-full overflow-y-auto">
+        <app-header></app-header>
+        <app-list></app-list>
+    </div>
+    
+  </div>
+  

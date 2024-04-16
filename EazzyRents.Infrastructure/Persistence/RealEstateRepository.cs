@@ -46,6 +46,11 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
         }
 
+        public List<RealEstate> GetByName(string name)
+        {
+            return this.appDbContext.RealEstates.Where(r => r.Description.Contains(name)).ToList();
+        }
+
         public List<RealEstate> GetByPrice(double fromPrice, double toPrice)
         {
             return this.appDbContext.RealEstates.Where(r => r.Price >= fromPrice && r.Price <= toPrice).ToList();

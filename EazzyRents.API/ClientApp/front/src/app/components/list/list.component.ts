@@ -1,29 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { RealEstateModel } from '../../models/realestate.model';
-import { RealestateService } from '../../services/realestate.service';
+import { RealEstateService } from '../../services/realestate.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrl: './list.component.css'
+  templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
+  realEstate: string = '';
   realEstates: RealEstateModel[] = [];
+  private subscription: Subscription | undefined; 
 
-  constructor(private realEstateService: RealestateService){}
+  constructor(private realEstateService: RealEstateService){}
 
   ngOnInit() {
-    this.realEstateService.getRealEstates().subscribe({
-      next: (estates) => {
-        this.realEstates = estates.map(estate => ({
-          ...estate,
-          // Adjust the path to where your backend serves the images
-        }));
+    this.realEstateService.getRealEstates();
+    this.subscription = this.realEstateService.realEstates$.subscribe(
+        (estates) => {
+        this.realEstates = estates;
       },
-      error: (error) => {
-        console.error('Error fetching real estates', error);
-      }
-    });
-    
+      (error) => {
+          console.error('Error fetching real estates', error);
+      });
+    }
+
+    ngOnDestroy(){
+      this.subscription?.unsubscribe();
+    }
   }
-}
+

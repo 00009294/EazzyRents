@@ -3,10 +3,9 @@ import { RealEstateModel } from '../../models/realestate.model';
 
 @Component({
   selector: 'app-real-estate',
-  templateUrl: './realestate.component.html',
-  styleUrl: './realestate.component.css'
+  templateUrl: './realestate.component.html'
 })
-export class RealestateComponent {
+export class RealEstateComponent {
   @Input() estate!: RealEstateModel;
 
   baseUrl: any = "https://localhost:44379/";

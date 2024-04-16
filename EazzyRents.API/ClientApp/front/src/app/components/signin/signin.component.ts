@@ -4,8 +4,7 @@ import { RegistrationService } from '../../services/registration.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css'
+  templateUrl: './signin.component.html'
 })
 export class SigninComponent implements OnInit {
   public loginForm!: FormGroup;

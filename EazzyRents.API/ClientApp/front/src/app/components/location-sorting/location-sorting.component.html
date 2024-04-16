@@ -1,0 +1,27 @@
+<div class="relative">
+    <button id="filterBtn" (click)="toggleFilter()" class="ml-4 bg-sky-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded whitespace-nowrap">
+        <i class="fa fa-map-marker" aria-hidden="true"></i> Locations
+    </button>
+    
+    <div *ngIf="filterVisible" class="fixed inset-0 bg-black bg-opacity-50 z-20" (click)="toggleFilter()"></div>
+    
+    <div *ngIf="filterVisible" class="fixed inset-0 z-30 flex items-center justify-center p-4">
+        <div class="bg-white shadow-xl rounded-lg max-w-2xl w-full m-auto p-6">
+        <div class="flex justify-end">
+            <button (click)="toggleFilter()" class="text-gray-400 hover:text-gray-600">
+            <span class="fa fa-times"></span>
+            </button>
+        </div>
+        <!-- Scrollable Address List -->
+        <div class="h-64 overflow-y-auto">
+          <!-- Replace with *ngFor if addresses are dynamic -->
+          <button (click)="filterByAddress(0)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location One</button>
+          <button (click)="filterByAddress(1)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location Two</button>
+          <button (click)="filterByAddress(2)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location Three</button>
+          <!-- More buttons for additional addresses -->
+        </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mt-4">Show Results</button>
+      </div>
+    </div>
+  </div>
+  

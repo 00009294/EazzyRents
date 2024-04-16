@@ -49,6 +49,13 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetByName/{name}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            return Ok(await this.mediatr.Send(new GetByNameQuery(name)));
+        }
+
+        [HttpGet]
         [Route("GetByAddress/{address}")]
         public async Task<IActionResult> GetByAddress(Address address)
         {

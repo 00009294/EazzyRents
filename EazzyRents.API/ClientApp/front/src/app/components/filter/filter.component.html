@@ -1,0 +1,30 @@
+<div class="relative">
+<button id="filterBtn" (click)="toggleFilter()" class="ml-4 bg-sky-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded whitespace-nowrap">
+    <i class="fa fa-filter" aria-hidden="true"></i> Price
+</button>
+
+<div *ngIf="filterVisible" class="fixed inset-0 bg-black bg-opacity-50 z-20" (click)="toggleFilter()"></div>
+
+<div *ngIf="filterVisible" class="fixed inset-0 z-30 flex items-center justify-center p-4">
+    <div class="bg-white shadow-xl rounded-lg max-w-2xl w-full m-auto p-6">
+    <div class="flex justify-end">
+        <button (click)="toggleFilter()" class="text-gray-400 hover:text-gray-600">
+        <span class="fa fa-times"></span>
+        </button>
+    </div>
+    <div class="mt-4">
+        <div class="flex space-x-4 mb-6">
+        <div class="w-1/2">
+            <label for="priceFrom" class="block text-gray-700 text-lg font-semibold mb-2">Price from:</label>
+            <input [(ngModel)]="fromPrice" type="number" id="priceFrom" class="border-2 border-gray-300 rounded w-full p-2" placeholder="$0" min="0">
+        </div>
+        <div class="w-1/2">
+            <label for="priceTo" class="block text-gray-700 text-lg font-semibold mb-2">Price to:</label>
+            <input [(ngModel)]="toPrice" type="number" id="priceTo" class="border-2 border-gray-300 rounded w-full p-2" placeholder="$1,000,000" min="0">
+        </div>
+        </div>
+        <button (click)="searchByPriceRange()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Show Results</button>
+    </div>
+    </div>
+</div>
+</div>
