@@ -1,17 +1,56 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RealEstateModel } from '../models/realestate.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RealestateService {
+export class RealEstateService {
   private apiUrl = 'https://localhost:44379/api/RealEstate'; // Update with your backend API URL
-
+  realEstates: RealEstateModel[] = [];
+  private realEstateSubject = new BehaviorSubject<RealEstateModel[]>([]);
+  realEstates$ = this.realEstateSubject.asObservable();
+  
   constructor(private http: HttpClient) { }
 
-  getRealEstates(): Observable<RealEstateModel[]> {
-    return this.http.get<RealEstateModel[]>(`${this.apiUrl}`);
+  getRealEstates(): void {
+    this.http.get<RealEstateModel[]>(`${this.apiUrl}`)
+    .subscribe( data => {
+      this.realEstateSubject.next(data);
+    },
+    error => {
+      console.log('Error while fetching all real estates', error);
+    }
+  )
+  }
+
+  getRealEstatesByName(name: string): void {
+    if(name.trim() === ''){
+      this.getRealEstates();
+    }
+    else {
+      this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByName/${name}`)
+      .subscribe( data => {
+        this.realEstateSubject.next(data);
+      },
+      error => {
+        console.log('Error fetching real estate', error);
+      }
+    );
+  }}
+
+  getRealEstateByPrice(fromPrice: number, toPrice: number) : void {
+    this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByPrice?fromPrice=${fromPrice}&toPrice=${toPrice}`)
+    .subscribe(data => {
+      this.realEstateSubject.next(data);
+    },
+  error => {
+    console.log('Error fetching real estate', error);
+    });
+  }
+
+  getRealEstateByAddress(num: number) : Observable<RealEstateModel[]>{
+    return this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByAddress/${num}`);
   }
 }

@@ -1,0 +1,20 @@
+<!-- Header Component -->
+<div class="bg-gray-100 py-4 px-8">
+    <!-- Header Content -->
+    <div class="flex justify-between items-center">
+      <!-- Search Input and Button -->
+      <form class="w-5/6" (ngSubmit)="onSearch(searchInput.value)">
+        <div class="flex border-2 rounded">
+            <input #searchInput type="text" class="px-2 py-2 w-full" [(ngModel)]="searchName" [ngModelOptions]="{standalone: true}" placeholder="Search...">
+            <button class="flex w-12 items-center justify-center px-4 border-l">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            <button class="flex w-12 items-center justify-center px-4 border-l">
+                <i class="fa fa-map" aria-hidden="true"></i>
+            </button>
+        </div>
+    </form>
+  
+    <app-location-sorting></app-location-sorting>
+    <app-filter></app-filter>
+     
