@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RealEstateModel } from '../../models/realestate.model';
 import { RealEstateService } from '../../services/realestate.service';
 import { Subscription } from 'rxjs';
+import { Address } from '../../models/address';
 
 @Component({
   selector: 'app-list',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   realEstate: string = '';
+  address: Address | undefined;
   realEstates: RealEstateModel[] = [];
   private subscription: Subscription | undefined; 
 
@@ -27,6 +29,10 @@ export class ListComponent implements OnInit {
 
     ngOnDestroy(){
       this.subscription?.unsubscribe();
+    }
+
+    onSearch(id: number): void {
+      this.realEstateService.getRealEstateById(id);
     }
   }
 

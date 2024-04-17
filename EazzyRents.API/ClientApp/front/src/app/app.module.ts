@@ -16,6 +16,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainComponent } from './components/main/main.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { LocationSortingComponent } from './components/location-sorting/location-sorting.component';
+import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
+import { AddressPipe } from './pipes/address.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { LocationSortingComponent } from './components/location-sorting/location
     SidebarComponent,
     MainComponent,
     FilterComponent,
-    LocationSortingComponent
+    LocationSortingComponent,
+    AddressPipe,
+    RealestateProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class RealEstateService {
   private apiUrl = 'https://localhost:44379/api/RealEstate'; // Update with your backend API URL
+  realEstate: RealEstateModel | undefined;
   realEstates: RealEstateModel[] = [];
   private realEstateSubject = new BehaviorSubject<RealEstateModel[]>([]);
   realEstates$ = this.realEstateSubject.asObservable();
@@ -23,6 +24,13 @@ export class RealEstateService {
       console.log('Error while fetching all real estates', error);
     }
   )
+  }
+
+  getRealEstateById(id: number){
+    this.http.get<RealEstateModel>(`this${this.apiUrl}/GetById/${id}`)
+    .subscribe(data => {
+      this.realEstate = data;
+    })
   }
 
   getRealEstatesByName(name: string): void {
@@ -50,7 +58,10 @@ export class RealEstateService {
     });
   }
 
-  getRealEstateByAddress(num: number) : Observable<RealEstateModel[]>{
-    return this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByAddress/${num}`);
+  getRealEstateByAddress(num: number): void {
+    this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByAddress/${num}`).
+    subscribe(data => {
+      this.realEstateSubject.next(data);
+    });
   }
 }
