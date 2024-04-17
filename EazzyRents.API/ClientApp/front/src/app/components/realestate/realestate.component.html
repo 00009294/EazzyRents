@@ -1,4 +1,3 @@
-<!-- Adjust the property bindings to match the exact property names from the model -->
 
   <div class="real-estate-item max-w-sm bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
     <div class="aspect-w-16 aspect-h-9 w-full">
@@ -6,7 +5,7 @@
     </div>
     <div class="p-4">
       <h2 class="text-2xl font-bold text-gray-900">{{ estate.description }}</h2>
-      <p class="text-gray-600">{{ estate.address }}</p>
+      <p class="text-gray-600">  {{ getAddressString(estate.address) }}</p>
       <p class="text-gray-800 font-semibold">{{ estate.price | currency }}</p>
     </div>
   </div>

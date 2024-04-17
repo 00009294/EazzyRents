@@ -5,10 +5,8 @@ import { SigninComponent } from './components/signin/signin.component';
 import { ListComponent } from './components/list/list.component';
 import { RealEstateComponent } from './components/realestate/realestate.component';
 import { MainComponent } from './components/main/main.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
-  { path: 's', component: SidebarComponent},
   { path: '', component: MainComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },
@@ -18,6 +16,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class AppRoutingModule { }

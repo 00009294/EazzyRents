@@ -6,21 +6,18 @@
     <div *ngIf="filterVisible" class="fixed inset-0 bg-black bg-opacity-50 z-20" (click)="toggleFilter()"></div>
     
     <div *ngIf="filterVisible" class="fixed inset-0 z-30 flex items-center justify-center p-4">
-        <div class="bg-white shadow-xl rounded-lg max-w-2xl w-full m-auto p-6">
+        <div class="bg-white shadow-xl rounded-lg w-96 h-32 m-auto p-6">
         <div class="flex justify-end">
             <button (click)="toggleFilter()" class="text-gray-400 hover:text-gray-600">
             <span class="fa fa-times"></span>
             </button>
         </div>
         <!-- Scrollable Address List -->
-        <div class="h-64 overflow-y-auto">
-          <!-- Replace with *ngFor if addresses are dynamic -->
-          <button (click)="filterByAddress(0)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location One</button>
-          <button (click)="filterByAddress(1)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location Two</button>
-          <button (click)="filterByAddress(2)" class="block w-full text-left px-4 py-2 hover:bg-gray-100">Location Three</button>
-          <!-- More buttons for additional addresses -->
+        <div class="h-64 overflow-y-auto space-x-2">
+          <button (click)="filterByAddress(0)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Tashkent</button>
+          <button (click)="filterByAddress(1)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Samarkand</button>
+          <button (click)="filterByAddress(2)" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Bukhara</button>
         </div>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mt-4">Show Results</button>
       </div>
     </div>
   </div>
