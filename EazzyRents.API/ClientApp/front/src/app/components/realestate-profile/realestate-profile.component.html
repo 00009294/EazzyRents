@@ -1,1 +1,23 @@
-<p>realestate-profile works!</p>
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+    <app-sidebar></app-sidebar>
+    
+    <div class="real-estate-item max-w-sm bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
+        <h2 class="text-4xl p-8 font-bold text-gray-900">{{ realEstate.description }}</h2>
+        <div class="aspect-w-16 aspect-h-9 w-full">
+            <div *ngFor="let imageUrl of realEstate.imageUrls">
+                <img [src]="baseUrl + imageUrl" alt="Real Estate Image" class="object-cover w-[32rem] h-[12rem]">
+            </div>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-600">  {{ getAddressString(realEstate.address) }}</p>
+          <p class="text-gray-800 font-semibold">{{ realEstate.price | currency }}</p>
+          <p>{{realEstate.latitude}}</p>
+          <p>{{realEstate.longitude}}</p>
+          
+        </div>
+      </div>
+       <div class="w-full lg:w-1/4 h-1/4-screen">
+        <app-map [latitude]="realEstate.latitude" [longitude]="realEstate.longitude"></app-map>
+      </div>
+</div>
+

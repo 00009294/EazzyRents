@@ -5,9 +5,11 @@ import { SigninComponent } from './components/signin/signin.component';
 import { ListComponent } from './components/list/list.component';
 import { RealEstateComponent } from './components/realestate/realestate.component';
 import { MainComponent } from './components/main/main.component';
+import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
+  { path: 'realestate-profile/:id', component: RealestateProfileComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },
   { path: 'signup', component: SignupComponent },

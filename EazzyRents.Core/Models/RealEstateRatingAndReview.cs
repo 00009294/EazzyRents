@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public int SenderId { get; set; }
-        public int ReceiverId { get; set; }
         public string ReviewMessage { get; set; } = string.Empty;
         public int RealEstateId { get; set; }
 
