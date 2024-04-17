@@ -3,6 +3,7 @@ import { RealEstateModel } from '../../models/realestate.model';
 import { RealEstateService } from '../../services/realestate.service';
 import { Subscription } from 'rxjs';
 import { Address } from '../../models/address';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +15,7 @@ export class ListComponent implements OnInit {
   realEstates: RealEstateModel[] = [];
   private subscription: Subscription | undefined; 
 
-  constructor(private realEstateService: RealEstateService){}
+  constructor(private realEstateService: RealEstateService, private router: Router){}
 
   ngOnInit() {
     this.realEstateService.getRealEstates();
@@ -33,6 +34,7 @@ export class ListComponent implements OnInit {
 
     onSearch(id: number): void {
       this.realEstateService.getRealEstateById(id);
+      this.router.navigate(['/realestate-profile', id]);
     }
   }
 

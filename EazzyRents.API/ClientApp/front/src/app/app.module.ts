@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -18,6 +17,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { LocationSortingComponent } from './components/location-sorting/location-sorting.component';
 import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
 import { AddressPipe } from './pipes/address.pipe';
+import { MapComponent } from './components/map/map.component';
+import {  GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -33,14 +34,16 @@ import { AddressPipe } from './pipes/address.pipe';
     FilterComponent,
     LocationSortingComponent,
     AddressPipe,
-    RealestateProfileComponent
+    RealestateProfileComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

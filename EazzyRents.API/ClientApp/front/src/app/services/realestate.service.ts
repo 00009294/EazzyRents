@@ -26,11 +26,8 @@ export class RealEstateService {
   )
   }
 
-  getRealEstateById(id: number){
-    this.http.get<RealEstateModel>(`this${this.apiUrl}/GetById/${id}`)
-    .subscribe(data => {
-      this.realEstate = data;
-    })
+  getRealEstateById(id: number): Observable<RealEstateModel>{
+    return this.http.get<RealEstateModel>(`${this.apiUrl}/GetById/${id}`)
   }
 
   getRealEstatesByName(name: string): void {
