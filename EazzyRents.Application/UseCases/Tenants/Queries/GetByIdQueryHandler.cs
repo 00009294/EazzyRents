@@ -14,7 +14,7 @@ namespace EazzyRents.Application.UseCases.Tenants.Queries
         }
         public Task<User> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var tenant = this.userRepository.GetUserById(request.tenantId);
+            var tenant = this.userRepository.GetUserById(request.tenantId.ToString());
 
             if (tenant == null)
             {

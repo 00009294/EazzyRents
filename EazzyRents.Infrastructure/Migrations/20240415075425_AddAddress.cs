@@ -16,8 +16,8 @@ namespace EazzyRents.Infrastructure.Migrations
                 name: "FK_Images_RealEstates_RealEstateId",
                 table: "Images");
 
-            
-            
+
+
             migrationBuilder.DropIndex(
                 name: "IX_Images_RealEstateId",
                 table: "Images");
@@ -88,7 +88,7 @@ namespace EazzyRents.Infrastructure.Migrations
                 oldType: "int");
 
 
-            
+
             migrationBuilder.AddColumn<int>(
                 name: "RealEstateId",
                 table: "Images",
@@ -105,7 +105,7 @@ namespace EazzyRents.Infrastructure.Migrations
                     { "58d009b4-6bc7-47c5-be5f-a529d49c1775", null, "Tenant", "TENANT" }
                 });
 
-            
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Images_RealEstates_RealEstateId",
                 table: "Images",
@@ -113,6 +113,6 @@ namespace EazzyRents.Infrastructure.Migrations
                 principalTable: "RealEstates",
                 principalColumn: "Id");
 
-         }
+        }
     }
 }

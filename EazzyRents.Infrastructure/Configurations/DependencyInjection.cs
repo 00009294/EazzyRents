@@ -27,9 +27,10 @@ namespace EazzyRents.Infrastructure.Configurations
                 });
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
+
             // Blob Storage connection
-            services.AddSingleton(x => new BlobServiceClient(configuration.GetConnectionString("AzureBlobConnectionString")));
-            ;
+            //services.AddSingleton(x => new BlobServiceClient(configuration.GetConnectionString("AzureBlobConnectionString")));
+            
             // Services
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRealEstateRepository, RealEstateRepository>();

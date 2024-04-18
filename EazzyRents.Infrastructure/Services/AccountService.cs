@@ -1,16 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Services;
-using EazzyRents.Core.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 
 namespace EazzyRents.Infrastructure.Services
 {

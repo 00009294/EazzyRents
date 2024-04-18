@@ -17,8 +17,8 @@ namespace EazzyRents.Application.UseCases.RatingsAndReviews.Users.Commands
         }
         public Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
-            var sender = userRepository.GetUserById(request.ratingAndReview.SenderId);
-            var receiver = userRepository.GetUserById(request.ratingAndReview.ReceiverId);
+            var sender = userRepository.GetUserById(request.ratingAndReview.SenderId.ToString());
+            var receiver = userRepository.GetUserById(request.ratingAndReview.ReceiverId.ToString());
             if (sender != null && receiver != null)
             {
                 if (sender.UserRole == UserRole.Tenant && receiver.UserRole == UserRole.Tenant)

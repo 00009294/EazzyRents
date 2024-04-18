@@ -197,21 +197,22 @@ namespace EazzyRents.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
                     b.Property<int>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ReviewMessage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -352,19 +353,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "61032db0-a9c7-48c6-bb05-ad7466fba42b",
+                            Id = "5c485a0a-6c98-47f8-88a7-7b7a6cb9a341",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "cac19130-9013-4288-bd9d-94edccb38540",
+                            Id = "7a27db8c-1be9-4c27-96ef-bebc292c8db9",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "36149f43-3dd1-424e-b684-27605cbdc650",
+                            Id = "b87ebcfe-c81a-4f4f-9d97-70bb27ca93e3",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

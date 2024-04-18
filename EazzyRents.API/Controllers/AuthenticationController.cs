@@ -2,10 +2,7 @@
 using EazzyRents.Application.Authentication.Common;
 using EazzyRents.Application.Authentication.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Encodings.Web;
 
 namespace EazzyRents.API.Controllers
 {

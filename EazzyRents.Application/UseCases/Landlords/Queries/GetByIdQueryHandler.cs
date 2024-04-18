@@ -14,7 +14,7 @@ namespace EazzyRents.Application.UseCases.Landlords.Queries
         }
         public Task<User> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var landlord = this.userRepository.GetUserById(request.landlordId);
+            var landlord = this.userRepository.GetUserById(request.landlordId.ToString());
 
             if (landlord == null)
             {

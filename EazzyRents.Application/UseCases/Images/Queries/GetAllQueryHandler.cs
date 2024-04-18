@@ -1,10 +1,5 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.UseCases.Images.Queries
 {
@@ -21,14 +16,14 @@ namespace EazzyRents.Application.UseCases.Images.Queries
             List<string> temp = new List<string>();
             var res = this.realEstateRepository.GetAll();
 
-            foreach(var item in res)
+            foreach (var item in res)
             {
                 if (item.ImageUrls != null && item.ImageUrls.Any())
                 {
-                    temp.Add(item.ImageUrls.First()); 
+                    temp.Add(item.ImageUrls.First());
                 }
             }
-            
+
             return Task.FromResult(temp);
 
 

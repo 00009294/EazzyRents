@@ -20,8 +20,8 @@ namespace EazzyRents.Application.UseCases.Hubs.Conversations.Commands
             var tenantId = request.conversation.TenantId;
             var landlordId = request.conversation.LandlordId;
 
-            var tenant = this.userRepository.GetUserById(tenantId);
-            var landlord = this.userRepository.GetUserById(landlordId);
+            var tenant = this.userRepository.GetUserById(tenantId.ToString());
+            var landlord = this.userRepository.GetUserById(landlordId.ToString());
 
             if (tenant != null && landlord != null
                 && tenant.UserRole != UserRole.Tenant

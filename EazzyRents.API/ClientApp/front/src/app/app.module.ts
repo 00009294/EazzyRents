@@ -17,8 +17,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { LocationSortingComponent } from './components/location-sorting/location-sorting.component';
 import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
 import { AddressPipe } from './pipes/address.pipe';
-import { MapComponent } from './components/map/map.component';
-import {  GoogleMapsModule } from '@angular/google-maps';
+import { CommentComponent } from './components/comment/comment.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -35,15 +35,15 @@ import {  GoogleMapsModule } from '@angular/google-maps';
     LocationSortingComponent,
     AddressPipe,
     RealestateProfileComponent,
-    MapComponent
+    CommentComponent,
+    StarRatingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
-    GoogleMapsModule
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

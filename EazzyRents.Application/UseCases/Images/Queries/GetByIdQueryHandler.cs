@@ -1,11 +1,5 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EazzyRents.Application.UseCases.Images.Queries
 {
@@ -21,7 +15,7 @@ namespace EazzyRents.Application.UseCases.Images.Queries
         {
             var allImages = this.realEstateRepository.GetAll().Where(r => r.Id == request.id);
 
-            foreach(var image in allImages)
+            foreach (var image in allImages)
             {
                 return Task.FromResult(image.ImageUrls);
             }

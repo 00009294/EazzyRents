@@ -5,5 +5,6 @@ namespace EazzyRents.Application.Common.Interfaces.Persistence
     public interface IRealEstateRatingAndReviewRepository
     {
         bool Create(RealEstateRatingAndReview realEstateRatingAndReview);
+        List<RealEstateRatingAndReview> GetAll();
     }
 }

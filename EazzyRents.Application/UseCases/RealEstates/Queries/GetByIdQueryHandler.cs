@@ -1,31 +1,50 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
-using EazzyRents.Core.Models;
+using EazzyRents.Application.UseCases.RealEstates.Entities;
 using MediatR;
 
 namespace EazzyRents.Application.UseCases.RealEstates.Queries
 {
-    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, RealEstate?>
+    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, GetByIdQueryEntity>
     {
         private readonly IRealEstateRepository realEstateRepository;
-        private readonly IImageRepository imageRepository;
+        private readonly IUserRepository userRepository;
 
         public GetByIdQueryHandler(IRealEstateRepository realEstateRepository,
-            IImageRepository imageRepository)
+            IUserRepository userRepository)
         {
             this.realEstateRepository = realEstateRepository;
-            this.imageRepository = imageRepository;
+            this.userRepository = userRepository;
         }
-        public Task<RealEstate?> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+        public Task<GetByIdQueryEntity> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            RealEstate? realEstate = realEstateRepository.GetById(request.id);
+            var realEstate = realEstateRepository.GetById(request.id);
+            if (realEstate == null)
+            {
+                throw new ArgumentNullException("Not Found Entity");
+            }
 
-            //if (realEstate != null)
-            //{
-            //    var imageList = imageRepository.GetImages(realEstate.Email);
-            //    realEstate.ImageUrls = imageList;
-            //}
+            var owner = this.userRepository.GetUserByEmail(realEstate.Email);
+            if (owner == null || owner.UserName == null)
+            {
+                throw new ArgumentNullException("Not Found Entity");
+            }
 
-            return Task.FromResult(realEstate);
+            GetByIdQueryEntity entity = new GetByIdQueryEntity
+            {
+                Id = request.id,
+                Description = realEstate.Description,
+                Email = realEstate.Email,
+                Owner = owner.UserName,
+                Price = realEstate.Price,
+                PhoneNumber = realEstate.PhoneNumber,
+                Latitude = realEstate.Latitude,
+                Longitude = realEstate.Longitude,
+                ImageUrls = realEstate.ImageUrls,
+                Address = realEstate.Address,
+                RealEstateStatus = realEstate.RealEstateStatus
+            };
+
+            return Task.FromResult(entity);
         }
     }
 }
