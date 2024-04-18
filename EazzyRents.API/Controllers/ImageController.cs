@@ -1,6 +1,5 @@
 ﻿using EazzyRents.Application.UseCases.Images.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EazzyRents.API.Controllers

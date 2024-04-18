@@ -3,19 +3,37 @@ import { RealEstateService } from '../../services/realestate.service';
 import { RealEstateModel } from '../../models/realestate.model';
 import { ActivatedRoute } from '@angular/router';
 import { Address } from '../../models/address';
+import { CommentModel } from '../../models/comment';
+import { CommentService } from './../../services/comment.service';
 @Component({
   selector: 'app-realestate-profile',
   templateUrl: './realestate-profile.component.html'
 })
 
 export class RealestateProfileComponent implements OnInit{
-  @Input() realEstate!: RealEstateModel;
+  baseUrl: any = "https://localhost:44379/";
+  @Input() realEstate: RealEstateModel = {
+    id: 0,
+    description: '',
+    price: '',
+    phoneNumber: '',
+    address: Address.Tashkent,
+    imageUrls: [],
+    longitude: 0,
+    latitude: 0,
+    owner: ''
+  }
+
+  comments: CommentModel[] = [];
+  @Input() comment: CommentModel | undefined;
+  selectedImageUrl: string = '';
   id: number | any;
   longitude: number | any;
   latitude: number | any;
-  baseUrl: any = "https://localhost:44379/";
 
-constructor(private realEstateService: RealEstateService, private route: ActivatedRoute){}
+constructor(private realEstateService: RealEstateService, 
+  private commentService: CommentService,
+  private route: ActivatedRoute){}
 
 
   ngOnInit(): void {
@@ -23,6 +41,12 @@ constructor(private realEstateService: RealEstateService, private route: Activat
       this.id = +params['id'];
     })
     this.getRealEstate();
+    this.commentService.getComments(this.id).subscribe(
+      (data: CommentModel[]) => {
+        this.comments = data;
+      }
+    )
+    
   }
   
   getRealEstate(): void{
@@ -30,6 +54,9 @@ constructor(private realEstateService: RealEstateService, private route: Activat
       this.realEstateService.getRealEstateById(this.id).subscribe(
         data => {
           this.realEstate = data;
+          if (this.realEstate.imageUrls.length > 0) {
+            this.selectedImageUrl = this.realEstate.imageUrls[0];
+          }
         },
         error => {
           console.error('Real estate not found', error);
@@ -40,6 +67,7 @@ constructor(private realEstateService: RealEstateService, private route: Activat
       console.error('ID not provided');
     }
   }
+
   public getAddressString(value: Address): string {
     switch(value) {
       case Address.Tashkent:
@@ -51,5 +79,9 @@ constructor(private realEstateService: RealEstateService, private route: Activat
       default:
         return 'Unknown Address';
     }
+  }
+
+  selectImage(imageUrl: string): void {
+    this.selectedImageUrl = imageUrl;
   }
 }

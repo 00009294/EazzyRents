@@ -1,4 +1,5 @@
 ﻿using EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Commands;
+using EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,15 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromQuery] CreateCommand createCommand)
+        public async Task<IActionResult> Create([FromBody] CreateCommand createCommand)
         {
             return Ok(await this.mediator.Send(createCommand));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllReviewsById(int id)
+        {
+            return Ok(await this.mediator.Send(new GetByIdQuery(id)));
         }
     }
 }

@@ -7,6 +7,7 @@ namespace EazzyRents.Application.Common.Interfaces.Persistence
         List<User> GetAll();
         void AddUser(User user);
         User? GetUserByEmail(string email);
-        User? GetUserById(int id);
+        User? GetUserByUsername(string username);
+        User? GetUserById(string id);
     }
 }

@@ -17,5 +17,10 @@ namespace EazzyRents.Infrastructure.Persistence
             this.appDbContext.RealEstateRatingAndReviews.Add(realEstateRatingAndReview);
             return this.appDbContext.SaveChanges() > 0;
         }
+
+        public List<RealEstateRatingAndReview> GetAll()
+        {
+            return this.appDbContext.RealEstateRatingAndReviews.ToList();
+        }
     }
 }

@@ -1,23 +1,34 @@
 <div class="flex h-screen bg-gray-100 overflow-hidden">
     <app-sidebar></app-sidebar>
     
-    <div class="real-estate-item max-w-sm bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
-        <h2 class="text-4xl p-8 font-bold text-gray-900">{{ realEstate.description }}</h2>
-        <div class="aspect-w-16 aspect-h-9 w-full">
-            <div *ngFor="let imageUrl of realEstate.imageUrls">
-                <img [src]="baseUrl + imageUrl" alt="Real Estate Image" class="object-cover w-[32rem] h-[12rem]">
-            </div>
+    <div class="real-estate-item w-2/4 rounded-lg border border-gray-200 shadow-md overflow-auto">
+      <h2 class="text-4xl p-6 font-bold text-gray-900 text-center">{{ realEstate.description }} Residence</h2>
+      
+      <div class="flex p-4 justify-center">
+        <div class="overflow-hidden relative rounded-lg">
+          <img [src]="baseUrl + selectedImageUrl" alt="Real Estate Image" class="object-contain w-full h-80">
         </div>
-        <div class="p-4">
-          <p class="text-gray-600">  {{ getAddressString(realEstate.address) }}</p>
-          <p class="text-gray-800 font-semibold">{{ realEstate.price | currency }}</p>
-          <p>{{realEstate.latitude}}</p>
-          <p>{{realEstate.longitude}}</p>
-          
+        
+        <div class="h-80 p-2 overflow-y-auto"> 
+          <div *ngFor="let imageUrl of realEstate.imageUrls" class="mb-2">
+            <img [src]="baseUrl + imageUrl" alt="Thumbnail Image" class="cursor-pointer rounded-lg w-40 h-24" (click)="selectImage(imageUrl)">
+          </div>
         </div>
       </div>
-       <div class="w-full lg:w-1/4 h-1/4-screen">
-        <app-map [latitude]="realEstate.latitude" [longitude]="realEstate.longitude"></app-map>
-      </div>
+        
+        <h2 class="text-2xl p-6 font-semibold text-blue-700">Ratings & Reviews</h2>
+        <div *ngFor="let comment of comments" class="p-2">
+          <app-comment [comment] = "comment" ></app-comment>
+        </div>
+    </div>
+    
+    <div class="p-8">
+      <p class="text-xl font-bold text-gray-900"> RealEstate agent: {{realEstate.owner}}</p>
+      <p class="text-2xl text-gray-800 font-bold">Price: {{ realEstate.price | currency }}</p>
+      <p class="text-gray-600 font-bold"> Address: {{ getAddressString(realEstate.address) }} city</p>
+      <p class="text-gray-800 font-semibold"> Phone: {{realEstate.phoneNumber}}</p>
+      <p> Latitude: {{realEstate.latitude}}</p>
+      <p> Longitude: {{realEstate.longitude}}</p>
+    </div>
 </div>
 

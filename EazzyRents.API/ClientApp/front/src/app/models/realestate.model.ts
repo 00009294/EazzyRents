@@ -2,10 +2,12 @@ import { Address } from "./address";
 
 export interface RealEstateModel{
     id: number;
-    description: any;
-    price: any;
+    description: string;
+    price: string;
+    phoneNumber: string,
     imageUrls: string[];
     address: Address;
     longitude: number,
-    latitude: number
+    latitude: number,
+    owner: string
 }

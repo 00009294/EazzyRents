@@ -12,7 +12,7 @@ namespace EazzyRents.Core.Models
         public string Latitude { get; set; } = String.Empty;
         public string Longitude { get; set; } = String.Empty;
         public List<string> ImageUrls { get; set; } = new List<string>();
-        public Address Address { get; set; } 
+        public Address Address { get; set; }
         public RealEstateStatus RealEstateStatus { get; set; }
 
     }

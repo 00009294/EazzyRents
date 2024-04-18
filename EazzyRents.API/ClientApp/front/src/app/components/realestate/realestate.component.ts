@@ -7,7 +7,17 @@ import { Address } from '../../models/address';
   templateUrl: './realestate.component.html'
 })
 export class RealEstateComponent {
-  @Input() estate!: RealEstateModel;
+  @Input() estate: RealEstateModel = {
+    id: 0,
+    description: '',
+    price: '',
+    phoneNumber: '',
+    address: Address.Tashkent,
+    imageUrls: [],
+    longitude: 0,
+    latitude: 0,
+    owner: ''
+  }
   
   baseUrl: any = "https://localhost:44379/";
 

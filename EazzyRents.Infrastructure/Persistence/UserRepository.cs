@@ -28,9 +28,14 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public User? GetUserById(int id)
+        public User? GetUserById(string id)
         {
             return this.appDbContext.Users.FirstOrDefault(u => u.Id == id.ToString());
+        }
+
+        public User? GetUserByUsername(string username)
+        {
+            return this.appDbContext.Users.FirstOrDefault(u => u.UserName == username);
         }
     }
 }

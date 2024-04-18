@@ -1,5 +1,6 @@
 ﻿using EazzyRents.Application.Common.Interfaces.Persistence;
 using EazzyRents.Core.Enums;
+using EazzyRents.Core.Models;
 using MediatR;
 
 namespace EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Commands
@@ -21,16 +22,39 @@ namespace EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Commands
         }
         public Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
-            var realEstate = realEstateRepository.GetById(request.realEstateRatingAndReview.RealEstateId);
-            var tenant = userRepository.GetUserById(request.realEstateRatingAndReview.SenderId);
-
-            if (realEstate == null || tenant == null || tenant.UserRole != UserRole.Tenant)
+            try
             {
-                return Task.FromResult(false);
+                var realEstate = this.realEstateRepository.GetById(request.RealEstateId);
+                var tenant = this.userRepository.GetUserById(request.SenderId);
+
+                if (realEstate == null || tenant == null || tenant.UserRole != UserRole.Tenant)
+                {
+                    return Task.FromResult(false);
+                }
+                // myturon 
+                
+                if (!(request.Rating > 0 && request.Rating < 6))
+                {
+                    return Task.FromResult(false);
+                }
+
+                var realEstateRatingAndReview = new RealEstateRatingAndReview
+                {
+                    SenderId = tenant.Id,
+                    RealEstateId = realEstate.Id,
+                    ReviewMessage = request.ReviewMessage,
+                    Rating = request.Rating,
+                    CreatedDate = DateTime.UtcNow
+                };
+                    
+                var result = realEstateRatingAndReviewRepository.Create(realEstateRatingAndReview);
+
+                return Task.FromResult(result);
             }
-
-            return Task.FromResult(realEstateRatingAndReviewRepository.Create(request.realEstateRatingAndReview));
-
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -1,0 +1,32 @@
+<!-- <div class="bg-white p-4 rounded shadow">
+    <div class="font-bold">{{comment?.senderName}}</div>
+    <div class="text-gray-600 text-sm">{{comment?.reviewMessage}}</div>
+    <div class="text-yellow-400">Rating: {{comment?.rating}}/5</div>
+    <div class="text-yellow-400">Date: {{comment?.createdDate}}/5</div>
+  </div> -->
+
+  <div class="bg-white p-4 rounded-lg shadow space-y-2">
+  <div class="flex items-center justify-between">
+    <div class="font-semibold text-lg">{{ comment?.senderName }}</div>
+    <div class="font-semibold text-lg">{{ comment?.rating }}</div>
+      <div class="text-sm text-gray-500">{{ comment?.createdDate| date }}</div>
+    </div>
+    <div class="text-gray-600">
+      {{ comment?.reviewMessage }}
+    </div>
+    </div>
+  <!--   
+  <div *ngFor="let comment of comments">
+    <div class="bg-white p-4 rounded-lg shadow space-y-2">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold text-lg">{{ comment.senderName }}</div>
+        <app-star-rating [rating]="comment.rating"></app-star-rating>
+        <div class="text-sm text-gray-500">{{ comment.createdDate | date }}</div>
+      </div>
+      <div class="text-gray-600">
+        {{ comment.reviewMessage }}
+      </div>
+    </div>
+  </div>
+  </div>  
+   -->
