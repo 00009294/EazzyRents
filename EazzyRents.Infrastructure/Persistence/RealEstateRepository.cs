@@ -23,11 +23,13 @@ namespace EazzyRents.Infrastructure.Persistence
         public bool Delete(int id)
         {
             var realEstate = this.appDbContext.RealEstates.FirstOrDefault(r => r.Id == id);
+            
             if (realEstate != null)
             {
                 this.appDbContext.RealEstates.Remove(realEstate);
                 return this.appDbContext.SaveChanges() > 0;
             }
+
             return false;
         }
 

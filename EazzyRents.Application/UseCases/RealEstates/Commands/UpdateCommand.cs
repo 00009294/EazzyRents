@@ -13,6 +13,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         string Email,
         string Longitude,
         string Latitude,
+        string about,
         Address Address,
         RealEstateStatus Status
         ) : IRequest<bool>;

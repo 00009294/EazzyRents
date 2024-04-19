@@ -3,6 +3,7 @@ import { Address } from "./address";
 export interface RealEstateModel{
     id: number;
     description: string;
+    about: string;
     price: string;
     phoneNumber: string,
     imageUrls: string[];

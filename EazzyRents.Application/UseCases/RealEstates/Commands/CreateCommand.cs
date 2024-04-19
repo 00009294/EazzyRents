@@ -13,6 +13,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         public string Email { get; init; }
         public string Longitude { get; init; }
         public string Latitude { get; init; }
+        public string About { get; init; }  
         public List<IFormFile> ImageDataList { get; set; }
         public Address Address { get; init; }
         public RealEstateStatus RealEstateStatus { get; init; }

@@ -21,7 +21,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
 
             if (oldRealEstate == null) return Task.FromResult(false);
 
-            var realEstate = new RealEstate()
+            RealEstate realEstate = new RealEstate()
             {
                 Id = request.Id,
                 Description = request.Descriprion,
@@ -31,6 +31,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
                 PhoneNumber = request.PhoneNumber,
                 Longitude = request.Longitude,
                 Latitude = request.Latitude,
+                About = request.about,
                 RealEstateStatus = request.Status,
                 ImageUrls = new List<string>()
             };

@@ -19,6 +19,7 @@ import { RealestateProfileComponent } from './components/realestate-profile/real
 import { AddressPipe } from './pipes/address.pipe';
 import { CommentComponent } from './components/comment/comment.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { StarRatingComponent } from './components/star-rating/star-rating.compon
     RealestateProfileComponent,
     CommentComponent,
     StarRatingComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

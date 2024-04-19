@@ -36,6 +36,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
                 Email = realEstate.Email,
                 Owner = owner.UserName,
                 Price = realEstate.Price,
+                About = realEstate.About,
                 PhoneNumber = realEstate.PhoneNumber,
                 Latitude = realEstate.Latitude,
                 Longitude = realEstate.Longitude,
