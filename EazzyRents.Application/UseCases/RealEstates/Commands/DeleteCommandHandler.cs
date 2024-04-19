@@ -7,22 +7,27 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
     {
         private readonly IRealEstateRepository realEstateRepository;
         private readonly IImageRepository imageRepository;
+        private readonly IRealEstateRatingAndReviewRepository realEstateRatingAndReviewRepository;
 
         public DeleteCommandHandler(
               IRealEstateRepository realEstateRepository,
-              IImageRepository imageRepository
+              IImageRepository imageRepository,
+              IRealEstateRatingAndReviewRepository realEstateRatingAndReviewRepository
+               
               )
         {
             this.realEstateRepository = realEstateRepository;
             this.imageRepository = imageRepository;
+            this.realEstateRatingAndReviewRepository = realEstateRatingAndReviewRepository;
         }
         public Task<bool> Handle(DeleteCommand request, CancellationToken cancellationToken)
         {
             var realEstate = realEstateRepository.GetById(request.id);
             if (realEstate != null)
             {
-                imageRepository.DeleteImages(realEstate.Email);
+                //this.imageRepository.DeleteImages(realEstate.Email);
             }
+            this.realEstateRatingAndReviewRepository.Delete(realEstate.Id);
 
             return Task.FromResult(realEstateRepository.Delete(request.id));
         }

@@ -44,6 +44,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
                 Price = request.Price,
                 PhoneNumber = request.PhoneNumber,
                 RealEstateStatus = request.RealEstateStatus,
+                About  = request.About,
                 Email = user.Email,
                 Longitude = request.Longitude,
                 Latitude = request.Latitude,

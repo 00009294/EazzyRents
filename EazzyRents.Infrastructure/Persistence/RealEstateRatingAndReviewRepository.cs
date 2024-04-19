@@ -18,6 +18,25 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.SaveChanges() > 0;
         }
 
+        public bool Delete(int realEstateId)
+        {
+
+            var selectedRealEstate = this.appDbContext.RealEstateRatingAndReviews.Where(r => r.RealEstateId == realEstateId);
+            
+            if(selectedRealEstate != null)
+            {
+                foreach(var estate in selectedRealEstate)
+                {
+                    this.appDbContext.RealEstateRatingAndReviews.Remove(estate);
+                    this.appDbContext.SaveChanges();
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         public List<RealEstateRatingAndReview> GetAll()
         {
             return this.appDbContext.RealEstateRatingAndReviews.ToList();

@@ -8,8 +8,8 @@ import { CommentService } from '../../services/comment.service';
   templateUrl: './comment.component.html'
 })
 export class CommentComponent{
+  @Input() comment?: CommentModel;
   comments: CommentModel[] = [];
-  @Input() comment: CommentModel | undefined;
 
   constructor(private commentService: CommentService) {}
 

@@ -1,32 +1,31 @@
-<!-- <div class="bg-white p-4 rounded shadow">
-    <div class="font-bold">{{comment?.senderName}}</div>
-    <div class="text-gray-600 text-sm">{{comment?.reviewMessage}}</div>
-    <div class="text-yellow-400">Rating: {{comment?.rating}}/5</div>
-    <div class="text-yellow-400">Date: {{comment?.createdDate}}/5</div>
-  </div> -->
 
-  <div class="bg-white p-4 rounded-lg shadow space-y-2">
-  <div class="flex items-center justify-between">
-    <div class="font-semibold text-lg">{{ comment?.senderName }}</div>
-    <div class="font-semibold text-lg">{{ comment?.rating }}</div>
-      <div class="text-sm text-gray-500">{{ comment?.createdDate| date }}</div>
+<div class="bg-white p-4 rounded-lg shadow space-y-2">
+  
+<div class="flex">
+  <div class="w-10 h-10 rounded-full mr-4 bg-red-200 flex items-center justify-center uppercase font-semibold" 
+    *ngIf="comment?.senderName">
+      {{ comment!.senderName[0] }}
+  </div>
+
+  <div class="flex flex-col">
+    <div class="text-xl font-bold capitalize">{{ comment?.senderName }}</div>
+    <div class="text-sm text-gray-500">{{ comment?.createdDate| date:"MMM yyyy" }}</div>
+  </div>
+
+</div>  
+
+<div class="flex items-center justify-between">
+  <div class="flex items-center">
+      <div *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <span [ngClass]="i < comment!.rating ? 'text-yellow-400' : 'text-gray-300'">
+          {{ i < comment!.rating ? '&#9733;' : '&#9734;' }}
+        </span>
+      </div>
     </div>
+</div>
+
     <div class="text-gray-600">
       {{ comment?.reviewMessage }}
     </div>
-    </div>
-  <!--   
-  <div *ngFor="let comment of comments">
-    <div class="bg-white p-4 rounded-lg shadow space-y-2">
-      <div class="flex items-center justify-between">
-        <div class="font-semibold text-lg">{{ comment.senderName }}</div>
-        <app-star-rating [rating]="comment.rating"></app-star-rating>
-        <div class="text-sm text-gray-500">{{ comment.createdDate | date }}</div>
-      </div>
-      <div class="text-gray-600">
-        {{ comment.reviewMessage }}
-      </div>
-    </div>
   </div>
-  </div>  
-   -->
+

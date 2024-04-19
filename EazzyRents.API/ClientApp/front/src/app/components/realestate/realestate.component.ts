@@ -12,6 +12,7 @@ export class RealEstateComponent {
     description: '',
     price: '',
     phoneNumber: '',
+    about: '',
     address: Address.Tashkent,
     imageUrls: [],
     longitude: 0,

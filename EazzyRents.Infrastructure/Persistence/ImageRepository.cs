@@ -2,6 +2,7 @@
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -75,44 +76,47 @@ namespace EazzyRents.Infrastructure.Persistence
             try
             {
                 DeleteImages(emailAddress);
-                string fileName = file.FileName;
-                byte[] fileContent;
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    file.CopyTo(memoryStream);
-                    fileContent = memoryStream.ToArray();
-                }
-
-                string folderPath = $@"StaticFiles\{emailAddress}";
-
-                if (!Directory.Exists(folderPath))
-                {
-                    Directory.CreateDirectory(folderPath);
-                }
-
-                string filePath = Path.Combine(folderPath, fileName);
-
-                var imageData = this.appDbContext.Images.FirstOrDefault(img => img.FileName == fileName && img.Url == folderPath);
-
-                if (imageData != null)
-                {
-                    imageData.Data = fileContent;
-                    File.WriteAllBytes(filePath, fileContent);
-                }
-
-                imageData = new ImageData()
-                {
-                    FileName = fileName,
-                    Url = folderPath,
-                    Data = fileContent
-                };
-
-                this.appDbContext.Images.Add(imageData);
-                this.appDbContext.SaveChanges();
+                return UploadImage(file, emailAddress);
 
 
-                return imageData;
+                //string fileName = file.FileName;
+                //byte[] fileContent;
+
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    file.CopyTo(memoryStream);
+                //    fileContent = memoryStream.ToArray();
+                //}
+
+                //string folderPath = $@"StaticFiles\{emailAddress}";
+
+                //if (!Directory.Exists(folderPath))
+                //{
+                //    Directory.CreateDirectory(folderPath);
+                //}
+
+                //var imageData = this.appDbContext.Images.FirstOrDefault(img => img.FileName == fileName && img.Url == folderPath);
+
+                //if (imageData == null)
+                //{
+                //    return new ImageData();
+                //}
+
+                //imageData = new ImageData()
+                //{
+                //    FileName = fileName,
+                //    Url = folderPath,
+                //    Data = fileContent
+                //};
+
+                //string filePath = Path.Combine(folderPath, imageData.FileName);
+                //File.WriteAllBytes(filePath, imageData.Data);
+                
+                //this.appDbContext.Images.Add(imageData);
+                //this.appDbContext.SaveChanges();
+                
+                //return imageData;
+
             }
             catch (Exception ex)
             {

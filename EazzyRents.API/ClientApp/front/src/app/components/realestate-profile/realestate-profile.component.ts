@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,  AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { RealEstateService } from '../../services/realestate.service';
 import { RealEstateModel } from '../../models/realestate.model';
 import { ActivatedRoute } from '@angular/router';
 import { Address } from '../../models/address';
 import { CommentModel } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
+import * as L from 'leaflet';
 @Component({
   selector: 'app-realestate-profile',
   templateUrl: './realestate-profile.component.html'
@@ -17,6 +18,7 @@ export class RealestateProfileComponent implements OnInit{
     description: '',
     price: '',
     phoneNumber: '',
+    about: '',
     address: Address.Tashkent,
     imageUrls: [],
     longitude: 0,
@@ -84,4 +86,5 @@ constructor(private realEstateService: RealEstateService,
   selectImage(imageUrl: string): void {
     this.selectedImageUrl = imageUrl;
   }
+
 }

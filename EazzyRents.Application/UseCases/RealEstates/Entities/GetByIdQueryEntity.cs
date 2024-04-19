@@ -11,6 +11,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Entities
         public string Email { get; set; } = String.Empty;
         public string Latitude { get; set; } = String.Empty;
         public string Longitude { get; set; } = String.Empty;
+        public string About {  get; set; } = String.Empty;
         public List<string> ImageUrls { get; set; } = new List<string>();
         public string Owner { get; set; } = String.Empty;
         public Address Address { get; set; }
