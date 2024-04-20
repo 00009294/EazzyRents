@@ -1,38 +1,48 @@
 <div class="flex h-screen bg-gray-100">
-    <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
+  
+  <div class="flex-grow flex flex-col justify-self-center rounded-lg border border-gray-200 shadow-md px-6 overflow-x-hidden">
     
-    <div class=" justify-self-center w-full rounded-lg border border-gray-200 shadow-md px-24 overflow-x-hidden">
-      <h2 class="text-4xl p-6 font-bold text-gray-900 text-center">{{ realEstate?.description}} Residence</h2>
-      
-      <div class="flex p-4 justify-center">
-        <div class="overflow-hidden relative rounded-lg">
-          <img [src]="baseUrl + selectedImageUrl" alt="Real Estate Image" class="object-contain w-full h-80">
+    <h2 class="text-4xl p-4 font-bold text-gray-900 text-center">{{ realEstate?.description}} Residence</h2>
+    
+    <div class="flex flex-col bg-slate-200 rounded-lg md:flex-row">
+      <div class="w-3/5 rounded-lg p-4">
+        <p class="text-xl font-semibold text-gray-800 capitalize">RealEstate Agent: {{realEstate?.owner}}</p>
+        <p class="text-xl text-gray-800 font-semibold">Price: {{ realEstate?.price | currency }}</p>
+        <p class="text-gray-600 font-semibold text-gray-800">Address: {{ realEstate?.address != null ? getAddressString(realEstate!.address) : 'Address not available' }} city</p>
+        <p class="text-gray-800 font-semibold">Phone: {{realEstate?.phoneNumber}}</p>
+        <button id="filterBtn" class="mt-2 bg-sky-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg whitespace-nowrap">
+          <i class="fa-solid fa-message"></i> Chat
+        </button>
+        <p class="text-xl text-black font-bold pt-2">About</p>
+        <p class="text-gray-900">{{realEstate?.about }}</p>
+      </div>
+    
+      <div class="flex">
+        <div class="overflow-hidden relative py-3">
+          <img [src]="baseUrl + selectedImageUrl" alt="Real Estate Image" class="rounded-lg w-full h-96">
         </div>
-        
-        <div class="h-80 p-2 overflow-y-auto"> 
+        <div class="overflow-hidden py-3 pl-1 pr-4">
           <div *ngFor="let imageUrl of realEstate?.imageUrls" class="mb-2">
-            <img [src]="baseUrl + imageUrl" alt="Thumbnail Image" class="cursor-pointer rounded-lg w-40 h-full" (click)="selectImage(imageUrl)">
+            <img [src]="baseUrl + imageUrl" alt="Thumbnail Image" class="cursor-pointer rounded-lg w-16" (click)="selectImage(imageUrl)">
           </div>
         </div>
       </div>
-      <div class="p-4 w-full">
-        <div class="bg-slate-200 rounded-lg p-4">
-          <p class="text-2xl text-gray-800 font-bold">Price: {{ realEstate?.price | currency }}</p>
-          <p class="text-xl font-bold text-gray-900 capitalize"> RealEstate agent: {{realEstate?.owner}}</p>
-          <p class="text-gray-600 font-bold"> Address: {{ realEstate?.address != null ? getAddressString(realEstate!.address) : 'Address not available' }} city</p>
-          <p class="text-gray-800 font-semibold"> Phone: {{realEstate?.phoneNumber}}</p>
-          <p class="text-2xl text-black font-bold py-2"> About</p>
-          <p class="text-gray-900 py-2">{{realEstate?.about }}</p>
-          <p class="text-2xl text-black font-bold py-2"> Where you will be: </p>
-          <app-map *ngIf="realEstate" [latitude]="realEstate.latitude" [longitude]="realEstate.longitude"></app-map>
-        </div>
-        
-        <h2 class="text-2xl py-4 font-bold text-blue-700">Ratings & Reviews</h2>
-        <div *ngFor="let comment of comments" class="py-1">
-          <app-comment [comment] = "comment" ></app-comment>
-        </div>
-        
-      </div>  
     </div>
-  </div>
 
+  
+    <div class="rounded-lg py-2">
+      <p class="text-2xl text-blue-700 py-2 font-bold py-1">Where you will be:</p>
+      <app-map *ngIf="realEstate" [latitude]="realEstate.latitude" [longitude]="realEstate.longitude"></app-map>
+    </div>
+
+    <div class="w-full">
+      <h2 class="text-2xl py-2 font-bold text-blue-700">Ratings & Reviews</h2>
+      <div *ngFor="let comment of comments" class="py-1">
+        <app-comment [comment] = "comment"></app-comment>
+      </div>
+    </div>  
+
+  </div>
+  
+</div>

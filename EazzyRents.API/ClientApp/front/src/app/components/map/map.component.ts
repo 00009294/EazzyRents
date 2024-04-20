@@ -36,7 +36,7 @@ export class MapComponent implements  AfterViewInit, OnDestroy{
         }
         
         this.map = L.map(this.mapContainer.nativeElement, {
-            attributionControl: true,
+            attributionControl: false,
             center: [lat, lng],
             zoom: 15,
         });
@@ -49,7 +49,6 @@ export class MapComponent implements  AfterViewInit, OnDestroy{
         const customIcon = L.icon({
             iconUrl: "../../../assets/images/map-marker.png",
             iconSize: [30, 30],
-            iconAnchor: [22, 94],
             popupAnchor: [-3, -76]
         });
     

@@ -50,7 +50,7 @@ namespace EazzyRents.Infrastructure.Persistence
 
         public List<RealEstate> GetByName(string name)
         {
-            return this.appDbContext.RealEstates.Where(r => r.Description.Contains(name)).ToList();
+            return this.appDbContext.RealEstates.Where(r => r.Description.StartsWith(name)).ToList();
         }
 
         public List<RealEstate> GetByPrice(double fromPrice, double toPrice)
