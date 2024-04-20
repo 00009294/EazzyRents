@@ -7,11 +7,12 @@ import * as L from 'leaflet';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements  AfterViewInit, OnDestroy{
-  @Input() latitude!: string;
+    @Input() latitude!: string;
     @Input() longitude!: string;
     @ViewChild('map') mapContainer!: ElementRef;
 
     private map!: L.Map;
+
 
     ngAfterViewInit() {
         this.initMap();
@@ -25,26 +26,28 @@ export class MapComponent implements  AfterViewInit, OnDestroy{
 
     private initMap(): void {
         if (!this.mapContainer) return;
-
         const lat = parseFloat(this.latitude);
         const lng = parseFloat(this.longitude);
-
-        if (isNaN(lat) || isNaN(lng)) {
+        
+        if ( isNaN(lat) || isNaN(lng)) {
+            console.error('Invalid latitude or longitude');
+            console.log('Latitude:', lat, 'Longitude:', lng);
             return;
         }
-
+        
         this.map = L.map(this.mapContainer.nativeElement, {
-            attributionControl: false,
+            attributionControl: true,
             center: [lat, lng],
             zoom: 15,
         });
+        
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(this.map);
 
         const customIcon = L.icon({
-            iconUrl: "../../../assets/images/icon.png",
+            iconUrl: "../../../assets/images/map-marker.png",
             iconSize: [30, 30],
             iconAnchor: [22, 94],
             popupAnchor: [-3, -76]

@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Address } from '../../models/address';
 import { CommentModel } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
-import * as L from 'leaflet';
 @Component({
   selector: 'app-realestate-profile',
   templateUrl: './realestate-profile.component.html'
@@ -13,29 +12,18 @@ import * as L from 'leaflet';
 
 export class RealestateProfileComponent implements OnInit{
   baseUrl: any = "https://localhost:44379/";
-  @Input() realEstate: RealEstateModel = {
-    id: 0,
-    description: '',
-    price: '',
-    phoneNumber: '',
-    about: '',
-    address: Address.Tashkent,
-    imageUrls: [],
-    longitude: 0,
-    latitude: 0,
-    owner: ''
-  }
+  @Input() realEstate: RealEstateModel | null = null;
 
   comments: CommentModel[] = [];
-  @Input() comment: CommentModel | undefined;
+  @Input() comment!: CommentModel;
   selectedImageUrl: string = '';
   id: number | any;
-  longitude: number | any;
-  latitude: number | any;
+  
 
 constructor(private realEstateService: RealEstateService, 
   private commentService: CommentService,
-  private route: ActivatedRoute){}
+  private route: ActivatedRoute,
+      ){}
 
 
   ngOnInit(): void {
@@ -48,13 +36,12 @@ constructor(private realEstateService: RealEstateService,
         this.comments = data;
       }
     )
-    
   }
   
   getRealEstate(): void{
     if(this.id){
       this.realEstateService.getRealEstateById(this.id).subscribe(
-        data => {
+        data  => {
           this.realEstate = data;
           if (this.realEstate.imageUrls.length > 0) {
             this.selectedImageUrl = this.realEstate.imageUrls[0];
@@ -70,7 +57,7 @@ constructor(private realEstateService: RealEstateService,
     }
   }
 
-  public getAddressString(value: Address): string {
+  public getAddressString(value: number): string {
     switch(value) {
       case Address.Tashkent:
         return 'Tashkent';
