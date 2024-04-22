@@ -30,6 +30,7 @@
     <Folder Include="UseCases\Images\Commands\" />
     <Folder Include="UseCases\Images\Entities\" />
     <Folder Include="UseCases\RatingsAndReviews\Users\Queries\" />
+    <Folder Include="UseCases\Users\Commands\" />
   </ItemGroup>
 
 </Project>
