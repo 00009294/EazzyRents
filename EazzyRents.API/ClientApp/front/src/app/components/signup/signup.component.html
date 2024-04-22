@@ -1,6 +1,5 @@
 <div class="flex items-center justify-center h-screen bg-cover bd-center bg-no-repeat" style="background-image: url('/assets/images/img-1.png');">
   <div class="flex flex-col md:flex-row shadow-lg overflow-hidden rounded-lg max-w-4xl">
-    
     <!-- Left Side with the Welcome Message -->
     <div class="md:w-1/2 p-8 flex flex-col bg-white justify-between">
       <div>
@@ -11,34 +10,73 @@
         </div>
       </div>
     </div>
-
       <!-- Right Side with the Signup Form -->
-      <div class="md:w-1/2 p-8 bg-gray-200">
+      <div class="md:w-1/2 p-4 bg-gray-200">
         <form [formGroup]="signUpForm" class="space-y-6" (ngSubmit)="onSubmit()">
           <div>
             <label for="userName" class="text-sm font-medium text-gray-700 block mb-2">Username</label>
-            <input id="userName" type="text" formControlName="UserName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
+            <input id="userName" type="text" placeholder="Your username" formControlName="UserName"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          [class.border-red-500]="signUpForm.get('UserName')?.touched && signUpForm.get('UserName')?.invalid"/>
+          <div *ngIf="signUpForm.get('UserName')?.touched && signUpForm.get('UserName')?.invalid" class="text-red-500 text-sm">
+            {{ getValidationMessage('UserName') }}
+    </div>
           </div>
           
           <div>
             <label for="email" class="text-sm font-medium text-gray-700 block mb-2">Email</label>
-            <input id="email" type="email" formControlName="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
+            <input id="email" type="email"  placeholder="example@gmail.com" formControlName="Email" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            [class.border-red-500]="signUpForm.get('UserName')?.touched && signUpForm.get('UserName')?.invalid"/>
+            <div *ngIf="signUpForm.get('Email')?.touched && signUpForm.get('Email')!.invalid" class="text-red-500 text-sm">
+              {{ getValidationMessage('Email') }}
+            </div>
           </div>
           
           <div>
             <label for="password" class="text-sm font-medium text-gray-700 block mb-2">Password</label>
-            <input id="password" type="password" formControlName="Password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
+            <input id="password" type="password" formControlName="Password"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              [class.border-red-500]="signUpForm.get('Password')?.touched && signUpForm.get('Password')?.invalid" />
+
+              <div *ngIf="signUpForm.get('Password')?.touched" class="text-red-500 text-sm">
+                <div *ngIf="signUpForm.get('Password')?.errors?.['required']">
+                  Password is required.
+                </div>
+                <div *ngIf="!signUpForm.get('Password')?.errors?.['required'] && signUpForm.get('Password')?.errors?.['minlength']">
+                  Password must be at least 7 characters long.
+                </div>
+                <div *ngIf="!signUpForm.get('Password')?.errors?.['minlength'] && signUpForm.get('Password')?.errors?.['requireDigit']">
+                  Password must include at least one digit.
+                </div>
+                <div *ngIf="!signUpForm.get('Password')?.errors?.['requireDigit'] && signUpForm.get('Password')?.errors?.['requireNonAlphanumeric']">
+                  Password must include at least one non-alphanumeric character.
+                </div>
+                <div *ngIf="!signUpForm.get('Password')?.errors?.['requireNonAlphanumeric'] && signUpForm.get('Password')?.errors?.['requireUppercase']">
+                  Password must include at least one uppercase letter.
+                </div>
+                <div *ngIf="!signUpForm.get('Password')?.errors?.['requireUppercase'] && signUpForm.get('Password')?.errors?.['requireLowercase']">
+                  Password must include at least one lowercase letter.
+                </div>
+              </div>
+
           </div>
           
           <div>
-            <label for="confirm-password" class="text-sm font-medium text-gray-700 block mb-2">Repeat Password</label>
-            <input id="confirm-password" type="password" formControlName="ConfirmPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"/>
+            <label for="confirm-password" class="text-sm font-medium text-gray-700 block mb-2">Confirm Password</label>
+            <input id="confirm-password" type="password" formControlName="ConfirmPassword" 
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            [class.border-red-500]="signUpForm.get('ConfirmPassword')?.touched && signUpForm.get('ConfirmPassword')?.invalid"/>
+            <div *ngIf="signUpForm.get('ConfirmPassword')?.touched && signUpForm.get('ConfirmPassword')?.invalid" class="text-red-500 text-sm">
+              {{ getValidationMessage('ConfirmPassword') }}
+            </div>
           </div>
           
           <span class="text-sm font-semibold text-gray-700 text-center">Select your role: </span>
           <div class="mt-2 flex gap-2">
+            
             <button type="button" (click)="selectRole('Guest')"
-              [ngClass]="{'bg-green-600 text-white': selectedRole === 0, 'bg-white text-gray-700': selectedRole !== 0}"
+            [ngClass]="{'bg-green-600 text-white': selectedRole === 0, 'bg-white text-gray-700': selectedRole !== 0}"
               class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
               Guest
             </button>
@@ -48,16 +86,25 @@
               Landlord
           </button>
             <button type="button" (click)="selectRole('Tenant')"
-              [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
-              class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
-              Tenant
-            </button>
-            </div>
-          <input type="hidden" formControlName="UserRole" [value]="selectedRole">
-
+            [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+            Tenant
+          </button>
+        </div>
+        <input type="hidden" formControlName="UserRole" [value]="selectedRole">
+        <div *ngIf="signUpForm.get('Password')?.touched" class="text-red-500 text-sm">
+          <div *ngIf="signUpForm.get('Password')?.errors?.['required']">
+            Select your role
+          </div>
+    </div>
+  
           <div class="flex items-center justify-between">
-            <button type="submit" class="px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Sign Up</button>
-            <a routerLink="/signin" class="text-sm text-indigo-600 hover:underline">Log in</a>
+            <button type="submit" class=" px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">
+              Sign Up
+            </button>
+            <div class="text-center">
+              <p class="text-sm">Already have an account? <a routerLink="/signin" href="#" class="text-blue-600 hover:underline">Login</a></p>
+            </div>
           </div>
         </form>
         </div>
