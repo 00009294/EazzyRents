@@ -11,17 +11,14 @@ namespace EazzyRents.Application.Authentication.Queries
     public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthResultForLogin>
     {
         private readonly IJwtTokenGenerator jwtTokenGenerator;
-        private readonly IUserRepository userRepository;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
         public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator,
-            IUserRepository userRepository,
                 UserManager<User> userManager,
                     SignInManager<User> signInManager)
         {
-            this.jwtTokenGenerator = jwtTokenGenerator;
-            this.userRepository = userRepository;
+            this.jwtTokenGenerator = jwtTokenGenerator; 
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
