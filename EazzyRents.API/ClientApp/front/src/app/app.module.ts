@@ -20,6 +20,7 @@ import { AddressPipe } from './pipes/address.pipe';
 import { CommentComponent } from './components/comment/comment.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { MapComponent } from './components/map/map.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MapComponent } from './components/map/map.component';
     CommentComponent,
     StarRatingComponent,
     MapComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

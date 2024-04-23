@@ -24,7 +24,8 @@ namespace EazzyRents.Application.Authentication.Queries
         }
         public async Task<AuthResultForLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.Username.ToLower());
+            var user = await this.userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.userName.ToLower());
+            
             if (user == null)
             {
                 return new AuthResultForLogin()
@@ -33,8 +34,11 @@ namespace EazzyRents.Application.Authentication.Queries
                 };
             }
 
-            var signInUser = await this.signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: false);
-            if (signInUser != null)
+            //var signInUser = await this.signInManager.CheckPasswordAsync(user, request.Password, lockoutOnFailure: false);
+            
+            var signInUser = await this.userManager.CheckPasswordAsync(user, request.password);
+
+            if (signInUser)
             {
                 return new AuthResultForLogin()
                 {
@@ -44,7 +48,9 @@ namespace EazzyRents.Application.Authentication.Queries
                 };
             }
             else
+            {
                 return new AuthResultForLogin() { Message = "Wrong password or username" };
+            }
         }
     }
 }

@@ -6,9 +6,11 @@ import { ListComponent } from './components/list/list.component';
 import { RealEstateComponent } from './components/realestate/realestate.component';
 import { MainComponent } from './components/main/main.component';
 import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: 'realestate-profile/:id', component: RealestateProfileComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },

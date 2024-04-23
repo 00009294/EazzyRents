@@ -20,4 +20,16 @@ export class RegistrationService {
     return this.http.post(`${this.baseUrl}/signin`, loginObj)
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('token'); // Retrieve token from local storage
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token); // Save token to local storage
+  }
+
+  removeToken() {
+    localStorage.removeItem('token'); // Remove token from local storage
+  }
+
 }

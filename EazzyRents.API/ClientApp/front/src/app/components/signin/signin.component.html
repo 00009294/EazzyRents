@@ -10,12 +10,18 @@
           <input type="email" id="email" formControlName="Username" 
             class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" 
             placeholder="Enter your username" required>
+            <div *ngIf="loginForm.get('Username')!.touched && loginForm.get('Username')!.invalid" class="text-red-500 text-sm">
+              Username is required.
+            </div>
         </div>
         <div class="mb-6">
           <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
           <input type="password" id="password" formControlName="Password" 
             class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" 
             placeholder="Enter your password" required>
+            <div *ngIf="loginForm.get('Password')!.touched && loginForm.get('Password')!.invalid" class="text-red-500 text-sm">
+              Password is required.
+            </div>
         </div>
         <div class="flex items-center justify-center mb-6">
           <button type="submit" class="px-24 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none">Login</button>
