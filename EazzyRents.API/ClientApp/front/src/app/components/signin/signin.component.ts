@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { RegistrationService } from '../../services/registration.service';
+import { Router } from '@angular/router'; 
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signin',
@@ -11,7 +13,9 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: RegistrationService
+    private http: HttpClient,
+    private auth: RegistrationService,
+    private router: Router
   ) {}
 
   ngOnInit(){
@@ -31,7 +35,24 @@ export class SigninComponent implements OnInit {
 
       this.auth.signIn(query).subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.token);
+          this.auth.setToken(response.token);
+          if(response.token !== null){
+            //console.log(response.token);
+            alert("Done");
+            const token = this.auth.getToken();
+            this.http.get('/', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }).subscribe(response => {
+              console.log(response);
+            })
+            
+            this.router.navigate(['/']);
+          }
+          else {
+            alert('Wrong username or password');
+          }
         },
         error: (error) => {
           console.error(error);
@@ -39,13 +60,12 @@ export class SigninComponent implements OnInit {
       });
     }
     else {
-      console.log("Form us not valid", this.loginForm.errors);
+      console.log("Form is not valid", this.loginForm.errors);
     }
   }
   
   downloadSupportPDF(): void {
     const link = document.createElement('a');
-    // Adjust the path according to your directory structure
     link.href = 'assets/files/Support.pdf';
     link.download = 'Support_Document.pdf';
     document.body.appendChild(link); // Append to body

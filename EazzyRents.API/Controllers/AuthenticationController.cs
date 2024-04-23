@@ -27,7 +27,7 @@ namespace EazzyRents.API.Controllers
         [HttpPost("signin")]
         public async Task<AuthResultForLogin> SignIn([FromBody] LoginQuery query)
         {
-            var user = new LoginQuery(query.Username, query.Password);
+            var user = new LoginQuery(query.userName, query.password);
             return await this.mediator.Send(user);
         }
 
