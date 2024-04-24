@@ -46,7 +46,9 @@ namespace EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Queries
                 ratingAndReviewEntities.Add(ratingAndReviewEntity);
             }
 
-            return Task.FromResult(ratingAndReviewEntities);
+            var result = ratingAndReviewEntities.OrderByDescending(r=>r.CreatedDate).ToList();
+
+            return Task.FromResult(result);
 
         }
     }

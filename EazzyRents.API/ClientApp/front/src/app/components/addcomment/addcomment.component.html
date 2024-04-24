@@ -1,0 +1,38 @@
+<button id="filterBtn" class="bg-sky-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded whitespace-nowrap" (click)="openCommentModal()">
+    <i class="fa-solid fa-pen-to-square"></i> Add Comment
+  </button>
+  
+  <!-- Modal for entering message and rating -->
+  <div *ngIf="showCommentModal" class="grid w-full inset-0 flex">
+    
+    <span class="mr-2">Rate:</span>
+
+    <div class="flex mb-2">
+      <i *ngFor="let star of stars" 
+         class="fa-regular fa-star cursor-pointer text-yellow-500 text-2xl p-1"
+         
+         [ngClass]="{
+           'fa-solid': star <= comment.rating, 
+           'fa-regular': star > comment.rating
+         }"
+         (click)="setRating(star)"
+         (mouseenter)="hoverStar(star)"
+         (mouseleave)="unhoverStar()">
+      </i>
+    </div>
+    
+      
+      <textarea class="w-full h-24 border rounded-lg p-2 mb-4" placeholder="Enter your comment" [(ngModel)]="comment.reviewMessage"></textarea>
+      
+    <div class="flex items-center">
+        <div class="flex items-center">
+        </div>
+    </div>
+    <div class="flex space-x-2">
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" (click)="submitComment()">Submit</button>
+        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded" (click)="closeCommentModal()">Cancel</button>
+    </div>
+
+</div>
+  

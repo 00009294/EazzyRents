@@ -53,6 +53,11 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.RealEstates.Where(r => r.Description.StartsWith(name)).ToList();
         }
 
+        public List<RealEstate> GetOwnerIdByEmail(string email)
+        {
+            return this.appDbContext.RealEstates.Where(r => r.Email == email).ToList();
+        }
+
         public List<RealEstate> GetByPrice(double fromPrice, double toPrice)
         {
             return this.appDbContext.RealEstates.Where(r => r.Price >= fromPrice && r.Price <= toPrice).ToList();

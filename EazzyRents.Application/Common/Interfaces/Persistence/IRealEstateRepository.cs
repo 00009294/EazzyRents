@@ -8,6 +8,7 @@ namespace EazzyRents.Application.Common.Interfaces.Persistence
         List<RealEstate> GetAll();
         RealEstate? GetById(int id);
         List<RealEstate> GetByName(string name);
+        List<RealEstate> GetOwnerIdByEmail(string email);
         RealEstate Create(RealEstate realEstate);
         bool Update(RealEstate realEstate);
         bool Delete(int id);

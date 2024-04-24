@@ -21,6 +21,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { MapComponent } from './components/map/map.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AddcommentComponent } from './components/addcomment/addcomment.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     StarRatingComponent,
     MapComponent,
     ProfileComponent,
+    AddcommentComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

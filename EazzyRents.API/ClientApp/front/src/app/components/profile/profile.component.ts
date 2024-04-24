@@ -11,6 +11,7 @@ import { UserRole } from '../../models/userRole.enum';
 export class ProfileComponent implements OnInit {
   
   user: ProfileModel  = {
+    id: '',
     email: '',
     userName: '',
     userRole: ''
