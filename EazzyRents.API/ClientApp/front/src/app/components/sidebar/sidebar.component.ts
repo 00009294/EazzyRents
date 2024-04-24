@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RegistrationService } from '../../services/registration.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  constructor(private auth: RegistrationService) {}
 
   downloadSupportPDF(): void {
     const link = document.createElement('a');
@@ -15,5 +17,10 @@ export class SidebarComponent {
     document.body.appendChild(link); // Append to body
     link.click(); // Simulate click to trigger download
     document.body.removeChild(link); // Clean up and remove the element
+  }
+
+  onLogOut(): void {
+    this.auth.logout();
+    this.auth.removeToken();
   }
 }

@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit {
             alert('Email is already taken');
           }
 
-       if (usernameUnique && emailUnique) {
+      if (usernameUnique && emailUnique) {
         console.log(this.count);
         this.auth.signUp(signupData).pipe(tap(() => { }),
         switchMap(() => timer(2000))).subscribe({
