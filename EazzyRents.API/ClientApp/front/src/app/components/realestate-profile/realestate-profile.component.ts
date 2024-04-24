@@ -37,7 +37,7 @@ constructor(private realEstateService: RealEstateService,
       }
     )
   }
-  
+ 
   getRealEstate(): void{
     if(this.id){
       this.realEstateService.getRealEstateById(this.id).subscribe(

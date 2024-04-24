@@ -7,6 +7,7 @@ import { RealEstateComponent } from './components/realestate/realestate.componen
 import { MainComponent } from './components/main/main.component';
 import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'realestate-profile/:id', component: RealestateProfileComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent}
 ];

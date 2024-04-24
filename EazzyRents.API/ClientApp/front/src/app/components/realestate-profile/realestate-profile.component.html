@@ -1,7 +1,7 @@
 <div class="flex h-screen bg-gray-100">
   <app-sidebar></app-sidebar>
   
-  <div class="flex-grow flex flex-col justify-self-center rounded-lg border border-gray-200 shadow-md px-6 overflow-x-hidden">
+  <div class="flex-grow flex flex-col justify-self-center rounded-lg border border-gray-200 shadow-md px-6 pb-40 overflow-x-hidden">
     
     <h2 class="text-4xl p-4 font-bold text-gray-900 text-center">{{ realEstate?.description}} Residence</h2>
     
@@ -38,10 +38,7 @@
 
     <div class="w-full">
       <h2 class="text-2xl py-2 font-bold text-blue-700">Ratings & Reviews</h2>
-      
-      <button id="filterBtn" class="bg-sky-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded whitespace-nowrap">
-        <i class="fa-solid fa-pen-to-square"></i> Add Comment
-      </button>
+      <app-addcomment></app-addcomment>
 
       <div *ngFor="let comment of comments" class="py-1">
         <app-comment [comment] = "comment"></app-comment>

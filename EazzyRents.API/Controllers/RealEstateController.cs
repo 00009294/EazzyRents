@@ -56,6 +56,13 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetByEmail/{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            return Ok(await this.mediatr.Send(new GetByEmailQuery(email)));
+        }
+
+        [HttpGet]
         [Route("GetByAddress/{address}")]
         public async Task<IActionResult> GetByAddress(Address address)
         {
