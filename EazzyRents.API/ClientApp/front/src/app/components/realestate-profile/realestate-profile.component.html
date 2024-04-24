@@ -38,6 +38,11 @@
 
     <div class="w-full">
       <h2 class="text-2xl py-2 font-bold text-blue-700">Ratings & Reviews</h2>
+      
+      <button id="filterBtn" class="bg-sky-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded whitespace-nowrap">
+        <i class="fa-solid fa-pen-to-square"></i> Add Comment
+      </button>
+
       <div *ngFor="let comment of comments" class="py-1">
         <app-comment [comment] = "comment"></app-comment>
       </div>

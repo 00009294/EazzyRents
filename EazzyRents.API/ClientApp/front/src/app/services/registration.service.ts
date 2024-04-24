@@ -19,7 +19,11 @@ export class RegistrationService {
   signIn(loginObj : SigninModel) : Observable<any> {
     return this.http.post(`${this.baseUrl}/signin`, loginObj)
   }
-
+  
+  logout(): Observable<any>{
+    return this.http.post(`${this.baseUrl}/logout`, '');
+  }
+  
   getToken(): string | null {
     return localStorage.getItem('token'); // Retrieve token from local storage
   }
@@ -31,5 +35,6 @@ export class RegistrationService {
   removeToken() {
     localStorage.removeItem('token'); // Remove token from local storage
   }
+  
 
 }

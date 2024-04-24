@@ -73,23 +73,23 @@
           </div>
           
           <span class="text-sm font-semibold text-gray-700 text-center">Select your role: </span>
-          <div class="mt-2 flex gap-2">
+          <div class=" flex w-full mb-2 flex gap-2">
             
-            <button type="button" (click)="selectRole('Guest')"
+            <!-- <button type="button" (click)="selectRole('Guest')"
             [ngClass]="{'bg-green-600 text-white': selectedRole === 0, 'bg-white text-gray-700': selectedRole !== 0}"
               class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
               Guest
-            </button>
+            </button> -->
             <button type="button" (click)="selectRole('Landlord')"
               [ngClass]="{'bg-green-600 text-white': selectedRole === 2, 'bg-white text-gray-700': selectedRole !== 2}"
               class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
-              Landlord
-          </button>
+                Landlord
+            </button>
             <button type="button" (click)="selectRole('Tenant')"
-            [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
-            class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
-            Tenant
-          </button>
+              [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
+              class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+                Tenant
+            </button>
         </div>
         <input type="hidden" formControlName="UserRole" [value]="selectedRole">
         <div *ngIf="signUpForm.get('Password')?.touched" class="text-red-500 text-sm">

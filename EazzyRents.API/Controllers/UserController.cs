@@ -29,5 +29,12 @@ namespace EazzyRents.API.Controllers
         {
             return Ok(await this.mediator.Send(new GetByUserNameQuery(username)));
         }
+
+        [HttpGet]
+        [Route("GetByToken/")]
+        public async Task<IActionResult> GetByToken(string token)
+        {
+            return Ok(await this.mediator.Send(new GetByJwtTokenQuery(token)));
+        }
     }
 }

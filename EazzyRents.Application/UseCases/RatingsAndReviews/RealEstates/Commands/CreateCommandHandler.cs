@@ -27,12 +27,11 @@ namespace EazzyRents.Application.UseCases.RatingsAndReviews.RealEstates.Commands
                 var realEstate = this.realEstateRepository.GetById(request.RealEstateId);
                 var tenant = this.userRepository.GetUserById(request.SenderId);
 
-                if (realEstate == null || tenant == null || tenant.UserRole != UserRole.Tenant)
+                if (realEstate == null || tenant == null)
                 {
                     return Task.FromResult(false);
                 }
-                // myturon 
-                
+
                 if (!(request.Rating > 0 && request.Rating < 6))
                 {
                     return Task.FromResult(false);
