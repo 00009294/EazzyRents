@@ -22,11 +22,11 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.auth.getToken();
-    console.log(token);
+    //console.log(token);
     this.userService.getByToken(token!).subscribe({
       next: (user: ProfileModel) => {
         this.email = user.email;
-        console.log(this.email);
+        //console.log(this.email);
       }}
     )};
 
@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit {
   onSearch(): void {
     this.realEstateService.getRealEstatesByEmail(this.email);
     this.router.navigate(['/dashboard',this.email]);
-    console.log(this.router.navigate(['/dashboard',this.email]));
+    //console.log(this.router.navigate(['/dashboard',this.email]));
 
   }
 

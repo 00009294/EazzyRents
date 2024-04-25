@@ -1,24 +1,42 @@
-<p>dashboard works!</p>
-<div *ngFor="let estate of realEstates">
-    <h2>Real Estate Details</h2>
-    <div>
-      <p><strong>ID:</strong> {{ estate.id }}</p>
-      <p><strong>Description:</strong> {{ estate.description }}</p>
-      <p><strong>About:</strong> {{ estate.about }}</p>
-      <p><strong>Price:</strong> {{ estate.price }}</p>
-      <p><strong>Phone Number:</strong> {{ estate.phoneNumber }}</p>
-      <p><strong>Latitude:</strong> {{ estate.latitude }}</p>
-      <p><strong>Longitude:</strong> {{ estate.longitude }}</p>
-      <p><strong>Address:</strong> {{ getAddressString(estate.address) }}</p>
-      <p><strong>Status:</strong> {{ estate.realEstateStatus }}</p>
-      <div *ngIf="estate.imageUrls.length > 0">
-        <p><strong>Image URLs:</strong></p>
-        <ul>
-          <li *ngFor="let imageUrl of estate.imageUrls">
-            <img [src]="imageUrl" alt="Real Estate Image">
-          </li>
-        </ul>
-      </div>
-    </div>
+
+<div class="flex h-screen bg-gray-100 min-w-90 overflow-hidden">
+    
+  <app-sidebar></app-sidebar>
+  <div class="w-full overflow-y-auto my-10 mx-5">
+    <table class=" w-full border-2 border-slate-950 p-2">
+      <thead class="border-2 border-slate-950 bg-slate-400">
+        <tr>
+          <th class="border p-2 border-2 border-slate-950 w-28">Description</th>
+          <th class="border p-2 border-2 border-slate-950">About</th>
+          <th class="border p-2 border-2 border-slate-950 w-20">Status</th>
+          <th class="border p-2 border-2 border-slate-950 w-24">Price</th>
+          <th class="border p-2 border-2 border-slate-950 w-24">Address</th>
+          <th class="border p-2 border-2 border-slate-950 w-40">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estate of realEstates" class="border border-2 border-slate-950 h-16">
+          <td class="border p-2 border-2 border-slate-950">{{ estate.description }}</td>
+          <td 
+            [ngClass]="{'transition-max-h ease-out duration-500 overflow-hidden': showAbout, 'border p-2 cursor-pointer': !showAbout}"
+            class="border p-4 cursor-pointer border-2 border-slate-950"
+            (click)="toggleAbout()">
+            {{ showAbout ? estate.about : 'Click to show more' }}
+          </td>
+          <td class="border p-2 border-2 border-slate-950">{{ estate.realEstateStatus != null ? getRealEstateStatusString(estate!.realEstateStatus) : 'Address not available' }}</td>
+          <td class="border p-2 border-2 border-slate-950">{{ estate.price | currency }}</td>
+          <td class="border p-2 border-2 border-slate-950">{{ getAddressString(estate.address) }}</td>
+          <td class="border-slate-950 py-5 flex justify-around"> 
+            <i class="fa-solid fa-cart-plus cursor-pointer" (click)="addEstate()"></i>
+            <i class="fa-brands fa-readme cursor-pointer" (click)="getById(estate.id)"></i>
+            <i class="fa-solid fa-pen-to-square cursor-pointer"></i> 
+
+          <i class="fa-solid fa-trash cursor-pointer" (click)="removeById(estate.id)"></i>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
   </div>
   
+</div>
