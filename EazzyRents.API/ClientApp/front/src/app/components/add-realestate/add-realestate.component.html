@@ -1,42 +1,55 @@
 <div class="flex h-screen bg-gray-100 min-w-90 overflow-hidden">
   <app-sidebar></app-sidebar>
   <div class="w-full overflow-y-auto my-10 mx-5">
-    <table class="w-full border-2 border-slate-950 p-2">
-      <thead class="border-2 border-slate-950 bg-slate-400">
-        <tr>
-          <th class="border p-2 border-2 border-slate-950 w-28">Description</th>
-          <th class="border p-2 border-2 border-slate-950">About</th>
-          <th class="border p-2 border-2 border-slate-950 w-20">Status</th>
-          <th class="border p-2 border-2 border-slate-950 w-24">Price</th>
-          <th class="border p-2 border-2 border-slate-950 w-24">Address</th>
-          <th class="border p-2 border-2 border-slate-950 w-40">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Your existing table rows -->
-        <!-- Add a new row for adding a real estate entry -->
-        <tr class="border border-2 border-slate-950 h-16">
-          <td class="border p-2 border-2 border-slate-950">
-            <input type="text" [(ngModel)]="realEstate.description" placeholder="Description">
-          </td>
-          <td class="border p-2 border-2 border-slate-950">
-            <input type="text" [(ngModel)]="realEstate.about" placeholder="About">
-          </td>
-          <td class="border p-2 border-2 border-slate-950">
-            <input type="text" [(ngModel)]="realEstate.realEstateStatus" placeholder="Status">
-          </td>
-          <td class="border p-2 border-2 border-slate-950">
-            <input type="text" [(ngModel)]="realEstate.price" placeholder="Price">
-          </td>
-          <td class="border p-2 border-2 border-slate-950">
-            <input type="text" [(ngModel)]="realEstate.address" placeholder="Address">
-          </td>
-          <td class="border-slate-950 py-5 flex justify-around">
-            <!-- Add button to submit the new real estate entry -->
-            <button (click)="submitNewRealEstate()">Add</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="w-4/5 border-2 border-slate-950 p-2">
+      <!-- Input fields for adding a new real estate entry -->
+      <div class="grid grid-cols-1 gap-2">
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Description</p>
+          <input type="text" [(ngModel)]="realEstate.description" placeholder="Description" class="border p-2 border-2 border-slate-950 w-4/5 ">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">About</p>
+          <input type="text" [(ngModel)]="realEstate.about" placeholder="About" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Price</p>
+          <input type="text" [(ngModel)]="realEstate.price" placeholder="Price" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">PhoneNumber</p>
+          <input type="text" [(ngModel)]="realEstate.phoneNumber" placeholder="PhoneNumber" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Email</p>
+          <input type="text" [(ngModel)]="realEstate.email" placeholder="Email" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Logitude</p>
+          <input type="text" [(ngModel)]="realEstate.longitude" placeholder="Logitude" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Latitude</p>
+          <input type="text" [(ngModel)]="realEstate.latitude" placeholder="Latitude" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Image</p>
+          <input type="text" [(ngModel)]="realEstate.imageUrls" placeholder="Image" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Address</p>
+          <input type="text" [(ngModel)]="realEstate.address" placeholder="Address" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <div class="flex justify-between">
+          <p class="flex-none mr-2">Status</p>
+          <input type="text" [(ngModel)]="realEstate.realEstateStatus" placeholder="Status" class="border p-2 border-2 border-slate-950 w-4/5">
+        </div>
+        <!-- Add button to submit the new real estate entry -->
+        <div class="grid justify-items-end">
+        
+          <button (click)="submitNewRealEstate()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
