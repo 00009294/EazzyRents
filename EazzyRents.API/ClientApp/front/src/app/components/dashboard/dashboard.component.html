@@ -1,1 +1,24 @@
 <p>dashboard works!</p>
+<div *ngFor="let estate of realEstates">
+    <h2>Real Estate Details</h2>
+    <div>
+      <p><strong>ID:</strong> {{ estate.id }}</p>
+      <p><strong>Description:</strong> {{ estate.description }}</p>
+      <p><strong>About:</strong> {{ estate.about }}</p>
+      <p><strong>Price:</strong> {{ estate.price }}</p>
+      <p><strong>Phone Number:</strong> {{ estate.phoneNumber }}</p>
+      <p><strong>Latitude:</strong> {{ estate.latitude }}</p>
+      <p><strong>Longitude:</strong> {{ estate.longitude }}</p>
+      <p><strong>Address:</strong> {{ getAddressString(estate.address) }}</p>
+      <p><strong>Status:</strong> {{ estate.realEstateStatus }}</p>
+      <div *ngIf="estate.imageUrls.length > 0">
+        <p><strong>Image URLs:</strong></p>
+        <ul>
+          <li *ngFor="let imageUrl of estate.imageUrls">
+            <img [src]="imageUrl" alt="Real Estate Image">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

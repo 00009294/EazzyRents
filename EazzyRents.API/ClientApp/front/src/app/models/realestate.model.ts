@@ -11,5 +11,7 @@ export interface RealEstateModel{
     address: Address;
     longitude: string,
     latitude: string,
+    email: string,
+    realEstateStatus: any,
     owner: string | null
 }

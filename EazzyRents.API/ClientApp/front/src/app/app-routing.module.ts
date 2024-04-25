@@ -8,14 +8,16 @@ import { MainComponent } from './components/main/main.component';
 import { RealestateProfileComponent } from './components/realestate-profile/realestate-profile.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddRealestateComponent } from './components/add-realestate/add-realestate.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
+  { path: 'add-realestate', component: AddRealestateComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'realestate-profile/:id', component: RealestateProfileComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard/:email', component: DashboardComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent}
 ];
