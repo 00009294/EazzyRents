@@ -15,6 +15,11 @@ export class RealEstateService {
   
   constructor(private http: HttpClient) { }
 
+  getRealEstatesByEmail(email: string): Observable<RealEstateModel[]>{
+    var encodedEmail = decodeURIComponent(email);
+    return this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByEmail/${encodedEmail}`);
+  }
+
   getRealEstates(): void {
     this.http.get<RealEstateModel[]>(`${this.apiUrl}`)
     .subscribe( data => {

@@ -23,6 +23,7 @@ import { MapComponent } from './components/map/map.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddcommentComponent } from './components/addcomment/addcomment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddRealestateComponent } from './components/add-realestate/add-realestate.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ProfileComponent,
     AddcommentComponent,
     DashboardComponent,
+    AddRealestateComponent,
   ],
   imports: [
     BrowserModule,
