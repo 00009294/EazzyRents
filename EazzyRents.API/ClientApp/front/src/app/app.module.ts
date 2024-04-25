@@ -23,6 +23,7 @@ import { MapComponent } from './components/map/map.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddcommentComponent } from './components/addcomment/addcomment.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AddRealestateComponent } from './components/add-realestate/add-realestate.component';
 
 @NgModule({
@@ -56,7 +57,8 @@ import { AddRealestateComponent } from './components/add-realestate/add-realesta
     FormsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RealEstateModel } from '../../models/realestate.model';
 import { RealEstateService } from '../../services/realestate.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../../models/address';
+import { RealEstateStatusModel } from '../../models/RealEstateStatus.Enum';
+import { MatDialog } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -15,10 +18,13 @@ export class DashboardComponent implements OnInit {
   realEstates: RealEstateModel[] = [];
   selectedImageUrl: string = '';
   email: string | null = null;
+  showAbout: boolean = false;
 
   constructor(
     private realEstateService: RealEstateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +37,27 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  addEstate(){
+    this.router.navigate(['/add-realestate']);
+  }
+
+  getById(id: number){
+    this.realEstateService.getRealEstateById(id);
+    this.router.navigate(['/realestate-profile', id]);
+  }
+
+  removeById(id: number){
+    this.realEstateService.deleteById(id);
+    alert('Successfully deleted');
+    window.location.reload();
+
+  }
+
+  toggleAbout() {
+    this.showAbout = !this.showAbout;
+  }
+  
 
   getRealEstate(): void {
     if (this.email) {
@@ -63,4 +90,18 @@ export class DashboardComponent implements OnInit {
   selectImage(imageUrl: string): void {
     this.selectedImageUrl = imageUrl;
   }
+
+  public getRealEstateStatusString(value: number): string {
+    switch(value) {
+      case RealEstateStatusModel.Active:
+        return 'Active';
+      case RealEstateStatusModel.Rent:
+        return 'Rent';
+      case RealEstateStatusModel.Archieve:
+        return 'Archieve';
+      default:
+        return 'Unknown Status';
+    }
+  }
+
 }

@@ -12,8 +12,8 @@ import { AddRealestateComponent } from './components/add-realestate/add-realesta
 
 const routes: Routes = [
   { path: '', component: MainComponent},
-  { path: 'add-realestate', component: AddRealestateComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'add-realestate', component: AddRealestateComponent},
   { path: 'realestate-profile/:id', component: RealestateProfileComponent},
   { path: 'item', component: RealEstateComponent },
   { path: 'list', component: ListComponent },

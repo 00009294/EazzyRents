@@ -15,6 +15,10 @@ export class RealEstateService {
   
   constructor(private http: HttpClient) { }
 
+  createRealEstate(estate: RealEstateModel) {
+    this.http.post<RealEstateModel>(`${this.apiUrl}`, estate);
+  }
+
   getRealEstatesByEmail(email: string): Observable<RealEstateModel[]>{
     var encodedEmail = decodeURIComponent(email);
     return this.http.get<RealEstateModel[]>(`${this.apiUrl}/GetByEmail/${encodedEmail}`);
@@ -28,8 +32,7 @@ export class RealEstateService {
     error => {
       console.log('Error while fetching all real estates', error);
     }
-  )
-  }
+  )}
 
   getRealEstateById(id: number): Observable<RealEstateModel>{
     return this.http.get<RealEstateModel>(`${this.apiUrl}/GetById/${id}`)
@@ -65,5 +68,9 @@ export class RealEstateService {
     subscribe(data => {
       this.realEstateSubject.next(data);
     });
+  }
+
+  deleteById(id: number): void{
+    this.http.delete(`${this.apiUrl}/?id=${id}`).subscribe();
   }
 }
