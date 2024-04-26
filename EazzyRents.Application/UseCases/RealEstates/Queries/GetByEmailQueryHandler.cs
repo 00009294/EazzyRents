@@ -22,6 +22,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Queries
             var allSelectedRealEstates = this.realEstateRepository
                 .GetAll().Where(r => r.Email == request.email).ToList();
 
+
             return Task.FromResult(allSelectedRealEstates);
         }
     }

@@ -3,6 +3,7 @@ using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using System.Net;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -166,5 +167,7 @@ namespace EazzyRents.Infrastructure.Persistence
                 throw;
             }
         }
+       
+
     }
 }

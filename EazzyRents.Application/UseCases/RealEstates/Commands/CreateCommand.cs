@@ -14,7 +14,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string About { get; set; }
-        public List<IFormFile>? ImageDataList { get; set; } = default!;
+        public List<IFormFile>? ImageDataList { get; set; }
         public Address Address { get; set; }
         public RealEstateStatus RealEstateStatus { get; set; }
     }
