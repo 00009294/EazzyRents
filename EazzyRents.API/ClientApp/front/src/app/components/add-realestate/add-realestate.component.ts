@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Address } from '../../models/address';
 import { RealEstateStatusModel } from '../../models/realestatestatus.enum';
 import { AddRealEstateModel } from '../../models/addrealestate.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-realestate',
@@ -32,13 +33,21 @@ export class AddRealestateComponent{
 
 
   constructor(private realEstateService: RealEstateService,
-              private http: HttpClient
+              private http: HttpClient,
+              private router: Router
   ){}
 
   submitNewRealEstate(){
-    console.log(this.realEstate);
-    console.log('This is first part');
-    this.realEstateService.createRealEstate(this.realEstate).subscribe();
+    console.log(this.realEstate.ImageDataList);
+    this.realEstateService.createRealEstate(this.realEstate).subscribe({
+      next: (response) =>{
+        alert('Successfully added');
+        this.router.navigate([`/dashboard/${this.realEstate.Email}`]);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 
   onCoordinatesSelected(coordinates: { latitude: string, longitude: string }): void {

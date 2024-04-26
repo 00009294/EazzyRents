@@ -24,7 +24,7 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromQuery] CreateCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateCommand command)
         {
             return Ok(await this.mediatr.Send(command));
         }
