@@ -3,7 +3,7 @@ import { RealEstateModel } from '../../models/realestate.model';
 import { RealEstateService } from '../../services/realestate.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../../models/address';
-import { RealEstateStatusModel } from '../../models/RealEstateStatus.Enum';
+import { RealEstateStatusModel } from '../../models/realestatestatus.enum';
 import { MatDialog } from '@angular/material/dialog';
 
 

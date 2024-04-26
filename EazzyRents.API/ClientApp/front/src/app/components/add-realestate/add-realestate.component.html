@@ -2,54 +2,86 @@
   <app-sidebar></app-sidebar>
   <div class="w-full overflow-y-auto my-10 mx-5">
     <div class="w-4/5 border-2 border-slate-950 p-2">
-      <!-- Input fields for adding a new real estate entry -->
-      <div class="grid grid-cols-1 gap-2">
+
+      <form (ngSubmit)="submitNewRealEstate()" class="grid grid-cols-1 gap-2">
         <div class="flex justify-between">
-          <p class="flex-none mr-2">Description</p>
-          <input type="text" [(ngModel)]="realEstate.description" placeholder="Description" class="border p-2 border-2 border-slate-950 w-4/5 ">
+          <label class="flex-none mr-2">Description</label>
+          <input type="text" [(ngModel)]="realEstate.Description" name="description" placeholder="Description" class="border p-2 border-2 border-slate-950 w-4/5">
         </div>
+      
         <div class="flex justify-between">
-          <p class="flex-none mr-2">About</p>
-          <input type="text" [(ngModel)]="realEstate.about" placeholder="About" class="border p-2 border-2 border-slate-950 w-4/5">
+          <label class="flex-none mr-2">About</label>
+          <input type="text" [(ngModel)]="realEstate.About" name="about" placeholder="About" class="border p-2 border-2 border-slate-950 w-4/5">
         </div>
+      
         <div class="flex justify-between">
-          <p class="flex-none mr-2">Price</p>
-          <input type="text" [(ngModel)]="realEstate.price" placeholder="Price" class="border p-2 border-2 border-slate-950 w-4/5">
+          <label class="flex-none mr-2">Price</label>
+          <input type="number" [(ngModel)]="realEstate.Price" name="price" placeholder="Price" class="border p-2 border-2 border-slate-950 w-4/5">
         </div>
+      
         <div class="flex justify-between">
-          <p class="flex-none mr-2">PhoneNumber</p>
-          <input type="text" [(ngModel)]="realEstate.phoneNumber" placeholder="PhoneNumber" class="border p-2 border-2 border-slate-950 w-4/5">
+          <label class="flex-none mr-2">PhoneNumber</label>
+          <input type="number" [(ngModel)]="realEstate.PhoneNumber" name="phoneNumber" placeholder="PhoneNumber" class="border p-2 border-2 border-slate-950 w-4/5">
         </div>
+      
         <div class="flex justify-between">
-          <p class="flex-none mr-2">Email</p>
-          <input type="text" [(ngModel)]="realEstate.email" placeholder="Email" class="border p-2 border-2 border-slate-950 w-4/5">
+          <label class="flex-none mr-2">Email</label>
+          <input type="text" [(ngModel)]="realEstate.Email" name="email" placeholder="Email" class="border p-2 border-2 border-slate-950 w-4/5">
         </div>
-        <div class="flex justify-between">
-          <p class="flex-none mr-2">Logitude</p>
-          <input type="text" [(ngModel)]="realEstate.longitude" placeholder="Logitude" class="border p-2 border-2 border-slate-950 w-4/5">
+      
+        <div class="image-upload-container">
+          <div class="flex justify-between">
+            <label class="flex-none mr-2">Images</label>
+            <input #fileInput type="file" (change)="onFilesSelected($event)" accept=".png, .jpg, .jpeg" multiple class="border p-2 border-2 border-slate-950 w-4/5">
+          </div>
         </div>
-        <div class="flex justify-between">
-          <p class="flex-none mr-2">Latitude</p>
-          <input type="text" [(ngModel)]="realEstate.latitude" placeholder="Latitude" class="border p-2 border-2 border-slate-950 w-4/5">
+      
+        <div>
+          <label class="flex justify-start mr-2">Address</label>
+          <div class="flex justify-end">
+            <button type="button" (click)="selectAddress('Tashkent')"
+                    [ngClass]="{'bg-green-600 text-white': selectedAddress === 0, 'bg-white text-gray-700': selectedAddress !== 0}"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Tashkent
+            </button>
+      
+            <button type="button" (click)="selectAddress('Samarkand')"
+                    [ngClass]="{'bg-green-600 text-white': selectedAddress === 1, 'bg-white text-gray-700': selectedAddress !== 1}"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Samarkand
+            </button>
+            <button type="button" (click)="selectAddress('Bukhara')"
+                    [ngClass]="{'bg-green-600 text-white': selectedAddress === 2, 'bg-white text-gray-700': selectedAddress !== 2}"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Bukhara
+            </button>
+          </div>
         </div>
-        <div class="flex justify-between">
-          <p class="flex-none mr-2">Image</p>
-          <input type="text" [(ngModel)]="realEstate.imageUrls" placeholder="Image" class="border p-2 border-2 border-slate-950 w-4/5">
+      
+        <div>
+          <label class="flex justify-start mr-2">Status</label>
+          <div class="flex justify-end">
+            <button type="button" (click)="selectStatus(0)"
+                    [ngClass]="{'bg-green-600 text-white': selectedStatus === 0, 'bg-white text-gray-700': selectedStatus !== 0}"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Active
+            </button>
+            <button type="button" (click)="selectStatus(1)"
+                    [ngClass]="{'bg-green-600 text-white': selectedStatus === 1, 'bg-white text-gray-700': selectedStatus !== 1}"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Rent
+            </button>
+            <button type="button" (click)="selectStatus(2)"
+                    [ngClass]="{'bg-green-600 text-white': selectedStatus === 2, 'bg-white text-gray-700': selectedStatus !== 2 }"
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+              Archive
+            </button>
+          </div>
         </div>
-        <div class="flex justify-between">
-          <p class="flex-none mr-2">Address</p>
-          <input type="text" [(ngModel)]="realEstate.address" placeholder="Address" class="border p-2 border-2 border-slate-950 w-4/5">
-        </div>
-        <div class="flex justify-between">
-          <p class="flex-none mr-2">Status</p>
-          <input type="text" [(ngModel)]="realEstate.realEstateStatus" placeholder="Status" class="border p-2 border-2 border-slate-950 w-4/5">
-        </div>
-        <!-- Add button to submit the new real estate entry -->
-        <div class="grid justify-items-end">
-        
-          <button (click)="submitNewRealEstate()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
-        </div>
-      </div>
+      
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add</button>
+      </form>
+      
     </div>
   </div>
 </div>

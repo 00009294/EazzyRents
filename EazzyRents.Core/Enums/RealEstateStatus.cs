@@ -2,9 +2,9 @@
 {
     public enum RealEstateStatus
     {
-        Active,
-        Rent,
-        Archieve
+        Active = 0,
+        Rent = 1,
+        Archieve = 2
     }
 
 }
