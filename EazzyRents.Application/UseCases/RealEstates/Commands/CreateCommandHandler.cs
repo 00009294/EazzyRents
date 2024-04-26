@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http.Internal;
 
 namespace EazzyRents.Application.UseCases.RealEstates.Commands
 {
-    public class CreateCommandHandler : IRequestHandler<CreateCommand, bool>
+    public class CreateCommandHandler : IRequestHandler<CreateCommandEstate, bool>
     {
         private readonly IRealEstateRepository realEstateRepository;
         private readonly IMapper mapper;
@@ -26,7 +26,7 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
             this.imageRepository = imageRepository;
         }
 
-        public Task<bool> Handle(CreateCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(CreateCommandEstate request, CancellationToken cancellationToken)
         {
             if (request == null)
                 return Task.FromResult(false);

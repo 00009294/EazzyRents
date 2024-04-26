@@ -8,7 +8,7 @@ namespace EazzyRents.Application.Helper
     {
         public AppMapper()
         {
-            CreateMap<RealEstate, CreateCommand>().ReverseMap();
+            CreateMap<RealEstate, CreateCommandEstate>().ReverseMap();
             //CreateMap<IFormFile, BlobContent>().ReverseMap();
         }
     }
