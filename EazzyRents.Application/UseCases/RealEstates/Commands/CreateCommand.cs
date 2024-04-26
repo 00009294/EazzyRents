@@ -7,16 +7,16 @@ namespace EazzyRents.Application.UseCases.RealEstates.Commands
     public class CreateCommand : IRequest<bool>
     {
 
-        public string Description { get; init; }
-        public double Price { get; init; }
-        public string PhoneNumber { get; init; }
-        public string Email { get; init; }
-        public string Longitude { get; init; }
-        public string Latitude { get; init; }
-        public string About { get; init; }  
-        public List<IFormFile> ImageDataList { get; set; }
-        public Address Address { get; init; }
-        public RealEstateStatus RealEstateStatus { get; init; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
+        public string About { get; set; }
+        public List<IFormFile>? ImageDataList { get; set; } = default!;
+        public Address Address { get; set; }
+        public RealEstateStatus RealEstateStatus { get; set; }
     }
 
 }

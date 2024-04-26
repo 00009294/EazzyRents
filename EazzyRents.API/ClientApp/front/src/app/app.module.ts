@@ -25,6 +25,7 @@ import { AddcommentComponent } from './components/addcomment/addcomment.componen
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AddRealestateComponent } from './components/add-realestate/add-realestate.component';
+import { SelectMapComponent } from './components/select-map/select-map.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AddRealestateComponent } from './components/add-realestate/add-realesta
     AddcommentComponent,
     DashboardComponent,
     AddRealestateComponent,
+    SelectMapComponent,
   ],
   imports: [
     BrowserModule,

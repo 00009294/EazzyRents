@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RealEstateModel } from '../models/realestate.model';
+import { AddRealEstateModel } from '../models/addrealestate.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class RealEstateService {
   private apiUrl = 'https://localhost:44379/api/RealEstate'; // Update with your backend API URL
+  // https://localhost:44379/api/RealEstate?Description=NRG&Price=99800&PhoneNumber=997000101&Email=fayzullaev.javlonbek.d%40gmail.com&Longitude=69.245443&Latitude=41.339668&About=This%20is%20about%20page&Address=2&RealEstateStatus=0
   realEstate: RealEstateModel | undefined;
   realEstates: RealEstateModel[] = [];
   private realEstateSubject = new BehaviorSubject<RealEstateModel[]>([]);
@@ -15,8 +17,11 @@ export class RealEstateService {
   
   constructor(private http: HttpClient) { }
 
-  createRealEstate(estate: RealEstateModel) {
-    this.http.post<RealEstateModel>(`${this.apiUrl}`, estate);
+  createRealEstate(estate: AddRealEstateModel): Observable<AddRealEstateModel> {
+    console.log(estate.About);
+    let decodedEmail = decodeURIComponent(estate.Email);
+    let decodedString = decodeURIComponent(estate.About.replace(/\+/g, ' '));
+    return this.http.post<AddRealEstateModel>(`${this.apiUrl}?Description=${estate.Description}&Price=${estate.Price}&PhoneNumber=${estate.PhoneNumber}&Email=${decodedEmail}&Longitude=${estate.Longitude}&Latitude=${estate.Latitude}&About=${decodedString}&Address=${estate.Address}&RealEstateStatus=${estate.RealEstateStatus}`, '');
   }
 
   getRealEstatesByEmail(email: string): Observable<RealEstateModel[]>{
