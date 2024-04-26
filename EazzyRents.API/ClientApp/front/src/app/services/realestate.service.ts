@@ -18,10 +18,9 @@ export class RealEstateService {
   constructor(private http: HttpClient) { }
 
   createRealEstate(estate: AddRealEstateModel): Observable<AddRealEstateModel> {
-    console.log(estate.About);
-    let decodedEmail = decodeURIComponent(estate.Email);
-    let decodedString = decodeURIComponent(estate.About.replace(/\+/g, ' '));
-    return this.http.post<AddRealEstateModel>(`${this.apiUrl}?Description=${estate.Description}&Price=${estate.Price}&PhoneNumber=${estate.PhoneNumber}&Email=${decodedEmail}&Longitude=${estate.Longitude}&Latitude=${estate.Latitude}&About=${decodedString}&Address=${estate.Address}&RealEstateStatus=${estate.RealEstateStatus}`, '');
+    // let decodedEmail = decodeURIComponent(estate.Email);
+    // let decodedString = decodeURIComponent(estate.About.replace(/\+/g, ' '));
+    return this.http.post<AddRealEstateModel>(`${this.apiUrl}`, estate);
   }
 
   getRealEstatesByEmail(email: string): Observable<RealEstateModel[]>{

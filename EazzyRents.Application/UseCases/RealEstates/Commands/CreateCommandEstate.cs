@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace EazzyRents.Application.UseCases.RealEstates.Commands
 {
-    public class CreateCommand : IRequest<bool>
+    public class CreateCommandEstate : IRequest<bool>
     {
 
         public string Description { get; set; }

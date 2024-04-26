@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { RealEstateStatusModel } from "./realestatestatus.enum";
 
 export interface AddRealEstateModel{
     Id: number;
@@ -6,11 +7,11 @@ export interface AddRealEstateModel{
     About: any;
     Price: any | null;
     PhoneNumber: any | null,
-    ImageDataList: any | null;
+    ImageDataList: string[] | any;
     Address: Address;
     Longitude: string,
     Latitude: string,
     Email: string,
-    RealEstateStatus: any,
+    RealEstateStatusModel: RealEstateStatusModel,
     Owner: string | null
 }
