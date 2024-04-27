@@ -1,10 +1,15 @@
-import { Component, OnInit, Input,  AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input,  AfterViewInit, ViewChild, ElementRef, inject } from '@angular/core';
 import { RealEstateService } from '../../services/realestate.service';
 import { RealEstateModel } from '../../models/realestate.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../../models/address';
 import { CommentModel } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
+import { ChatService } from '../hub/chat.service';
+import { RegistrationService } from '../../services/registration.service';
+import { UserService } from '../../services/user.service';
+import { ProfileModel } from '../../models/profile.model';
+
 @Component({
   selector: 'app-realestate-profile',
   templateUrl: './realestate-profile.component.html'
@@ -18,17 +23,27 @@ export class RealestateProfileComponent implements OnInit{
   @Input() comment!: CommentModel;
   selectedImageUrl: string = '';
   id: number | any;
+
+
+  userName: string = '';
+  room: string = '';
+
   
 
 constructor(private realEstateService: RealEstateService, 
   private commentService: CommentService,
   private route: ActivatedRoute,
+  private router: Router,
+  private auth: RegistrationService,
+  private userService: UserService,
+  private chatService: ChatService
       ){}
 
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
+      this.room = params['id'];
     })
     this.getRealEstate();
     this.commentService.getComments(this.id).subscribe(
@@ -72,6 +87,28 @@ constructor(private realEstateService: RealEstateService,
 
   selectImage(imageUrl: string): void {
     this.selectedImageUrl = imageUrl;
+  }
+
+  goToChat(){
+    console.log('goToChat');
+
+    const token = this.auth.getToken();
+    this.userService.getByToken(token!).subscribe({
+      next: (user: ProfileModel) => {
+        this.userName = user.userName;
+        console.log('goToChat2');
+
+        this.chatService.joinRoom(this.userName, this.room)
+        .then(()=>{
+          console.log('goToChat3');
+          console.log('JoinRoom');
+          this.router.navigate([`/chat/${this.room}`]);
+        }).catch((err)=>{
+          console.log(err);
+        })
+        
+      }
+    })
   }
 
 }

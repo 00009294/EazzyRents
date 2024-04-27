@@ -24,9 +24,9 @@ namespace EazzyRents.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCommandEstate command)
+        public async Task<IActionResult> Create([FromQuery] CreateCommandEstate createCommandEstate)
         {
-            return Ok(await this.mediatr.Send(command));
+            return Ok(await this.mediatr.Send(createCommandEstate));
         }
 
         [HttpPut]
@@ -75,5 +75,6 @@ namespace EazzyRents.API.Controllers
         {
             return Ok(await this.mediatr.Send(new GetByPriceQuery(fromPrice, toPrice)));
         }
+
     }
 }

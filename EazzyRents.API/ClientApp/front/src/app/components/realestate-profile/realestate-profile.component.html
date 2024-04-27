@@ -11,7 +11,7 @@
         <p class="text-xl text-gray-800 font-medium">Price: {{ realEstate?.price | currency }}</p>
         <p class="text-gray-600 font-medium text-gray-800">Address: {{ realEstate?.address != null ? getAddressString(realEstate!.address) : 'Address not available' }} city</p>
         <p class="text-gray-800 font-medium">Phone: {{realEstate?.phoneNumber}}</p>
-        <button id="filterBtn" class="mt-2 bg-sky-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg whitespace-nowrap">
+        <button id="filterBtn" class="mt-2 bg-sky-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg whitespace-nowrap" (click)="goToChat()">
           <i class="fa-solid fa-message"></i> Chat
         </button>
         <p class="text-xl text-black font-semibold pt-2">About</p>

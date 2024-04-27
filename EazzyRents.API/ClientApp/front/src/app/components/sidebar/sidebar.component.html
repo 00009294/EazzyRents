@@ -10,7 +10,7 @@
       <a class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition cursor-pointer" (click)="onSearch()">
           <i class="fa fa-list mr-2" aria-hidden="true"></i> Dashboard
       </a>
-      <a class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition cursor-pointer">
+      <a *ngIf="isLandlord"  href="/add-realestate" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition cursor-pointer">
         <i class="fa fa-building mr-2" aria-hidden="true" ></i> Add RealEstate
       </a>
       <a href="#" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">

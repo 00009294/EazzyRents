@@ -12,8 +12,11 @@ namespace EazzyRents.Application.Configurations
         {
             services.AddMediatR(configuration => configuration
                 .RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            //services.AddSignalR();
+            services.AddSignalR();
             services.AddAutoMapper(typeof(AppMapper));
+
+            // add this one 
+
 
             return services;
         }

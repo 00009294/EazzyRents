@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
           this.auth.setToken(response.token);
           if(response.token !== null){
             //console.log(response.token);
-            alert("Done");
+            alert("Welcome");
             const token = this.auth.getToken();
             this.http.get('/', {
               headers: {

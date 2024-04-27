@@ -71,6 +71,7 @@ export class AddcommentComponent {
             this.commentService.addComment(this.addCommentModel).subscribe(
               (response) => {
                 alert('Your comment successfully added');
+                location.reload();
             })
             
         },

@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   estate!: RealEstateModel;
   user!: ProfileModel;
   email: string = '';
+  isLandlord: boolean = false;
   constructor(private auth: RegistrationService,
               private realEstateService: RealEstateService,
               private userService: UserService,
@@ -26,6 +27,9 @@ export class SidebarComponent implements OnInit {
     this.userService.getByToken(token!).subscribe({
       next: (user: ProfileModel) => {
         this.email = user.email;
+        if(user.userRole === 1){
+          this.isLandlord = true;
+        }
         //console.log(this.email);
       }}
     )};

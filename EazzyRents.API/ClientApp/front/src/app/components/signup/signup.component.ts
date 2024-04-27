@@ -13,8 +13,8 @@ import { UserService } from '../../services/user.service';
 
 enum UserRoles {
   Guest = 0, 
-  Tenant = 1,
-  Landlord = 2,
+  Landlord = 1,
+  Tenant = 2,
 }
 
 @Component({
@@ -81,7 +81,7 @@ export class SignupComponent implements OnInit {
       if (usernameUnique && emailUnique) {
         console.log(this.count);
         this.auth.signUp(signupData).pipe(tap(() => { }),
-        switchMap(() => timer(2000))).subscribe({
+        switchMap(() => timer(100))).subscribe({
           next: (response) => {
             alert('Successfully registered');
             this.router.navigate(['/signin']);
