@@ -28,12 +28,13 @@
           <div class="flex justify-between">
             <div>
               <input type="file" multiple (change)="onFileSelected($event)">
-              <div *ngFor="let image of selectedImages" class="mt-4">
-                <img [src]="image" alt="Uploaded Image" class="max-w-xs h-auto">
+              <div *ngFor="let imageUrl of selectedImageUrls" class="mt-4">
+                <img [src]="imageUrl" alt="Uploaded Image" class="max-w-xs h-auto">
               </div>
             </div>
-            </div>
           </div>
+        </div>
+        
       
         <div>
           <label class="flex justify-start mr-2">Address</label>

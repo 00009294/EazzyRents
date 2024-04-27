@@ -9,6 +9,7 @@ import { RealestateProfileComponent } from './components/realestate-profile/real
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddRealestateComponent } from './components/add-realestate/add-realestate.component';
+import { ChatComponent } from './components/hub/chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'list', component: ListComponent },
   { path: 'dashboard/:email', component: DashboardComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent}
+  { path: 'signin', component: SigninComponent},
+  { path: 'chat/:id', component: ChatComponent},
 ];
 
 @NgModule({

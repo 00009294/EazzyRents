@@ -19,19 +19,19 @@ export class AddRealestateComponent{
     Description: '',
     About: '',
     Price: '',
-    ImageDataList: [],
+    ImageDataList: ['My project - 2023-06-20T095818.329 (1)_0', 'ff86126d4865dcca465bdb8d611468a5l-m4075378552od-w480_h360'],
     PhoneNumber: 0,
     Address: Address.Bukhara,
     Longitude: '69.245443',
     Latitude: '41.339668',
     Email: '',
-    RealEstateStatusModel: RealEstateStatusModel.Archieve,
+    RealEstateStatus: RealEstateStatusModel.Archieve,
     Owner: ''
   };
   
   address!: Address;
   realEstateStatusModel!: RealEstateStatusModel;
-
+  
   sender: ProfileModel ={
     id: '',
     userName: '',
@@ -39,33 +39,36 @@ export class AddRealestateComponent{
     userRole: ''
   };
 
-  selectedImages: string[] = [];
   selectedAddress!: Address;
   selectedStatus!: RealEstateStatusModel;
   selectedCoordinates!: { latitude: number, longitude: number };
-
-
-
+  
+  
+  
 
   constructor(private realEstateService: RealEstateService,
-              private http: HttpClient,
-              private auth: RegistrationService,
-              private userService: UserService,
-              private router: Router
+    private http: HttpClient,
+    private auth: RegistrationService,
+    private userService: UserService,
+    private router: Router
   ){}
-
+  
   submitNewRealEstate(){
     const token = this.auth.getToken();
+    
+    console.log(this.selectedImages);
+    //this.realEstate.ImageDataList = this.selectedImages;
+    console.log(this.realEstate.ImageDataList)
     
     this.userService.getByToken(token!).subscribe({
       next: (user: ProfileModel) => {
         this.realEstate.Email = user.email;
         this.realEstate.Owner = user.userName;
         this.realEstate.Address = this.selectedAddress;
-        this.realEstate.RealEstateStatusModel = this.selectedStatus;
-        this.realEstate.ImageDataList = this.selectedImages;
-        console.log(this.selectedImages);
+        this.realEstate.RealEstateStatus = this.selectedStatus;
         
+        console.log(this.realEstate);
+
         this.realEstateService.createRealEstate(this.realEstate).subscribe({
           next: (response) =>{
             alert('Successfully added');
@@ -78,13 +81,13 @@ export class AddRealestateComponent{
       }
     })
   }
-
+  
   onCoordinatesSelected(coordinates: { latitude: string, longitude: string }): void {
     this.realEstate.Latitude = coordinates.latitude;
     this.realEstate.Longitude = coordinates.longitude;
   }
   // Define array of enum values
-
+  
   selectStatus(status: string) {
     this.selectedStatus = RealEstateStatusModel[status as keyof typeof RealEstateStatusModel];
     // Additional logic if needed
@@ -95,20 +98,44 @@ export class AddRealestateComponent{
     // Additional logic if needed
   }
 // Method to handle file selection
+
+// Create a new FormData object
+// Define a property to hold the FormData object
+selectedImages: FormData = new FormData();
+
+// Define a property to hold the URLs of selected images
+selectedImageUrls: string[] = [];
+
 onFileSelected(event: any) {
   const files: FileList = event.target.files;
   if (files && files.length > 0) {
-    // Clear existing file names before adding new ones
-    this.selectedImages = [];
-
+    // Clear existing files before adding new ones
+    this.selectedImages = new FormData();
+    // Clear existing selected image URLs before adding new ones
+    this.selectedImageUrls = [];
+    
     for (let i = 0; i < files.length; i++) {
-      // Extract file name without extension
-      const fileName = files[i].name.split('.').slice(0, -1).join('.');
-      // Store only the file name without extension
-      this.selectedImages.push(fileName);
+      // Append each File object to the FormData object
+      this.selectedImages.append('files', files[i]);
+      //console.log(files[i]);
+      // this.selectedImages.forEach((value: File | string, key: string) => {
+      //   console.log(`${key}: ${value}`);
+      // });
+      
+
+      // Read the file as a URL and push the URL to selectedImageUrls
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (typeof e.target?.result === 'string') {
+          this.selectedImageUrls.push(e.target.result);
+        }
+      };
+      reader.readAsDataURL(files[i]);
     }
   }
 }
+
+
 
 }
 
