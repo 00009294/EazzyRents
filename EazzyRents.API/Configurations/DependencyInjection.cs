@@ -1,5 +1,4 @@
-﻿using EazzyRents.API.Hub;
-using EazzyRents.Application.Configurations;
+﻿using EazzyRents.Application.Configurations;
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Configurations;
 using EazzyRents.Infrastructure.Data;
@@ -81,8 +80,6 @@ namespace EazzyRents.API.Configurations
                 };
             });
 
-            services.AddSingleton<IDictionary<string, UserConnectionRoom>>(
-                new Dictionary<string, UserConnectionRoom>());
 
             return services;
         }

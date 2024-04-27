@@ -2,9 +2,9 @@
 {
     public enum UserRole
     {
-        Guest,
-        Landlord,
-        Tenant
+        Guest = 0,
+        Tenant = 1,
+        Landlord = 2,
     };
 
 }

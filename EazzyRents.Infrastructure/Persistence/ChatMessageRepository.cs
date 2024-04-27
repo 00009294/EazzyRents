@@ -18,38 +18,10 @@ namespace EazzyRents.Infrastructure.Persistence
             return this.appDbContext.SaveChanges() > 0;
         }
 
-        public List<ChatMessage> GetAll(int chatMessageId)
+        public List<ChatMessage> GetAll(int roomId)
         {
-            return this.appDbContext.ChatMessages.Where(c => c.Id == chatMessageId).ToList();
+            return this.appDbContext.ChatMessages.Where(m=>m.RealEstateId == roomId).ToList();
         }
 
-        public ChatMessage? GetById(int id)
-        {
-            return this.appDbContext.ChatMessages.FirstOrDefault(c => c.Id == id);
-        }
-
-        public bool Remove(ChatMessage chatMessage)
-        {
-            if (chatMessage == null)
-            {
-                return false;
-            }
-
-            this.appDbContext.ChatMessages.Remove(chatMessage);
-
-            return this.appDbContext.SaveChanges() > 0;
-        }
-
-        public bool Update(ChatMessage chatMessage)
-        {
-            if (chatMessage == null)
-            {
-                return false;
-            }
-
-            this.appDbContext.ChatMessages.Update(chatMessage);
-
-            return this.appDbContext.SaveChanges() > 0;
-        }
     }
 }

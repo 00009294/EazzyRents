@@ -4,6 +4,7 @@ using EazzyRents.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazzyRents.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427165631_ModifyChatContent")]
+    partial class ModifyChatContent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,14 +40,8 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.Property<int?>("ConversationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RealEstateId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("UserRole")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -352,19 +349,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b64ddc5a-64bd-4e84-8053-10a3bdfb9f42",
+                            Id = "3ca3b535-6ba1-47a1-88ac-95f7e2eafb4f",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "9e9e05ff-1f41-4994-8aa1-28ae0f770c79",
+                            Id = "100d59d2-0438-4bdd-8192-ef8c0e1e552c",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "d901ead4-3382-4280-a808-e0273ce96324",
+                            Id = "94220910-f1df-49e6-b2ee-5e3bafbd20fd",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

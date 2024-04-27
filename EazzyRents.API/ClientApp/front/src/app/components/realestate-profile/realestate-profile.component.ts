@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from '../../models/address';
 import { CommentModel } from '../../models/comment';
 import { CommentService } from './../../services/comment.service';
-import { ChatService } from '../hub/chat.service';
+import { ChatService } from '../../services/chat.service';
 import { RegistrationService } from '../../services/registration.service';
 import { UserService } from '../../services/user.service';
 import { ProfileModel } from '../../models/profile.model';
@@ -22,7 +22,7 @@ export class RealestateProfileComponent implements OnInit{
   comments: CommentModel[] = [];
   @Input() comment!: CommentModel;
   selectedImageUrl: string = '';
-  id: number | any;
+  id!: number;
 
 
   userName: string = '';
@@ -90,24 +90,9 @@ constructor(private realEstateService: RealEstateService,
   }
 
   goToChat(){
-    console.log('goToChat');
-
-    const token = this.auth.getToken();
-    this.userService.getByToken(token!).subscribe({
-      next: (user: ProfileModel) => {
-        this.userName = user.userName;
-        console.log('goToChat2');
-
-        this.chatService.joinRoom(this.userName, this.room)
-        .then(()=>{
-          console.log('goToChat3');
-          console.log('JoinRoom');
-          this.router.navigate([`/chat/${this.room}`]);
-        }).catch((err)=>{
-          console.log(err);
-        })
-        
-      }
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.router.navigate([`chat/${this.id}`]);
     })
   }
 

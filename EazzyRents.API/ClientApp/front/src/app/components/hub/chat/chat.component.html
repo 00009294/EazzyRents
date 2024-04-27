@@ -1,71 +1,33 @@
-<p>chat works!</p>
-<div class="container mt-5">
-
-    <div class="chat_header flex justify-between items-center h-20">
-      <h3 class="text-center my-2">Welcome to <span class="text-yellow-500">{{roomName}}</span> Group</h3>
-      <button (click)="leaveChat()" class="btn btn-danger">Leave Chat</button>
-    </div>
-    <div class="messaging">
-      <div class="inbox_msg flex">
-        <div class="inbox_people bg-blue-500 bg-gradient-to-b from-blue-500 to-yellow-200 float-left overflow-hidden w-2/5 border-r border-gray-300">
-          <div class="headind_srch px-10 py-2 border-b border-gray-300">
-            <div class="recent_heading">
-              <h4 class="text-white">Connected Users</h4>
-            </div>
-            <div class="srch_bar">
-              <div class="stylish-input-group">
-                <input type="text" class="search-bar border-b border-gray-300 bg-transparent w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none" placeholder="Search">
-                <span class="input-group-addon">
-                  <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="inbox_chat h-96 overflow-y-scroll">
-            <ng-container *ngFor="let user of this.chatService.connectedUsers$ | async">
-  
-              <div class="chat_list">
-                <div class="chat_people">
-                  <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                  <div class="chat_ib mt-3">
-                    <h5>{{user}} <span class="online bg-green-500 rounded-full inline-block w-3 h-3"></span></h5>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
+<div class="max-w-screen-sm mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-lg">
+        <!-- Chat Header -->
+        <div class="px-4 py-3 bg-gray-200 rounded-t-lg">
+            <h1 class="text-lg font-semibold text-gray-800">Anonymous Chat</h1>
+            <a href="/" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
+              <i class="fa fa-home mr-2" aria-hidden="true"></i> Home
+          </a>
         </div>
-        <div class="mesgs w-3/5 float-left p-8">
-          <div #scrollMe class="msg_history h-96 overflow-y-auto">
-            <ng-container *ngFor="let message of this.chatService.messages$ | async">
-              <div
-                [ngClass]="{'incoming_msg': message.user != loggedInUserName, 'outgoing_msg': message.user === loggedInUserName}">
-                <div *ngIf="message.user != loggedInUserName" class="incoming_msg_img">
-                  <img src="https://ptetutorials.com/images/user-profile.png">
-                </div>
-                <div *ngIf="message.user != loggedInUserName" class="received_msg">
-                  <div class="received_withd_msg">
-                    <p> {{message.message}}</p>
-                    <span class="time_date">{{message.user}} | {{message.messageTime | date: 'medium'}}</span>
+        <!-- Chat Messages -->
+        <div class="p-4" style="max-height: 400px; overflow-y: auto;">
+            <div class="flex flex-col space-y-4">
+                <!-- All Messages -->
+                <ng-container *ngFor="let message of messages">
+                  <div [ngClass]="{'flex justify-end': message.userRole === 1 && !message.userRole}">
+                      <div [ngClass]="{'flex justify-end text-black rounded-lg': message.userRole === 1 || !message.userRole, 
+                                      'bg-gray-300 rounded-lg py-2 px-4 max-w-xs': message.userRole === 2 && message.userRole}">
+                          <p>{{ message.content }}</p>
+                      </div>
                   </div>
-                </div>
-                <div *ngIf="message.user === loggedInUserName" class="sent_msg">
-                  <p>{{message.message}}</p>
-                  <span class="time_date">{{message.user}} | {{message.messageTime | date: 'medium'}}</span>
-                </div>
-              </div>
-            </ng-container>
-          </div>
-          <div class="type_msg border-t border-gray-300 py-4">
-            <div class="input_msg_write">
-              <input (keydown.enter)="sendMessage()" [(ngModel)]="inputMessage" type="text" class="write_msg bg-transparent border-b border-gray-300 w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none" placeholder="Type a message" />
-              <button (click)="sendMessage()" class="msg_send_btn bg-blue-500 rounded-full w-10 h-10 text-white" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                </ng-container>
             </div>
-          </div>
         </div>
-      </div>
-  
+        <!-- Chat Input -->
+        <div class="border-t border-gray-200 px-4 py-3">
+            <div class="flex">
+                <input type="text" placeholder="Type your message here..." class="flex-1 bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500" [(ngModel)]="newMessage">
+                <button class="ml-4 bg-blue-500 text-white px-4 py-2 rounded-lg focus:outline-none" (click)="sendMessage()">Send</button>
+            </div>
+        </div>
     </div>
-  
   </div>
   

@@ -55,4 +55,9 @@ export class SidebarComponent implements OnInit {
     this.auth.logout();
     this.auth.removeToken();
   }
+
+  goToChat(){
+    console.log('goToChat');
+    this.router.navigate(['chat']);
+  }
 }
