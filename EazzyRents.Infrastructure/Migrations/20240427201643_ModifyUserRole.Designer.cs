@@ -4,6 +4,7 @@ using EazzyRents.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EazzyRents.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427201643_ModifyUserRole")]
+    partial class ModifyUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -352,19 +355,19 @@ namespace EazzyRents.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b64ddc5a-64bd-4e84-8053-10a3bdfb9f42",
+                            Id = "0e071bf9-e496-44a9-80a3-7e011457d560",
                             Name = "Landlord",
                             NormalizedName = "LANDLORD"
                         },
                         new
                         {
-                            Id = "9e9e05ff-1f41-4994-8aa1-28ae0f770c79",
+                            Id = "34d3dad7-c6ce-43cf-bfa8-5121ea13adf4",
                             Name = "Tenant",
                             NormalizedName = "TENANT"
                         },
                         new
                         {
-                            Id = "d901ead4-3382-4280-a808-e0273ce96324",
+                            Id = "b54b46e2-aab8-4ca2-97e6-995cd1537dec",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });

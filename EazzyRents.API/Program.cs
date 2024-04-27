@@ -1,5 +1,4 @@
 using EazzyRents.API.Configurations;
-using EazzyRents.API.Hub;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,10 +51,6 @@ app.UseHttpsRedirection();
 app.UseCors(myCors);
 
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<ChatHub>("/chat");
-});
 
 app.UseAuthentication();
 app.UseAuthorization();

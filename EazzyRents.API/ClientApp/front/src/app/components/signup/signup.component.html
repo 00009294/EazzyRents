@@ -81,12 +81,12 @@
               Guest
             </button> -->
             <button type="button" (click)="selectRole('Landlord')"
-              [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
+              [ngClass]="{'bg-green-600 text-white': selectedRole === 2, 'bg-white text-gray-700': selectedRole !== 2}"
               class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
                 Landlord
             </button>
             <button type="button" (click)="selectRole('Tenant')"
-              [ngClass]="{'bg-green-600 text-white': selectedRole === 2, 'bg-white text-gray-700': selectedRole !== 2}"
+              [ngClass]="{'bg-green-600 text-white': selectedRole === 1, 'bg-white text-gray-700': selectedRole !== 1}"
               class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
                 Tenant
             </button>

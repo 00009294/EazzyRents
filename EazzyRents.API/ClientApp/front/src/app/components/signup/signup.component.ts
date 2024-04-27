@@ -13,8 +13,8 @@ import { UserService } from '../../services/user.service';
 
 enum UserRoles {
   Guest = 0, 
-  Landlord = 1,
-  Tenant = 2,
+  Tenant = 1,
+  Landlord = 2,
 }
 
 @Component({
