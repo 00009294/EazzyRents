@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
         //console.log(this.email);
         //console.log(user.userRole);
         if(user.userRole === 2){
-          console.log(user.userRole === 2)
+          //console.log(user.userRole === 2)
           this.isLandlord = true;
         }
         else{
