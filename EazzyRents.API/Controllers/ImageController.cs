@@ -1,4 +1,5 @@
-﻿using EazzyRents.Application.UseCases.Images.Queries;
+﻿using EazzyRents.Application.UseCases.Images.Commands;
+using EazzyRents.Application.UseCases.Images.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +22,17 @@ namespace EazzyRents.API.Controllers
             return Ok(await this.mediator.Send(new GetAllQuery()));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetByRealestateId/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await this.mediator.Send(new GetByIdQuery(id)));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromQuery]CreateImageCommand createImageCommand)
+        {
+            return Ok(await this.mediator.Send(createImageCommand));
         }
     }
 }
