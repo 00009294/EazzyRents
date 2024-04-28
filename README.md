@@ -1,3 +1,35 @@
+````
+Main Features:
 
-The vision is to revolutionize the property rental landscape in Uzbekistan by creating a centralized online platform that empowers tenants and landlords alike. We envision a future where the rental process is streamlined, transparent, and efficient, enabling tenants to find their ideal homes and landlords to connect directly with quality renters. This platform aims to be the trusted destination for all rental needs, fostering a community that values convenience, fairness, and innovation.
-In other words, the vision is to provide a seamless user experience where tenants can rent residential properties without the involvement of middlemen, and landlords can rent their properties directly to the tenants. Providing data-driven insights about the industry to help tenants and landlords make decisions guided by accurate and meaningful data.
+* User
+* Property
+* Location
+* Review and rate
+* Anonymous chat
+* Statistics
+Relationships:
+
+*  User - Property
+    Each user can have multiple properties.
+    Each property belongs to one user.
+    This relationship allows users to manage their properties.
+*  User - Review
+    Each user can leave multiple reviews.
+    Each review is left by one user.
+    This relationship enables users to provide feedback on properties or other users.
+* Property - Location
+    Each property is associated with one location.
+    Each location can have multiple properties.
+    This relationship links properties to their respective geographical locations.
+* Property - Status Change
+    Each property can have multiple status changes.
+    Each status change is associated with one property.
+    This relationship tracks the history of changes in a property's status.
+* Property - Statistics
+    Each property can have statistical data.
+    Each set of statistics is related to one property.
+    This relationship stores statistical information about properties.
+* Anonymous chat
+    Each user can leave message anonymously
+    No name or any credentials recorded
+    Only messages stored for better decision process
