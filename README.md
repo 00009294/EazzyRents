@@ -1,4 +1,9 @@
 ````
+
+Eazzy Rents
+
+These detailed explanations offer a comprehensive understanding of how each entity relates to others within the system, emphasizing the flow of data and interactions between users, properties, and rental processes.
+
 Main Features:
 
 * User
@@ -7,6 +12,7 @@ Main Features:
 * Review and rate
 * Anonymous chat
 * Statistics
+
 Relationships:
 
 *  User - Property
