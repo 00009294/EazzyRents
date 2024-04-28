@@ -7,7 +7,7 @@ export interface AddRealEstateModel{
     About: string;
     Price: any | null;
     PhoneNumber: any | null,
-    ImageDataList: string[];
+    ImageDataList: FormData;
     Address: Address;
     Longitude: string,
     Latitude: string,
