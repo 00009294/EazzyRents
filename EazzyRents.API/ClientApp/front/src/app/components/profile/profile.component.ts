@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
     id: '',
     email: '',
     userName: '',
-    userRole: ''
+    userRole: UserRole.Landlord
   };
 
 

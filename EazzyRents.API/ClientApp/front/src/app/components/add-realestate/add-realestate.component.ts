@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 import { UserService } from '../../services/user.service';
 import { ProfileModel } from '../../models/profile.model';
+import { UserRole } from '../../models/userRole.enum';
 
 @Component({
   selector: 'app-add-realestate',
@@ -36,7 +37,7 @@ export class AddRealestateComponent{
     id: '',
     userName: '',
     email: '',
-    userRole: ''
+    userRole: UserRole.Landlord
   };
 
   selectedAddress!: Address;
