@@ -3,10 +3,10 @@
                                         Eazzy Rents
                                         -----------
                                         
-    Welcome to the world of property management, where digital tools help landlords and tenants connect,
-    and every action tells a story.
-    Imagine a busy online marketplace where people look for places to live and others offer their properties.
-    In this digital world, every person and property has a role to play.
+    Welcome to the world of property management, where digital tools help landlords and tenants
+    connect, and every action tells a story.
+    Imagine a busy online marketplace where people look for places to live and others offer their
+    properties. In this digital world, every person and property has a role to play.
     In our journey, we'll explore how users, properties, rental requests, and reviews interact.
     Think of it like characters in a story, each with their own part to play.
     Join us as we dive into the world of property management. We'll explain things step by step,
