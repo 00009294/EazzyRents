@@ -79,7 +79,7 @@ export class SignupComponent implements OnInit {
           }
 
       if (usernameUnique && emailUnique) {
-        console.log(this.count);
+        //console.log(this.count);
         this.auth.signUp(signupData).pipe(tap(() => { }),
         switchMap(() => timer(100))).subscribe({
           next: (response) => {

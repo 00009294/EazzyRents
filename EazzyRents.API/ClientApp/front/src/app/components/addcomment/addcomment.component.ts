@@ -7,6 +7,7 @@ import { ProfileModel } from '../../models/profile.model';
 import { AddCommentModel } from '../../models/addcomment.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SignupModel } from '../../models/signup.model';
+import { UserRole } from '../../models/userRole.enum';
 
 @Component({
   selector: 'app-addcomment',
@@ -35,7 +36,7 @@ export class AddcommentComponent {
     id: '',
     userName: '',
     email: '',
-    userRole: ''
+    userRole: UserRole.Landlord
   };
 
 

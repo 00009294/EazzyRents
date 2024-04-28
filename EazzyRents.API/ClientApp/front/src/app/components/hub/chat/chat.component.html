@@ -1,23 +1,29 @@
-<div class="max-w-screen-sm mx-auto px-4 py-8">
+<div class="max-w-screen-sm pt-5 mx-auto">
+    <a class="hover:bg-blue-700 bg-blue-500 text-white p-2 rounded transition"
+        (click)="goBack()">Back
+    </a>
+    <a class="hover:bg-blue-700 bg-blue-500 text-white m-2 p-2 rounded transition" 
+        (click)="refresh()"> <i class="fa-solid fa-rotate-left"></i>Refresh
+    </a>
+    <div class="grid justify-items-center text-3xl p-5 font-extrabold ">Anonymous Chat</div>
     <div class="bg-white rounded-lg shadow-lg">
-        <!-- Chat Header -->
-        <div class="px-4 py-3 bg-gray-200 rounded-t-lg">
-            <h1 class="text-lg font-semibold text-gray-800">Anonymous Chat</h1>
-            <a href="/" class="hover:bg-blue-700 hover:text-gray-50 p-2 rounded transition">
-              <i class="fa fa-home mr-2" aria-hidden="true"></i> Home
-          </a>
+        <div class="bg-gray-200 rounded-t-lg">
+            <div class="flex w-full justify-between pt-6 p-2 text-3xl">
+                <div class="">Landlord</div>
+                <div class="">Tenant</div>
+            </div>
         </div>
         <!-- Chat Messages -->
         <div class="p-4" style="max-height: 400px; overflow-y: auto;">
             <div class="flex flex-col space-y-4">
                 <!-- All Messages -->
                 <ng-container *ngFor="let message of messages">
-                  <div [ngClass]="{'flex justify-end': message.userRole === 1 && !message.userRole}">
-                      <div [ngClass]="{'flex justify-end text-black rounded-lg': message.userRole === 1 || !message.userRole, 
-                                      'bg-gray-300 rounded-lg py-2 px-4 max-w-xs': message.userRole === 2 && message.userRole}">
-                          <p>{{ message.content }}</p>
-                      </div>
-                  </div>
+                <div [ngClass]="{'flex justify-end': message.userRole === 1 && !message.userRole}">
+                    <div [ngClass]="{'flex justify-end text-black rounded-lg': message.userRole === 1 || !message.userRole, 
+                                    'bg-gray-300 rounded-lg py-2 px-4 max-w-xs': message.userRole === 2 && message.userRole}">
+                        <p>{{ message.content }}</p>
+                    </div>
+                </div>
                 </ng-container>
             </div>
         </div>
@@ -29,5 +35,4 @@
             </div>
         </div>
     </div>
-  </div>
-  
+</div>

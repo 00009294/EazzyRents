@@ -27,8 +27,14 @@ export class SidebarComponent implements OnInit {
     this.userService.getByToken(token!).subscribe({
       next: (user: ProfileModel) => {
         this.email = user.email;
-        if(user.userRole === 1){
+        //console.log(this.email);
+        //console.log(user.userRole);
+        if(user.userRole === 2){
+          console.log(user.userRole === 2)
           this.isLandlord = true;
+        }
+        else{
+          this.isLandlord = false;
         }
         //console.log(this.email);
       }}

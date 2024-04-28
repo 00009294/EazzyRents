@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Message } from '../../../models/message.model';
 import { ChatService } from '../../../services/chat.service';
 import { UserRole } from '../../../models/userRole.enum';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { RegistrationService } from '../../../services/registration.service';
 import { UserService } from '../../../services/user.service';
 import { ProfileModel } from '../../../models/profile.model';
@@ -21,7 +21,8 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService,
               private route: ActivatedRoute,
               private auth: RegistrationService,
-              private userService: UserService
+              private userService: UserService,
+              private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -76,10 +77,18 @@ export class ChatComponent implements OnInit {
         (error: any) => {
           console.error('Error sending message:', error);
           // Handle error if needed
+            }
+          );
         }
-      );
-    }
+      }
+    })
   }
-})
+
+  refresh(){
+    location.reload();
+  }
+
+  goBack(){
+    this.router.navigate([`/realestate-profile/${this.roomId}`]);
   }
 }
