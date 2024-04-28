@@ -19,7 +19,7 @@ export class AddRealestateComponent{
     Description: '',
     About: '',
     Price: '',
-    ImageDataList: ['My project - 2023-06-20T095818.329 (1)_0', 'ff86126d4865dcca465bdb8d611468a5l-m4075378552od-w480_h360'],
+    ImageDataList: new FormData(),
     PhoneNumber: 0,
     Address: Address.Bukhara,
     Longitude: '69.245443',
@@ -42,7 +42,7 @@ export class AddRealestateComponent{
   selectedAddress!: Address;
   selectedStatus!: RealEstateStatusModel;
   selectedCoordinates!: { latitude: number, longitude: number };
-  
+  selectedImages: File[] = [];
   
   
 
@@ -56,9 +56,9 @@ export class AddRealestateComponent{
   submitNewRealEstate(){
     const token = this.auth.getToken();
     
-    console.log(this.selectedImages);
+    //console.log(this.selectedImages);
     //this.realEstate.ImageDataList = this.selectedImages;
-    console.log(this.realEstate.ImageDataList)
+    //console.log(this.realEstate.ImageDataList)
     
     this.userService.getByToken(token!).subscribe({
       next: (user: ProfileModel) => {
@@ -66,8 +66,21 @@ export class AddRealestateComponent{
         this.realEstate.Owner = user.userName;
         this.realEstate.Address = this.selectedAddress;
         this.realEstate.RealEstateStatus = this.selectedStatus;
-        
-        console.log(this.realEstate);
+
+        console.log("Inside getBy Token selected Images: "+this.selectedImages);
+
+        // Assign extracted files to ImageDataList
+
+        const formData = new FormData();
+
+    // Append each selected image file to the FormData object
+    for (const selectedImage of this.selectedImages) {
+      formData.append('files', selectedImage);
+    }
+      console.log('Form Data' + formData);
+        //this.realEstate.ImageDataList = this.selectedImages;
+          
+        console.log("Inside getBy Token: "+this.realEstate.ImageDataList);
 
         this.realEstateService.createRealEstate(this.realEstate).subscribe({
           next: (response) =>{
@@ -79,8 +92,8 @@ export class AddRealestateComponent{
           }
         });
       }
-    })
-  }
+      }
+    )}
   
   onCoordinatesSelected(coordinates: { latitude: string, longitude: string }): void {
     this.realEstate.Latitude = coordinates.latitude;
@@ -101,7 +114,6 @@ export class AddRealestateComponent{
 
 // Create a new FormData object
 // Define a property to hold the FormData object
-selectedImages: FormData = new FormData();
 
 // Define a property to hold the URLs of selected images
 selectedImageUrls: string[] = [];
@@ -110,13 +122,13 @@ onFileSelected(event: any) {
   const files: FileList = event.target.files;
   if (files && files.length > 0) {
     // Clear existing files before adding new ones
-    this.selectedImages = new FormData();
+    this.selectedImages = [];
     // Clear existing selected image URLs before adding new ones
     this.selectedImageUrls = [];
     
     for (let i = 0; i < files.length; i++) {
       // Append each File object to the FormData object
-      this.selectedImages.append('files', files[i]);
+      this.selectedImages.push(files[i]);
       //console.log(files[i]);
       // this.selectedImages.forEach((value: File | string, key: string) => {
       //   console.log(`${key}: ${value}`);
