@@ -2,8 +2,6 @@
 using EazzyRents.Core.Models;
 using EazzyRents.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using System.Net;
 
 namespace EazzyRents.Infrastructure.Persistence
 {
@@ -72,51 +70,13 @@ namespace EazzyRents.Infrastructure.Persistence
             }
         }
 
+
         public ImageData UpdateImage(IFormFile file, string emailAddress)
         {
             try
             {
                 DeleteImages(emailAddress);
                 return UploadImage(file, emailAddress);
-
-
-                //string fileName = file.FileName;
-                //byte[] fileContent;
-
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    file.CopyTo(memoryStream);
-                //    fileContent = memoryStream.ToArray();
-                //}
-
-                //string folderPath = $@"StaticFiles\{emailAddress}";
-
-                //if (!Directory.Exists(folderPath))
-                //{
-                //    Directory.CreateDirectory(folderPath);
-                //}
-
-                //var imageData = this.appDbContext.Images.FirstOrDefault(img => img.FileName == fileName && img.Url == folderPath);
-
-                //if (imageData == null)
-                //{
-                //    return new ImageData();
-                //}
-
-                //imageData = new ImageData()
-                //{
-                //    FileName = fileName,
-                //    Url = folderPath,
-                //    Data = fileContent
-                //};
-
-                //string filePath = Path.Combine(folderPath, imageData.FileName);
-                //File.WriteAllBytes(filePath, imageData.Data);
-                
-                //this.appDbContext.Images.Add(imageData);
-                //this.appDbContext.SaveChanges();
-                
-                //return imageData;
 
             }
             catch (Exception ex)
@@ -125,6 +85,67 @@ namespace EazzyRents.Infrastructure.Persistence
             }
         }
 
+        public ImageData UploadDefaultImage(string emailAddress, string imageUrl)
+        {
+            string filePath = @"C:\Users\fayzu\OneDrive\Рабочий стол\Images\img5.jpg";
+
+            // Check if the file exists
+            if (!File.Exists(filePath))
+            {
+                // Handle the case where the file does not exist
+                throw new FileNotFoundException("File not found.", filePath);
+            }
+
+            byte[] imageContent = File.ReadAllBytes(filePath);
+
+            string fileName = Path.GetFileName(filePath);
+
+            IFormFile file = CreateFormFile(imageContent, fileName);
+
+
+            //byte[] imageContent = File.ReadAllBytes(imageUrl);
+
+            //IFormFile file = CreateFormFile(imageContent, imageUrl);
+            //IFormFile file = null;
+
+            //string fileName = file.FileName;
+            byte[] fileContent;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream); // System.NullReferenceException: 'Object reference not set to an instance of an object.'
+                fileContent = memoryStream.ToArray();
+            }
+
+
+            string folderPath = $@"StaticFiles\{emailAddress}";
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            ImageData formFile = new ImageData()
+            {
+                FileName = fileName,
+                Url = folderPath,
+                Data = fileContent
+            };
+
+            string selectedfilePath = Path.Combine(folderPath, formFile.FileName);
+            File.WriteAllBytes(selectedfilePath, formFile.Data);
+
+            this.appDbContext.Images.Add(formFile);
+            this.appDbContext.SaveChanges();
+
+            return formFile;
+
+        }
+        private IFormFile CreateFormFile(byte[] fileContent, string fileName)
+        {
+            MemoryStream ms = new MemoryStream(fileContent);
+            return new Microsoft.AspNetCore.Http.Internal.FormFile(ms, 0, fileContent.Length, "file", fileName);
+        }
         public ImageData UploadImage(IFormFile file, string emailAddress)
         {
             try

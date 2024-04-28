@@ -27,10 +27,7 @@
           <td class="border p-2 border-2 border-slate-950">{{ estate.price | currency }}</td>
           <td class="border p-2 border-2 border-slate-950">{{ getAddressString(estate.address) }}</td>
           <td class="border-slate-950 py-5 flex justify-around"> 
-            <i class="fa-solid fa-cart-plus cursor-pointer" (click)="addEstate()"></i>
-            <i class="fa-brands fa-readme cursor-pointer" (click)="getById(estate.id)"></i>
-            <i class="fa-solid fa-pen-to-square cursor-pointer"></i> 
-
+            
           <i class="fa-solid fa-trash cursor-pointer" (click)="removeById(estate.id)"></i>
           </td>
         </tr>
