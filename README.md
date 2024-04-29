@@ -54,7 +54,7 @@
     to others within the system, emphasizing the flow of data and interactions between users,
     properties, and rental processes.
 
-
+````
 ![img1](https://github.com/00009294/EazzyRents/assets/73280255/46a74b17-f4d0-4590-9b5e-3751d93dcf04) 
 ![img2](https://github.com/00009294/EazzyRents/assets/73280255/f76d4ffd-b6a2-482d-8e9d-a4813edc270e)
 ![img3](https://github.com/00009294/EazzyRents/assets/73280255/16fcd084-f0bc-40de-ba85-b06c95690070)
