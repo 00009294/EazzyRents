@@ -53,3 +53,21 @@
     These detailed explanations offer a comprehensive understanding of how each entity relates
     to others within the system, emphasizing the flow of data and interactions between users,
     properties, and rental processes.
+
+
+![img1](https://github.com/00009294/EazzyRents/assets/73280255/46a74b17-f4d0-4590-9b5e-3751d93dcf04) 
+![img2](https://github.com/00009294/EazzyRents/assets/73280255/f76d4ffd-b6a2-482d-8e9d-a4813edc270e)
+![img3](https://github.com/00009294/EazzyRents/assets/73280255/16fcd084-f0bc-40de-ba85-b06c95690070)
+![img4](https://github.com/00009294/EazzyRents/assets/73280255/170fb4f8-ae0c-4647-982a-97bcfbbca256)
+![img5](https://github.com/00009294/EazzyRents/assets/73280255/3b97320b-6085-49b2-8afc-5d13d5c00b97)
+![img11](https://github.com/00009294/EazzyRents/assets/73280255/f4588fa3-0f17-4c3b-8b9d-3e171f60f820)
+![img6](https://github.com/00009294/EazzyRents/assets/73280255/70d72eca-2bbe-4490-a32c-772612a834ec)
+![img7](https://github.com/00009294/EazzyRents/assets/73280255/33671a36-9828-4d90-ba73-2021a474a18f)
+![img8](https://github.com/00009294/EazzyRents/assets/73280255/63dfccf9-3c17-4f9d-b7b1-c80d159e17eb)
+![img9](https://github.com/00009294/EazzyRents/assets/73280255/3abcc63e-69e1-42c9-805e-653b5728ff4f)
+![img10](https://github.com/00009294/EazzyRents/assets/73280255/adc58790-f5b5-45f5-a170-b3621a591f01)
+![img12](https://github.com/00009294/EazzyRents/assets/73280255/b59bee87-7023-47a2-a8a7-9d42dd7ca538)
+
+
+
+
