@@ -1,7 +1,7 @@
 ````
     
-                                        Eazzy Rents
-                                        -----------
+                                         Eazzy Rents
+                                         -----------
                                         
     Welcome to the world of property management, where digital tools help landlords and tenants
     connect, and every action tells a story.
